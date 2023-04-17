@@ -1,0 +1,31 @@
+﻿@using BookWormProject.ViewModels
+@model List<Genre>
+
+@{
+    const int SIZE = 13;
+    int j = 0;
+}
+
+<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-list"></span> Thể loại <span class="caret"></span>
+</a>
+<div class="dropdown-menu multi-column">
+    <div class="row">
+        @for (int i = 0; i < 3; i++)
+        {
+            if (j == Model.Count)
+            {
+                break;
+            }
+            <div class="col-md-4">
+                <ul class="dropdown-menu">
+                    @while (j < SIZE * (i + 1) && j != Model.Count)
+                    {
+                        <li><a href="#" title="@Model[j].Name">@Model[j].Name</a></li>
+                        j++;
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>

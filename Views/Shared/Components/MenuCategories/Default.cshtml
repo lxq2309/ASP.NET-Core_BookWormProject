@@ -1,0 +1,12 @@
+﻿@model List<Category>
+
+<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-list"></span> Danh mục <span class="caret"></span>
+</a>
+<ul class="dropdown-menu" role="menu">
+    @foreach (var category in Model)
+    {
+        <li><a href="#" title="@category.Name">@category.Name</a></li>
+
+    }
+</ul>

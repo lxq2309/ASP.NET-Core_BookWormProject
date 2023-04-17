@@ -1,0 +1,152 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+}
+@using BookWormProject.ViewModels
+@model HomeViewModel
+@{
+    var hotArticles = Model.hotArticles;
+    var newArticles = Model.newArticles;
+    var completedArticles = Model.completedArticles;
+}
+
+<div class="container" id="intro-index">
+    <div class="title-list">
+        <h2><a href="/truyen-hot/" title="Truyện Hot">Được đọc nhiều nhất</a></h2>
+        <a href="/truyen-hot/" title="Truyện Hot"><span class="glyphicon glyphicon-fire"></span></a>
+        <select id="hot-select" class="form-control new-select" aria-label="Select Genres">
+            <option value="all">Tất cả</option>
+            <option value="van-hoc-co-dien">
+                Văn học cổ điển
+            </option>
+        </select>
+    </div>
+    @for (int i = 0; i < hotArticles.Count; i++)
+    {
+        <div class="index-intro">
+            <div class="item top-@(i+1)" itemscope itemtype="https://schema.org/Book">
+                <!-- else -->
+                <a href="/p/@hotArticles[i].ArticleId" itemprop="url">
+                    <!-- nếu đã hoàn thành thì hiện full-label -->
+                    @if (hotArticles[i].IsCompleted)
+                    {
+                        <span class="full-label"></span>
+                    }
+                    <img src="@hotArticles[i].CoverImage" width="129" height="192" alt="#" class="img-responsive item-img"
+                     itemprop="image" />
+                    <div class="title">
+                        <h3 itemprop="name">
+                            @hotArticles[i].Title
+                        </h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="container" id="list-index">
+    <div id="novel-history-main" class="list list-truyen list-history col-xs-12 col-sm-12 col-md-8 col-truyen-main">
+    </div>
+    <div class="list list-truyen list-new col-xs-12 col-sm-12 col-md-8 col-truyen-main">
+        <div class="title-list">
+            <h2>
+                <a href="/truyen-moi/" title="Latest Release">
+                    Mới cập nhật
+                </a>
+            </h2>
+            <a href="/truyen-moi/" title="Latest Release">
+                <span class="glyphicon glyphicon-menu-right"></span>
+            </a><select id="new-select"
+                        class="form-control new-select" aria-label="Select Genres">
+                <option value="all">Tất cả</option>
+
+                <option value="van-hoc-co-dien">
+                    Văn học cổ điển
+                </option>
+            </select>
+        </div>
+
+        @for (int i = 0; i < newArticles.Count; i++)
+        {
+            <div class="row" itemscope="" itemtype="https://schema.org/Book">
+                <div class="col-xs-9 col-sm-6 col-md-5 col-title">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <h3 itemprop="name">
+                        <a href="/p/@newArticles[i].ArticleId" itemprop="url">
+                            @newArticles[i].Title
+                        </a>
+                    </h3>
+                    <span class="label-title label-new"></span>
+                    @if (newArticles[i].IsCompleted)
+                    {
+                        <span class="label-title label-full"></span>
+                    }
+                </div>
+                <div class="hidden-xs col-sm-3 col-md-3 col-cat text-888">
+                    @foreach (var genre in newArticles[i].Genres)
+                    {
+                        <a itemprop="genre" href="/g/@genre.GenreId" title="@genre.Name">@genre.Name</a>
+                    }
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-2 col-chap text-info">
+                    @if (newArticles[i].Chapters.Count() == 0)
+                    {
+                        <span class="chapter-text">
+                            Chưa có chương nào
+                        </span>
+                    }
+                    else
+                    {
+                        var newestChapter = newArticles[i].Chapters.MaxBy(x => x.Index);
+                        <a title="@newestChapter.Title" href="/p/@newArticles[i].ArticleId/@newestChapter.ChapterId">
+                            <span class="chapter-text">
+                                @newestChapter.Title
+                            </span>
+                        </a>
+                    }
+
+                </div>
+                <div class="hidden-xs hidden-sm col-md-2 col-time text-888">
+                    @newArticles[i].TimeDiff
+                </div>
+            </div>
+        }
+    </div>
+    <div class="visible-md-block visible-lg-block col-md-4 text-center col-truyen-side">
+        @await Component.InvokeAsync("RightSidebar")
+    </div>
+</div>
+
+<div class="container" id="truyen-slide">
+    <div class="list list-thumbnail col-xs-12">
+        <div class="title-list">
+            <h2>
+                <a href="/truyen-hoan-thanh/" title="Novel Completed">
+                    Đã hoàn thành
+                </a>
+            </h2>
+            <a href="/truyen-hoan-thanh/" title="Novel Completed">
+                <span class="glyphicon glyphicon-menu-right"></span>
+            </a>
+        </div>
+        <div class="row">
+            @for (int i = 0; i < completedArticles.Count; i++)
+            {
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                    <a href="#" title="#">
+                        <img src="@completedArticles[i].CoverImage" width="164" height="245" alt="#" />
+                        <div class="caption">
+                            <h3>
+                                @completedArticles[i].Title
+                            </h3>
+                            <small class="btn-xs label-primary">
+                                Full - @completedArticles[i].Chapters.Count() chương
+                            </small>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

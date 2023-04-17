@@ -1,0 +1,173 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookWormProject.bundle.scp.css",
+      "PackagePath": "staticwebassets\\BookWormProject.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\css\\chapter.css",
+      "PackagePath": "staticwebassets\\resource\\css\\chapter.css"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\css\\main.css",
+      "PackagePath": "staticwebassets\\resource\\css\\main.css"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\Minion.ttf",
+      "PackagePath": "staticwebassets\\resource\\fonts\\Minion.ttf"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\NoticiaText-Regular.eot",
+      "PackagePath": "staticwebassets\\resource\\fonts\\NoticiaText-Regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\NoticiaText-Regular.woff",
+      "PackagePath": "staticwebassets\\resource\\fonts\\NoticiaText-Regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\PatrickHand-Regular.eot",
+      "PackagePath": "staticwebassets\\resource\\fonts\\PatrickHand-Regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\PatrickHand-Regular.woff",
+      "PackagePath": "staticwebassets\\resource\\fonts\\PatrickHand-Regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\Roboto-Regular.eot",
+      "PackagePath": "staticwebassets\\resource\\fonts\\Roboto-Regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\Roboto-Regular.woff",
+      "PackagePath": "staticwebassets\\resource\\fonts\\Roboto-Regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.eot",
+      "PackagePath": "staticwebassets\\resource\\fonts\\RobotoCondensed-Regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.woff",
+      "PackagePath": "staticwebassets\\resource\\fonts\\RobotoCondensed-Regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\bookerly.eot",
+      "PackagePath": "staticwebassets\\resource\\fonts\\bookerly.eot"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\bookerly.ttf",
+      "PackagePath": "staticwebassets\\resource\\fonts\\bookerly.ttf"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\glyphicons-halflings-regular.svg",
+      "PackagePath": "staticwebassets\\resource\\fonts\\glyphicons-halflings-regular.svg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\glyphicons-halflings-regular.ttf",
+      "PackagePath": "staticwebassets\\resource\\fonts\\glyphicons-halflings-regular.ttf"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\glyphicons-halflings-regular.woff",
+      "PackagePath": "staticwebassets\\resource\\fonts\\glyphicons-halflings-regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\glyphicons-halflings-regular.woff2",
+      "PackagePath": "staticwebassets\\resource\\fonts\\glyphicons-halflings-regular.woff2"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\bg.jpg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg_dark.gif",
+      "PackagePath": "staticwebassets\\resource\\images\\bg_dark.gif"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg_op.png",
+      "PackagePath": "staticwebassets\\resource\\images\\bg_op.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bgnoel.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\bgnoel.jpg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\resource\\images\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\resource\\images\\favicon.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\full-label.png",
+      "PackagePath": "staticwebassets\\resource\\images\\full-label.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\logo.png",
+      "PackagePath": "staticwebassets\\resource\\images\\logo.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\p\\doge.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\p\\doge.jpg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\pixel.gif",
+      "PackagePath": "staticwebassets\\resource\\images\\pixel.gif"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\poster.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\poster.jpg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\poster.png",
+      "PackagePath": "staticwebassets\\resource\\images\\poster.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\radio.ico",
+      "PackagePath": "staticwebassets\\resource\\images\\radio.ico"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\spriteimg_new_white_op.png",
+      "PackagePath": "staticwebassets\\resource\\images\\spriteimg_new_white_op.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\star-half.png",
+      "PackagePath": "staticwebassets\\resource\\images\\star-half.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\star-off.png",
+      "PackagePath": "staticwebassets\\resource\\images\\star-off.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\star-on.png",
+      "PackagePath": "staticwebassets\\resource\\images\\star-on.png"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\chapter.js",
+      "PackagePath": "staticwebassets\\resource\\js\\chapter.js"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\main.js",
+      "PackagePath": "staticwebassets\\resource\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\style.css",
+      "PackagePath": "staticwebassets\\resource\\style.css"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BookWormProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.BookWormProject.props",
+      "PackagePath": "build\\BookWormProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.BookWormProject.props",
+      "PackagePath": "buildMultiTargeting\\BookWormProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.BookWormProject.props",
+      "PackagePath": "buildTransitive\\BookWormProject.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
