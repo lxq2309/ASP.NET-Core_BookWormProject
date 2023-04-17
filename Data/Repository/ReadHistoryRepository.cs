@@ -30,7 +30,7 @@ namespace BookWormProject.Data.Repository
 
         public ReadHistory GetBy(int userId, int articleId)
         {
-            return _context.ReadHistories.SingleOrDefault(x => x.UserId == userId&& x.ArticleId == articleId);
+            return _context.ReadHistories.SingleOrDefault(x => x.UserId == userId && x.ArticleId == articleId);
         }
 
         public void Update(ReadHistory readHistory)

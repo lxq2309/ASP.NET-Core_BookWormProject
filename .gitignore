@@ -1,0 +1,71 @@
+# Visual Studio files
+.vs/
+
+# Binaries
+bin/
+obj/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# NuGet
+**/[Tt]est[Rr]esults/
+[Bb]uild[Ll]og.*
+nuget.exe
+*.nuget.props
+*.nuget.targets
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# ASP.NET Core
+*.swp
+*~
+*.bak
+*.tmp
+*.log
+*.cache
+*.csproj.user
+obj/
+wwwroot/
+*.dbmdl
+*.jfm
+node_modules/
+bower_components/
+.vscode/
+*.suo
+*.user
+*.psess
+*.vsp
+*.pidb
+*.ide/
+*.sln.docstates
+*.dotnet/
+
+# Resharper
+_ReSharper*/
+*.ReSharper*
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+.idea/
+*.sln.iml
+*.csproj.iml
+*.DataSources/
+*.ipr
+*.iws
+*.dll.errors

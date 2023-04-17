@@ -7,6 +7,7 @@ namespace BookWormProject.ViewModels
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }
+
         public string TimeDiff
         {
             get
@@ -16,7 +17,7 @@ namespace BookWormProject.ViewModels
         }
 
         public DateTime UpdatedAt { get; set; }
-        public bool IsCompleted {get; set;}
+        public bool IsCompleted { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }
         public IEnumerable<Genre>? Genres { get; set; }

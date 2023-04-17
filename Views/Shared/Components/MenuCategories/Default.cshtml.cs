@@ -1,5 +1,4 @@
 ﻿using BookWormProject.Data.Services;
-using BookWormProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [ViewComponent(Name = "MenuCategories")]

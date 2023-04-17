@@ -1,6 +1,5 @@
 ﻿using BookWormProject.Data.Repository;
 using BookWormProject.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookWormProject.Data.Services
 {

@@ -1,6 +1,4 @@
 ﻿using BookWormProject.Data.Services;
-using BookWormProject.Models;
-using BookWormProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 [ViewComponent(Name = "RightSidebar")]

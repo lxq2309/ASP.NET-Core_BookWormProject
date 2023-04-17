@@ -43,9 +43,5 @@ namespace BookWormProject.Utils.Helper
             var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(str);
             return Encoding.ASCII.GetString(bytes);
         }
-
-
     }
-
-
 }

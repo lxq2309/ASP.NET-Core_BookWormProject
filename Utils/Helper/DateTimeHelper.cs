@@ -29,7 +29,7 @@
 
         public static string ToTimeAgo(this DateTime datetime)
         {
-            TimeSpan span = DateTime.UtcNow - datetime;
+            var span = DateTime.UtcNow - datetime;
             if (span.Days > 365)
             {
                 int years = (span.Days / 365);
@@ -57,5 +57,4 @@
             return string.Empty;
         }
     }
-
 }

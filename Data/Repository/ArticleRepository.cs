@@ -12,7 +12,6 @@ namespace BookWormProject.Data.Repository
             _context = context;
         }
 
-
         public void Add(Article article)
         {
             _context.Add(article);
@@ -40,6 +39,7 @@ namespace BookWormProject.Data.Repository
             _context.Update(article);
             _context.SaveChanges();
         }
+
         public IEnumerable<Genre>? GetGenresForArticle(int articleId)
         {
             var article = _context.Articles.Include(x => x.Genres).FirstOrDefault(x => x.ArticleId == articleId);
@@ -69,6 +69,5 @@ namespace BookWormProject.Data.Repository
             }
             return null;
         }
-
     }
 }

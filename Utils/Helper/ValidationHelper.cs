@@ -11,6 +11,7 @@ namespace BookWormProject.Utils.Helper
                 return false;
             }
 
+
             try
             {
                 var addr = new System.Net.Mail.MailAddress(input);
@@ -44,5 +45,4 @@ namespace BookWormProject.Utils.Helper
                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
         }
     }
-
 }

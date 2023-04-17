@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BookWormProject.Models;
+﻿namespace BookWormProject.Models;
 
 public partial class Review
 {

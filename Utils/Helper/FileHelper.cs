@@ -16,6 +16,7 @@
                 case ".png":
                 case ".gif":
                     return true;
+
                 default:
                     return false;
             }
@@ -29,5 +30,4 @@
             }
         }
     }
-
 }

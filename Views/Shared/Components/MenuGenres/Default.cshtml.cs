@@ -1,7 +1,5 @@
-﻿using BookWormProject.Models;
+﻿using BookWormProject.Data.Services;
 using Microsoft.AspNetCore.Mvc;
-using BookWormProject.ViewModels;
-using BookWormProject.Data.Services;
 
 [ViewComponent(Name = "MenuGenres")]
 public class MenuGenresComponent : ViewComponent

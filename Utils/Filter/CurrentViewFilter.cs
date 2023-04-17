@@ -21,5 +21,4 @@ namespace BookWormProject.Utils.Filter
             // Không cần thực hiện xử lý gì ở đây
         }
     }
-
 }
