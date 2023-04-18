@@ -3,19 +3,15 @@ using System.Collections.Generic;
 
 namespace BookWormProject.Models;
 
-public partial class Genre
+public partial class Author
 {
-    public int GenreId { get; set; }
+    public int AuthorId { get; set; }
 
     public string Name { get; set; } = null!;
 
     public string Description { get; set; } = null!;
 
-    public string Thumbnails { get; set; } = null!;
-
-    public int ViewCount { get; set; }
+    public string Avatar { get; set; } = null!;
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
-
-    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 }

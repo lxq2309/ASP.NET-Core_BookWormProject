@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookWormProject.Models;
 
@@ -14,6 +16,8 @@ public partial class BookWormDbContext : DbContext
     }
 
     public virtual DbSet<Article> Articles { get; set; }
+
+    public virtual DbSet<Author> Authors { get; set; }
 
     public virtual DbSet<Bookmark> Bookmarks { get; set; }
 
@@ -31,16 +35,15 @@ public partial class BookWormDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=ADMIN-PC;Initial Catalog=BookWormDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        => optionsBuilder.UseSqlServer("Data Source=ADMIN-PC;Initial Catalog=BookWormDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C878B0A838");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C855529869");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
-            entity.Property(e => e.Author).HasMaxLength(100);
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.CoverImage).HasMaxLength(255);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -59,6 +62,25 @@ public partial class BookWormDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Articles__UserID__300424B4");
 
+            entity.HasMany(d => d.Authors).WithMany(p => p.Articles)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ArticlesAuthor",
+                    r => r.HasOne<Author>().WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__Articles___Autho__47DBAE45"),
+                    l => l.HasOne<Article>().WithMany()
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__Articles___Artic__46E78A0C"),
+                    j =>
+                    {
+                        j.HasKey("ArticleId", "AuthorId").HasName("PK__Articles__CB6FDF09E8351623");
+                        j.ToTable("Articles_Authors");
+                        j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
+                        j.IndexerProperty<int>("AuthorId").HasColumnName("AuthorID");
+                    });
+
             entity.HasMany(d => d.Genres).WithMany(p => p.Articles)
                 .UsingEntity<Dictionary<string, object>>(
                     "ArticlesGenre",
@@ -72,16 +94,28 @@ public partial class BookWormDbContext : DbContext
                         .HasConstraintName("FK__Articles___Artic__3D5E1FD2"),
                     j =>
                     {
-                        j.HasKey("ArticleId", "GenreId").HasName("PK__Articles__6C5A209D401D8489");
+                        j.HasKey("ArticleId", "GenreId").HasName("PK__Articles__6C5A209D39A4CF1B");
                         j.ToTable("Articles_Genres");
                         j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
                         j.IndexerProperty<int>("GenreId").HasColumnName("GenreID");
                     });
         });
 
+        modelBuilder.Entity<Author>(entity =>
+        {
+            entity.HasKey(e => e.AuthorId).HasName("PK__Authors__70DAFC1436CE1DF0");
+
+            entity.Property(e => e.AuthorId).HasColumnName("AuthorID");
+            entity.Property(e => e.Avatar)
+                .HasMaxLength(255)
+                .HasDefaultValueSql("('/resource/images/default_avatar.jpg')");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<Bookmark>(entity =>
         {
-            entity.HasKey(e => new { e.BookmarkId, e.ArticleId }).HasName("PK__Bookmark__CDDC1D9D4C187FA2");
+            entity.HasKey(e => new { e.BookmarkId, e.ArticleId }).HasName("PK__Bookmark__CDDC1D9D27BE65DB");
 
             entity.Property(e => e.BookmarkId)
                 .ValueGeneratedOnAdd()
@@ -107,7 +141,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2B4EF854FD");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2BDCC6B9D4");
 
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Description).HasMaxLength(1000);
@@ -127,7 +161,7 @@ public partial class BookWormDbContext : DbContext
                         .HasConstraintName("FK__Categorie__Categ__2B3F6F97"),
                     j =>
                     {
-                        j.HasKey("CategoryId", "GenreId").HasName("PK__Categori__E9316A7E611E0314");
+                        j.HasKey("CategoryId", "GenreId").HasName("PK__Categori__E9316A7EECB21923");
                         j.ToTable("Categories_Genres");
                         j.IndexerProperty<int>("CategoryId").HasColumnName("CategoryID");
                         j.IndexerProperty<int>("GenreId").HasColumnName("GenreID");
@@ -136,7 +170,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Chapter>(entity =>
         {
-            entity.HasKey(e => e.ChapterId).HasName("PK__Chapters__0893A34A505051F8");
+            entity.HasKey(e => e.ChapterId).HasName("PK__Chapters__0893A34AEC22561B");
 
             entity.Property(e => e.ChapterId).HasColumnName("ChapterID");
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
@@ -151,7 +185,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.GenreId).HasName("PK__Genres__0385055E604037B5");
+            entity.HasKey(e => e.GenreId).HasName("PK__Genres__0385055E9EC504A0");
 
             entity.Property(e => e.GenreId).HasColumnName("GenreID");
             entity.Property(e => e.Description).HasMaxLength(1000);
@@ -161,11 +195,11 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<ReadHistory>(entity =>
         {
-            entity.HasKey(e => e.WatchedAt).HasName("PK__ReadHist__C5EA1BDB7B560FA2");
+            entity.HasKey(e => new { e.UserId, e.ArticleId }).HasName("PK__ReadHist__8E4EEBA0F6C4CCDE");
 
-            entity.Property(e => e.WatchedAt).HasColumnType("datetime");
-            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
+            entity.Property(e => e.WatchedAt).HasColumnType("datetime");
 
             entity.HasOne(d => d.Article).WithMany(p => p.ReadHistories)
                 .HasForeignKey(d => d.ArticleId)
@@ -180,7 +214,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => new { e.ReviewId, e.ArticleId }).HasName("PK__Review__ED7A5EA2982C846B");
+            entity.HasKey(e => new { e.ReviewId, e.ArticleId }).HasName("PK__Review__ED7A5EA22BDD44DD");
 
             entity.ToTable("Review");
 
@@ -206,9 +240,9 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC052E767D");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC239767B6");
 
-            entity.HasIndex(e => e.UserName, "UQ__Users__C9F28456D8DF4032").IsUnique();
+            entity.HasIndex(e => e.UserName, "UQ__Users__C9F2845658BBD72C").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Avatar).HasMaxLength(255);
@@ -233,5 +267,5 @@ public partial class BookWormDbContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
-    private partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

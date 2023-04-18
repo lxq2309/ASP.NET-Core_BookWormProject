@@ -1,6 +1,8 @@
 ﻿using BookWormProject.Data.Services;
 using BookWormProject.Models;
 using BookWormProject.ViewModels;
+using BookWormProject.ViewModels.Article;
+using BookWormProject.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -21,7 +23,7 @@ namespace BookWormProject.Controllers
         {
             var articles = _articleService.GetAllArticles();
             var hotArticles = articles.OrderByDescending(x => x.ViewCount)
-                                      .Select(x => new ArticleViewModel
+                                      .Select(x => new ArticleDetailViewModel
                                       {
                                           ArticleId = x.ArticleId,
                                           Title = x.Title,
@@ -30,7 +32,7 @@ namespace BookWormProject.Controllers
                                       })
                                       .ToList();
             var newArticles = articles.OrderByDescending(x => x.ArticleId)
-                                      .Select(x => new ArticleViewModel
+                                      .Select(x => new ArticleDetailViewModel
                                       {
                                           ArticleId = x.ArticleId,
                                           Title = x.Title,
@@ -42,7 +44,7 @@ namespace BookWormProject.Controllers
                                       .ToList();
             var completedArticles = articles.Where(x => x.IsCompleted)
                                             .OrderByDescending(x => x.ArticleId)
-                                            .Select(x => new ArticleViewModel
+                                            .Select(x => new ArticleDetailViewModel
                                             {
                                                 ArticleId = x.ArticleId,
                                                 Title = x.Title,
@@ -50,7 +52,7 @@ namespace BookWormProject.Controllers
                                                 Chapters = _articleService.GetChaptersForArticle(x.ArticleId)
                                             })
                                             .ToList();
-            var viewModels = new HomeViewModel(hotArticles, newArticles, completedArticles);
+            var viewModels = new IndexViewModel(hotArticles, newArticles, completedArticles);
             return View(viewModels);
         }
 

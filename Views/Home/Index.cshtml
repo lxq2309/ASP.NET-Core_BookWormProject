@@ -1,12 +1,12 @@
 ﻿@{
     Layout = "_LayoutBookWorm";
 }
-@using BookWormProject.ViewModels
-@model HomeViewModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BookWormProject.ViewModels.Home.IndexViewModel
 @{
-    var hotArticles = Model.hotArticles;
-    var newArticles = Model.newArticles;
-    var completedArticles = Model.completedArticles;
+    var hotArticles = Model.HotArticles;
+    var newArticles = Model.NewArticles;
+    var completedArticles = Model.CompletedArticles;
 }
 
 <div class="container" id="intro-index">

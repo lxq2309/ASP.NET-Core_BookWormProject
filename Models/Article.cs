@@ -1,4 +1,7 @@
-﻿namespace BookWormProject.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace BookWormProject.Models;
 
 public partial class Article
 {
@@ -7,8 +10,6 @@ public partial class Article
     public int UserId { get; set; }
 
     public string Title { get; set; } = null!;
-
-    public string Author { get; set; } = null!;
 
     public string Description { get; set; } = null!;
 
@@ -35,6 +36,8 @@ public partial class Article
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public virtual User User { get; set; } = null!;
+
+    public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 
     public virtual ICollection<Genre> Genres { get; set; } = new List<Genre>();
 }

@@ -49,5 +49,17 @@ namespace BookWormProject.Data.Repository
             }
             return null;
         }
+
+        public IEnumerable<Article>? GetArticlesForCategory(int categorizationId)
+        {
+            var category = _context.Categories.Include(x => x.Articles)
+                .FirstOrDefault(x => x.CategoryId == categorizationId);
+            if (category != null)
+            {
+                return category.Articles;
+            }
+            return null;
+        }
+
     }
 }

@@ -51,5 +51,10 @@ namespace BookWormProject.Data.Services
         {
             return _articleRepository.GetCategoryForArticle(articleId);
         }
+
+        public IEnumerable<Author>? GetAuthorsForArticle(int articleId)
+        {
+            return _articleRepository.GetAuthorsForArticle(articleId);
+        }
     }
 }

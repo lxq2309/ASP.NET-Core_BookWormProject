@@ -15,8 +15,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Genre\" />
+    <Folder Include="ViewModels\Chapter\" />
+    <Folder Include="ViewModels\Bookmark\" />
+    <Folder Include="ViewModels\Author\" />
+    <Folder Include="ViewModels\User\" />
+    <Folder Include="ViewModels\Review\" />
+    <Folder Include="ViewModels\ReadHistory\" />
     <Folder Include="Views\Article\" />
-    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Genre\" />
+    <Folder Include="Views\Bookmark\" />
+    <Folder Include="Views\Chapter\" />
+    <Folder Include="Views\Author\" />
+    <Folder Include="Views\Review\" />
+    <Folder Include="Views\ReadHistory\" />
+    <Folder Include="Views\Shared\Components\RightSidebar\ViewModels\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
 

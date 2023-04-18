@@ -27,6 +27,11 @@ namespace BookWormProject.Data.Services
             return _categoryRepository.GetAll();
         }
 
+        public IEnumerable<Article>? GetArticlesForCategory(int categorizationId)
+        {
+            return _categoryRepository.GetArticlesForCategory(categorizationId);
+        }
+
         public Category GetCategoryById(int id)
         {
             return _categoryRepository.GetCategoryById(id);
@@ -41,5 +46,6 @@ namespace BookWormProject.Data.Services
         {
             _categoryRepository.Update(category);
         }
+        
     }
 }

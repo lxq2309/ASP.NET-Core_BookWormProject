@@ -1,12 +1,15 @@
-﻿namespace BookWormProject.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace BookWormProject.Models;
 
 public partial class ReadHistory
 {
-    public DateTime WatchedAt { get; set; }
+    public int UserId { get; set; }
 
     public int ArticleId { get; set; }
 
-    public int UserId { get; set; }
+    public DateTime WatchedAt { get; set; }
 
     public virtual Article Article { get; set; } = null!;
 

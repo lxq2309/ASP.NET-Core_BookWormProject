@@ -69,5 +69,15 @@ namespace BookWormProject.Data.Repository
             }
             return null;
         }
+
+        public IEnumerable<Author>? GetAuthorsForArticle(int articleId)
+        {
+            var article = _context.Articles.Include(x => x.Authors).SingleOrDefault(x => x.ArticleId == articleId);
+            if (article != null)
+            {
+                return article.Authors;
+            }
+            return null;
+        }
     }
 }

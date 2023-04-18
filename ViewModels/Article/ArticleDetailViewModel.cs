@@ -1,9 +1,9 @@
 ﻿using BookWormProject.Models;
 using BookWormProject.Utils.Helper;
 
-namespace BookWormProject.ViewModels
+namespace BookWormProject.ViewModels.Article
 {
-    public class ArticleViewModel
+    public class ArticleDetailViewModel
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }
@@ -12,17 +12,15 @@ namespace BookWormProject.ViewModels
         {
             get
             {
-                return DateTimeHelper.ToTimeAgo(UpdatedAt);
+                return UpdatedAt.ToTimeAgo();
             }
         }
 
         public DateTime UpdatedAt { get; set; }
         public bool IsCompleted { get; set; }
-        public string Description { get; set; }
-        public string Author { get; set; }
         public IEnumerable<Genre>? Genres { get; set; }
-        public Category Category { get; set; }
         public string CoverImage { get; set; }
         public IEnumerable<Chapter>? Chapters { get; set; }
+        public IEnumerable<Author>? Authors { get; set; }
     }
 }
