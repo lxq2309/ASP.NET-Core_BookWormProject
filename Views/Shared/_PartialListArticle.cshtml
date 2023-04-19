@@ -1,0 +1,53 @@
+﻿@model List<BookWormProject.ViewModels.Article.ArticleDetailViewModel>
+@{
+    var articles = Model;
+}
+@for (int i = 0; i < articles.Count; i++)
+{
+    <div class="row" itemscope="" itemtype="https://schema.org/Book">
+        <div class="col-xs-3">
+            <div><img src="@articles[i].CoverImage" class="cover" alt="title"></div>
+        </div>
+        <div class="col-xs-7">
+            <div>
+                <span class="glyphicon glyphicon-book"></span>
+                <h3 class="truyen-title" itemprop="name">
+                    <a href="/" title="@articles[i].Title" itemprop="url">
+                        @articles[i].Title
+                    </a>
+                </h3>
+                @if (@articles[i].IsCompleted)
+                {
+                    <span class="label-title label-full"></span>
+                }
+                @foreach (var author in articles[i].Authors)
+                {
+                    <span class="author" itemprop="author">
+                        @author.Name
+                    </span>
+                }
+
+            </div>
+        </div>
+        <div class="col-xs-2 text-info">
+            <div>
+                @if (articles[i].Chapters.Count() == 0)
+                {
+                    <span class="chapter-text">
+                        Chưa có chương nào
+                    </span>
+                }
+                else
+                {
+                    var newestChapter = articles[i].Chapters.MaxBy(x => x.Index);
+                    <a title="@newestChapter.Title" href="/p/@articles[i].ArticleId/@newestChapter.ChapterId">
+                        <span class="chapter-text">
+                            @newestChapter.Title
+                        </span>
+                    </a>
+                }
+
+            </div>
+        </div>
+    </div>
+}

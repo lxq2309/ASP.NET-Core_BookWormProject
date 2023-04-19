@@ -19,7 +19,7 @@ namespace BookWormProject.Data.Services
 
         public void DeleteGenre(int id)
         {
-            _genresRepository.Delete(GetById(id));
+            _genresRepository.Delete(GetGenreById(id));
         }
 
         public IEnumerable<Genre> GetAllGenres()
@@ -27,7 +27,12 @@ namespace BookWormProject.Data.Services
             return _genresRepository.GetAll();
         }
 
-        public Genre GetById(int id)
+        public IEnumerable<Article>? GetArticlesForGenre(int id)
+        {
+            return _genresRepository.GetArticlesForGenre(id);
+        }
+
+        public Genre GetGenreById(int id)
         {
             return _genresRepository.GetById(id);
         }

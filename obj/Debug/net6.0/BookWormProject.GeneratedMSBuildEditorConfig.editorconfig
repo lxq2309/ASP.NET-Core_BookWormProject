@@ -20,8 +20,24 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Genre/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/CompletedArticles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb21wbGV0ZWRBcnRpY2xlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/HotArticles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb3RBcnRpY2xlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/NewArticles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdBcnRpY2xlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/Privacy.cshtml]
@@ -62,6 +78,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialHeader.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGVhZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialListArticle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTGlzdEFydGljbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialNewArticle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTmV3QXJ0aWNsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialPagination.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsUGFnaW5hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_ValidationScriptsPartial.cshtml]

@@ -7442,6 +7442,11 @@ h4,
     padding: 0;
 }
 
+#list-article{
+    padding: 0;
+    margin: 0;
+}
+
 .col-truyen-side .list {
     background-color: #ecf0f1;
     border: 1px solid #d9e1e4;

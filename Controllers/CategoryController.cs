@@ -16,7 +16,7 @@ namespace BookWormProject.Controllers
             _articleService = articleService;
         }
 
-        [Route("~/the-loai/{categoryId}")]
+        [Route("~/danh-muc/{categoryId}")]
         public IActionResult Index(int categoryId)
         {
             var currentCategory = _categoryService.GetCategoryById(categoryId);
@@ -33,7 +33,7 @@ namespace BookWormProject.Controllers
                                                Authors = _articleService.GetAuthorsForArticle(x.ArticleId)
                                            })
                                            .ToList();
-            CategoryIndexViewModel viewModels = new CategoryIndexViewModel(currentCategory, articles);
+            var viewModels = new CategoryIndexViewModel(currentCategory, articles);
             return View(viewModels);
         }
 

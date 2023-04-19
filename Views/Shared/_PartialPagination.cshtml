@@ -1,0 +1,10 @@
+﻿@using X.PagedList.Web.Common
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<BookWormProject.ViewModels.Article.ArticleDetailViewModel>
+
+@if (Model.PageCount > 1)
+{
+    <div class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("NewArticles", "Home", new { page }))
+    </div>
+}

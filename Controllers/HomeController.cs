@@ -5,6 +5,9 @@ using BookWormProject.ViewModels.Article;
 using BookWormProject.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using X.PagedList;
 
 namespace BookWormProject.Controllers
 {
@@ -54,6 +57,24 @@ namespace BookWormProject.Controllers
                                             .ToList();
             var viewModels = new IndexViewModel(hotArticles, newArticles, completedArticles);
             return View(viewModels);
+        }
+
+        [Route("~/moi-cap-nhat")]
+        public IActionResult NewArticles()
+        {
+            return View();
+        }
+
+        [Route("~/doc-nhieu-nhat")]
+        public IActionResult HotArticles()
+        {
+            return View();
+        }
+
+        [Route("~/da-hoan-thanh")]
+        public IActionResult CompletedArticles()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

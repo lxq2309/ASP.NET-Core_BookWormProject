@@ -12,10 +12,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="X.PagedList" Version="8.4.7" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Genre\" />
     <Folder Include="ViewModels\Chapter\" />
     <Folder Include="ViewModels\Bookmark\" />
     <Folder Include="ViewModels\Author\" />
@@ -23,7 +24,6 @@
     <Folder Include="ViewModels\Review\" />
     <Folder Include="ViewModels\ReadHistory\" />
     <Folder Include="Views\Article\" />
-    <Folder Include="Views\Genre\" />
     <Folder Include="Views\Bookmark\" />
     <Folder Include="Views\Chapter\" />
     <Folder Include="Views\Author\" />

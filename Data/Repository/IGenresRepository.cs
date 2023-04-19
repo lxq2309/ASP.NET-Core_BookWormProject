@@ -13,5 +13,6 @@ namespace BookWormProject.Data.Repository
         void Update(Genre genre);
 
         void Delete(Genre genre);
+        IEnumerable<Article>? GetArticlesForGenre(int id);
     }
 }

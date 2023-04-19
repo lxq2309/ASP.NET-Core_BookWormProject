@@ -1,4 +1,5 @@
 ﻿using BookWormProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookWormProject.Data.Repository
 {
@@ -26,6 +27,16 @@ namespace BookWormProject.Data.Repository
         public IEnumerable<Genre> GetAll()
         {
             return _context.Genres.ToList();
+        }
+
+        public IEnumerable<Article>? GetArticlesForGenre(int id)
+        {
+            var genre = _context.Genres.Include(x => x.Articles).FirstOrDefault(x => x.GenreId == id);
+            if (genre != null)
+            {
+                return genre.Articles;
+            }
+            return null;
         }
 
         public Genre GetById(int id)

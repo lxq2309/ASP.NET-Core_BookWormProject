@@ -21,7 +21,7 @@
                 <ul class="dropdown-menu">
                     @while (j < SIZE * (i + 1) && j != Model.Count)
                     {
-                        <li><a href="#" title="@Model[j].Name">@Model[j].Name</a></li>
+                        <li><a href="/the-loai/@Model[j].GenreId" title="@Model[j].Name">@Model[j].Name</a></li>
                         j++;
                     }
                 </ul>

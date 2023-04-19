@@ -1,13 +1,6 @@
 ﻿@{
     Layout = "_LayoutBookWorm";
-    ViewData["Title"] = @Model.CurrentCategory.Name;
-
-}
-
-@model BookWormProject.ViewModels.Category.CategoryIndexViewModel
-@{
-    var currentCategory = Model.CurrentCategory;
-    var articles = Model.Articles;
+    ViewData["Title"] = "Xem nhiều nhất";
 }
 
 <div class="container" id="list-page">
@@ -42,7 +35,7 @@
 
         function loadArticles(page) {
             $.ajax({
-                url: "/api/article/get_articles_for_category?page=" + page + '&categoryId=@Model.CurrentCategory.CategoryId',
+                url: "/api/article/get_hot_articles?page=" + page,
                 type: "GET",
                 dataType: "json",
                 success: function (result) {

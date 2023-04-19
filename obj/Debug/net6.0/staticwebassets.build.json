@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "H8ZF6t50txlwspQYpn1vTJ1GbjOBIdPgWKpVDtHVUgs=",
+  "Hash": "sckRnQmVSVV25IgthCkB3pHq2/HPnrRteXyFgWk1cbA=",
   "Source": "BookWormProject",
   "BasePath": "_content/BookWormProject",
   "Mode": "Default",
@@ -272,40 +272,6 @@
       "OriginalItemSpec": "wwwroot\\resource\\fonts\\PatrickHand-Regular.woff"
     },
     {
-      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.eot",
-      "SourceId": "BookWormProject",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\",
-      "BasePath": "_content/BookWormProject",
-      "RelativePath": "resource/fonts/RobotoCondensed-Regular.eot",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\resource\\fonts\\RobotoCondensed-Regular.eot"
-    },
-    {
-      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.woff",
-      "SourceId": "BookWormProject",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\",
-      "BasePath": "_content/BookWormProject",
-      "RelativePath": "resource/fonts/RobotoCondensed-Regular.woff",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\resource\\fonts\\RobotoCondensed-Regular.woff"
-    },
-    {
       "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\Roboto-Regular.eot",
       "SourceId": "BookWormProject",
       "SourceType": "Discovered",
@@ -340,12 +306,12 @@
       "OriginalItemSpec": "wwwroot\\resource\\fonts\\Roboto-Regular.woff"
     },
     {
-      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg.jpg",
+      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.eot",
       "SourceId": "BookWormProject",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\",
       "BasePath": "_content/BookWormProject",
-      "RelativePath": "resource/images/bg.jpg",
+      "RelativePath": "resource/fonts/RobotoCondensed-Regular.eot",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -354,7 +320,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\resource\\images\\bg.jpg"
+      "OriginalItemSpec": "wwwroot\\resource\\fonts\\RobotoCondensed-Regular.eot"
+    },
+    {
+      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\fonts\\RobotoCondensed-Regular.woff",
+      "SourceId": "BookWormProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\",
+      "BasePath": "_content/BookWormProject",
+      "RelativePath": "resource/fonts/RobotoCondensed-Regular.woff",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\resource\\fonts\\RobotoCondensed-Regular.woff"
     },
     {
       "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg_dark.gif",
@@ -389,6 +372,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\resource\\images\\bg_op.png"
+    },
+    {
+      "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bg.jpg",
+      "SourceId": "BookWormProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\",
+      "BasePath": "_content/BookWormProject",
+      "RelativePath": "resource/images/bg.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\resource\\images\\bg.jpg"
     },
     {
       "Identity": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\bgnoel.jpg",

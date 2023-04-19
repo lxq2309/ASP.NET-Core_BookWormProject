@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "_LayoutBookWorm";
+    ViewData["Title"] = "BookWorm - Web đọc sách và truyện";
 }
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model BookWormProject.ViewModels.Home.IndexViewModel
@@ -11,14 +12,8 @@
 
 <div class="container" id="intro-index">
     <div class="title-list">
-        <h2><a href="/truyen-hot/" title="Truyện Hot">Được đọc nhiều nhất</a></h2>
-        <a href="/truyen-hot/" title="Truyện Hot"><span class="glyphicon glyphicon-fire"></span></a>
-        <select id="hot-select" class="form-control new-select" aria-label="Select Genres">
-            <option value="all">Tất cả</option>
-            <option value="van-hoc-co-dien">
-                Văn học cổ điển
-            </option>
-        </select>
+        <h2><a href="/doc-nhieu-nhat/" title="Đọc nhiều nhất">Được đọc nhiều nhất</a></h2>
+        <a href="/doc-nhieu-nhat/" title="Đọc nhiều nhất"><span class="glyphicon glyphicon-fire"></span></a>
     </div>
     @for (int i = 0; i < hotArticles.Count; i++)
     {
@@ -51,20 +46,13 @@
     <div class="list list-truyen list-new col-xs-12 col-sm-12 col-md-8 col-truyen-main">
         <div class="title-list">
             <h2>
-                <a href="/truyen-moi/" title="Latest Release">
+                <a href="/moi-cap-nhat/" title="Latest Release">
                     Mới cập nhật
                 </a>
             </h2>
-            <a href="/truyen-moi/" title="Latest Release">
+            <a href="/moi-cap-nhat/" title="Latest Release">
                 <span class="glyphicon glyphicon-menu-right"></span>
-            </a><select id="new-select"
-                        class="form-control new-select" aria-label="Select Genres">
-                <option value="all">Tất cả</option>
-
-                <option value="van-hoc-co-dien">
-                    Văn học cổ điển
-                </option>
-            </select>
+            </a>
         </div>
 
         @for (int i = 0; i < newArticles.Count; i++)
@@ -86,7 +74,7 @@
                 <div class="hidden-xs col-sm-3 col-md-3 col-cat text-888">
                     @foreach (var genre in newArticles[i].Genres)
                     {
-                        <a itemprop="genre" href="/g/@genre.GenreId" title="@genre.Name">@genre.Name</a>
+                        <a itemprop="genre" href="/the-loai/@genre.GenreId" title="@genre.Name">@genre.Name</a>
                     }
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-2 col-chap text-info">
@@ -122,11 +110,11 @@
     <div class="list list-thumbnail col-xs-12">
         <div class="title-list">
             <h2>
-                <a href="/truyen-hoan-thanh/" title="Novel Completed">
+                <a href="/da-hoan-thanh/" title="Novel Completed">
                     Đã hoàn thành
                 </a>
             </h2>
-            <a href="/truyen-hoan-thanh/" title="Novel Completed">
+            <a href="/da-hoan-thanh/" title="Novel Completed">
                 <span class="glyphicon glyphicon-menu-right"></span>
             </a>
         </div>

@@ -1,12 +1,11 @@
 ﻿@{
     Layout = "_LayoutBookWorm";
-    ViewData["Title"] = @Model.CurrentCategory.Name;
-
+    ViewData["Title"] = @Model.CurrentGenre.Name;
 }
 
-@model BookWormProject.ViewModels.Category.CategoryIndexViewModel
+@model BookWormProject.ViewModels.Genre.GenreIndexViewModel
 @{
-    var currentCategory = Model.CurrentCategory;
+    var currentCategory = Model.CurrentGenre;
     var articles = Model.Articles;
 }
 
@@ -42,7 +41,7 @@
 
         function loadArticles(page) {
             $.ajax({
-                url: "/api/article/get_articles_for_category?page=" + page + '&categoryId=@Model.CurrentCategory.CategoryId',
+                url: "/api/article/get_articles_for_genre?page=" + page + '&genreId=@Model.CurrentGenre.GenreId',
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
