@@ -38,6 +38,15 @@ namespace BookWormProject.Data.Repository
             }
             return null;
         }
+        public IEnumerable<Category>? GetCategoriesForGenre(int id)
+        {
+            var genre = _context.Genres.Include(x => x.Categories).FirstOrDefault(x => x.GenreId == id);
+            if (genre != null)
+            {
+                return genre.Categories;
+            }
+            return null;
+        }
 
         public Genre GetById(int id)
         {

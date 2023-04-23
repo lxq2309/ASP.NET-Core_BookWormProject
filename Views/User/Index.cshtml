@@ -1,0 +1,198 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+}
+
+@model BookWormProject.ViewModels.User.UserIndexViewModel
+@{
+    var currentUser = Model.CurrentUser;
+    var bookmarks = Model.Bookmarks;
+    var comments = Model.CommentsForCurrentUser;
+}
+<div id="account-information">
+    <div class="container">
+        <div class="row">
+            <div id="ctl00_divCenter" class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <section class="user-sidebar clearfix">
+                            <div class="userinfo clearfix">
+                                <figure>
+                                    <img alt="" src="@currentUser.Avatar" class="avatar user-img">
+                                    <figcaption>
+                                        <div class="title">Tài khoản của</div>
+                                        <div class="user-name">
+                                            @currentUser.UserName
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </section>
+                        <nav class="user-sidelink clearfix">
+                            <ul>
+                                <li class="hvr-sweep-to-right active">
+                                    <a href=""><i class="fa fa-tachometer"></i> Thông tin chung</a>
+                                </li>
+                                <li class="hvr-sweep-to-right">
+                                    <a href="https://www.nettruyenvt.com/Secure/UserProfile.aspx"><i class="fa fa-info-circle"></i> Thông tin tài khoản</a>
+                                </li>
+                                <li class="hvr-sweep-to-right"><a href="https://www.nettruyenvt.com/Secure/ComicFollowed.aspx"><i class="fa fa-solid fa-bookmark"></i> Bookmark</a></li>
+                                <li class="hvr-sweep-to-right"><a href="https://www.nettruyenvt.com/Secure/ComicList.aspx"><i class="fa fa-list"></i> Bài viết đã đăng</a></li>
+                                <li class="hvr-sweep-to-right"><a href="https://www.nettruyenvt.com/Secure/Comments.aspx"><i class="fa fa-comments"></i> Bình luận</a></li>
+                                <li class="hvr-sweep-to-right"><a href="https://www.nettruyenvt.com/Secure/ChangePassword.aspx"><i class="fa fa-lock"></i> Đổi mật khẩu</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="user-page clearfix">
+                            <h1 class="postname">
+                                Thông tin chung
+                            </h1>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="account-info clearfix">
+                                        <h2 class="posttitle">
+                                            Thông tin tài khoản
+                                        </h2>
+                                        <a class="link" href="">Chỉnh sửa</a>
+                                        <div class="info-detail">
+                                            <div class="group">
+                                                <div class="label">Họ và tên</div>
+                                                <div class="detail">
+                                                    @currentUser.Name
+                                                </div>
+                                            </div>
+                                            <div class="group">
+                                                <div class="label">Email</div>
+                                                <div class="detail">
+                                                    @currentUser.Email
+                                                </div>
+                                            </div>
+                                            <div class="group">
+                                                <div class="label">Loại tài khoản</div>
+                                                <div class="detail" style="color: red">
+                                                    @(currentUser.Role == 0 ? "Member" : "Admin")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="relative">
+                                        <h2 class="posttitle">Bookmark</h2>
+                                        <a class="link" href="">Xem tất cả</a>
+                                    </div>
+                                    <section class="comics-followed comics-followed-nopaging user-table clearfix">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                        </th>
+                                                        <th class="nowrap">Tên bài viết</th>
+                                                        <th class="nowrap">Chap mới nhất</th>
+                                                        <th class="nowrap">Tên bookmark</th>
+                                                        <th class="nowrap">Description</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var bookmark in bookmarks)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <a class="image" href="/p/@bookmark.ArticleId">
+                                                                    <img src="@bookmark.ArticleCoverImage" class="lazy" data-original="@bookmark.ArticleCoverImage" alt="@bookmark.ArticleTitle">
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <a class="comic-name" href="/p/@bookmark.ArticleId">@bookmark.ArticleTitle</a>
+                                                                <div class="follow-action">
+                                                                    <a href="javascript:void(0)" class="follow-link">
+                                                                        <i class="fa fa-times">
+                                                                        </i> Xoá
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                            <td class="nowrap chapter">
+                                                                @if (bookmark.NewestChapter == null)
+                                                                {
+                                                                    <a href="#">Chưa có chương nào</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="/p/@bookmark.ArticleId/@bookmark.NewestChapter.ChapterId" title="@bookmark.NewestChapter.Title">@bookmark.NewestChapter.Title</a>
+                                                                }
+                                                                <br>
+                                                                <time class="time">@bookmark.ArticleUpdatedTimeAgo</time>
+                                                            </td>
+                                                            <td class="nowrap chapter">
+                                                                <a class="comic-name" href="/">@bookmark.BookmarkName</a>
+                                                            </td>
+                                                            <td class="nowrap chapter">
+                                                                <time class="time">@bookmark.BookmarkDescription</time>
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="relative">
+                                        <h2 class="posttitle">Bình luận gần đây</h2>
+                                    </div>
+                                    <section class="user-table clearfix">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th class="nowrap">Tên truyện</th>
+                                                        <th class="nowrap">Thời gian bình luận</th>
+                                                        <th class="nowrap">Nội dung</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var comment in comments)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <a class="image" href="/p/@comment.ArticleId">
+                                                                    <img src="@comment.ArticleCoverImage" class="lazy" data-original="@comment.ArticleCoverImage" alt="@comment.ArticleTitle">
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <a class="comic-name" href="/p/@comment.ArticleId">@comment.ArticleTitle</a>
+                                                                <div class="follow-action">
+                                                                    <a href="javascript:void(0)" class="follow-link">
+                                                                        <i class="fa fa-times">
+                                                                        </i> Xoá
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                            <td class="nowrap chapter">
+                                                                <time class="time">@comment.TimeAgo</time>
+                                                            </td>
+                                                            <td class="nowrap chapter">
+                                                                <time class="time">@comment.Content</time>
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

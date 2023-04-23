@@ -1,4 +1,5 @@
 ﻿using BookWormProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookWormProject.Data.Repository
 {
@@ -28,15 +29,46 @@ namespace BookWormProject.Data.Repository
             return _context.Users.ToList();
         }
 
+        public IEnumerable<Bookmark>? GetBookmarksForUser(int userId)
+        {
+            var user = _context.Users.Include(x => x.Bookmarks).FirstOrDefault(x => x.UserId == userId);
+            if (user != null)
+            {
+                return user.Bookmarks;
+            }
+            return null;
+        }
+
+        public User? GetByEmail(string email)
+        {
+            return _context.Users.SingleOrDefault(x => x.Email == email);
+        }
+
         public User GetById(int id)
         {
             return _context.Users.SingleOrDefault(x => x.UserId == id);
+        }
+
+        public User? GetByUserName(string userName)
+        {
+            return _context.Users.SingleOrDefault(x => x.UserName == userName);
         }
 
         public void Update(User user)
         {
             _context.Users.Update(user);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Comment>? GetCommentsForUser(int userId)
+        {
+            var user = _context.Users.Include(x => x.Comments).FirstOrDefault(x => x.UserId == userId);
+            if (user != null)
+            {
+                return _context.Comments;
+            }
+
+            return null;
         }
     }
 }

@@ -1,0 +1,292 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+}
+@model BookWormProject.ViewModels.Article.ArticleDetailViewModel
+@{
+    var article = Model;
+    var authors = Model.Authors.ToList();
+    var genres = Model.Genres.ToList();
+    var chapters = Model.Chapters.ToList();
+}
+<input id="id_post" type="hidden" value="@article.ArticleId">
+<div class="container csstransforms3d" id="truyen">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+        <div class="col-xs-12 col-info-desc" itemscope="" itemtype="https://schema.org/Book">
+            <div class="title-list book-intro">
+                <h2>Thông tin bài đăng</h2>
+            </div>
+            <h3 class="title" itemprop="name">
+                @article.Title
+            </h3>
+            <div class="col-xs-12 col-sm-4 col-md-4 info-holder">
+                <div class="books">
+                    <div class="book">
+                        <img src="@article.CoverImage" alt="@article.Title"
+                             itemprop="image" />
+                    </div>
+                </div>
+                <div class="info">
+                    <div>
+                        <h3><span class="glyphicon glyphicon-user"></span>&nbsp;Tác giả:</h3>
+                        @for (int i = 0; i < authors.Count; i++)
+                        {
+                            if (i != authors.Count - 1)
+                            {
+                                <a itemprop="author" href="/" title="@authors[i].Name">@authors[i].Name,</a>
+                            }
+                            else
+                            {
+                                <a itemprop="author" href="/" title="@authors[i].Name">@authors[i].Name</a>
+                            }
+                        }
+                    </div>
+                    <div>
+                        <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Thể loại:</h3>
+                        @for (int i = 0; i < genres.Count; i++)
+                        {
+                            if (i != authors.Count - 1)
+                            {
+                                <a itemprop="genre" href="" title="@genres[i].Name">@genres[i].Name,</a>
+                            }
+                            else
+                            {
+                                <a itemprop="genre" href="" title="@genres[i].Name">@genres[i].Name</a>
+                            }
+
+                        }
+                    </div>
+
+                    <div>
+                        <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Tình trạng:</h3>
+                        @if (article.IsCompleted)
+                        {
+                            <span class="label label-success">Hoàn thành</span>
+                        }
+                        else
+                        {
+                            <span class="label label-info">Đang tiến hành</span>
+                        }
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 desc">
+                <div class="rate">
+                    <div class="rate-holder" data-score="5" style="cursor: pointer;">
+                    </div>
+                    <em class="rate-text"></em>
+                    <div class="small" itemprop="aggregateRating" itemscope
+                         itemtype="http://schema.org/AggregateRating">
+                        <em>
+                            Đánh giá:
+                            <strong>
+                                <span itemprop="ratingValue">
+                                    5
+                                </span>
+                            </strong>
+                            <span class="text-muted" itemprop="bestRating">10</span> từ
+                            <strong>
+                                <span itemprop="ratingCount">
+                                    1000
+                                </span> lượt
+                            </strong>
+                        </em>
+                    </div>
+                </div>
+
+                <div id="gioi-thieu-truyen" class="desc-text desc-text-full" itemprop="description">
+                    @article.Description
+                </div>
+
+                <div class="showmore">
+                    <a class="btn btn-default btn-xs hide" href="javascript:void(0)"
+                       title="See more">Xem thêm »</a>
+                </div>
+
+                <div class="group-buttons">
+                    <a href="/p/@article.ArticleId/1" class="btn btn-danger btn-block btn-style btn-border">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;ĐỌC TỪ ĐẦU
+                    </a>
+                </div>
+
+
+                <div class="l-chapter">
+                    <div class="l-title">
+                        <h3>Chương mới nhất</h3>
+                    </div>
+                    <ul class="l-chapters">
+                        @for (int i = 0; i < chapters.Count && i < 5; i++)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-certificate"></span>
+                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                    <span class="chapter-text">
+                                        @chapters[i].Title
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" id="list-chapter">
+            <div id="danh-sach-chuong" class="title-list">
+                <h2>Danh sách chương</h2>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <ul class="list-chapter">
+                        @for (int i = 0; i < 25 && i < chapters.Count; i++)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-certificate"></span>
+                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                    <span class="chapter-text">
+                                        @chapters[i].Title
+                                    </span>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <ul class="list-chapter">
+                        @for (int i = 25; i < 50 && i < chapters.Count; i++)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-certificate"></span>
+                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                    <span class="chapter-text">
+                                        @chapters[i].Title
+                                    </span>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div id="pagination"></div>
+
+            </div>
+            <div id="comment" class="col-xs-12 comment-box">
+                @await Html.PartialAsync("_PartialComment")
+            </div>
+        </div>
+    </div>
+    <div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
+        @await Component.InvokeAsync("RightSidebar")
+    </div>
+</div>
+<style>
+    .group-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 10px;
+    }
+
+    .btn.btn-style {
+        -webkit-box-shadow: 0 3px 4px 0 #ced9d9;
+        -moz-box-shadow: 0 3px 4px 0 #ced9d9;
+        box-shadow: 0 3px 4px 0 #ced9d9;
+        color: #fff;
+        background-color: #9f251e;
+        border-color: #94221c;
+        -webkit-box-align: center !important;
+        -webkit-align-items: center !important;
+        -moz-box-align: center !important;
+        -ms-flex-align: center !important;
+        align-items: center !important;
+    }
+
+    .btn.btn-style-1 {
+        -webkit-box-shadow: 0 3px 4px 0 #ced9d9;
+        -moz-box-shadow: 0 3px 4px 0 #ced9d9;
+        box-shadow: 0 3px 4px 0 #ced9d9;
+        color: #222;
+        border-color: #bdbbba;
+        -webkit-box-align: center !important;
+        -webkit-align-items: center !important;
+        -moz-box-align: center !important;
+        -ms-flex-align: center !important;
+        align-items: center !important;
+        margin-top: 0 !important;
+    }
+
+    .group-buttons .btn {
+        padding: 12px 10px;
+    }
+
+    .btn-border {
+        border-radius: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ddd;
+        border-color: #d43f3a;
+    }
+
+    .group-gt {
+        font-family: roboto;
+        font-weight: bold;
+        border-radius: 90px;
+        margin: 0 0 10px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .group-gt .btn {
+            border-radius: 30px;
+        }
+</style>
+
+@section CommentScripts
+{
+    <script>
+    $(document).ready(function () {
+        // Hiển thị nội dung của tab đầu tiên
+        $('.tabcontent[data-tab="tab1"]').show();
+        $('.tablinks[data-tab="tab1"]').addClass('active');
+
+        // Xử lý khi click vào các tablink
+        $('.tablinks').click(function () {
+            // Ẩn tất cả các nội dung tabcontent
+            $('.tabcontent').hide();
+            $('.tablinks').removeClass('active');
+
+            // Lấy giá trị của data-tab của tablink được click
+            var tabId = $(this).data('tab');
+
+            // Hiển thị nội dung tabcontent tương ứng
+            $('.tabcontent[data-tab="' + tabId + '"]').show();
+            $('.tablinks[data-tab="' + tabId + '"]').addClass('active');
+        });
+    });
+</script>
+}

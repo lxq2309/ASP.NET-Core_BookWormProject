@@ -6,10 +6,12 @@ namespace BookWormProject.Data.Services
     public class ChapterService : IChapterService
     {
         private readonly IChapterRepository _chapterRepository;
+        private readonly IArticleService _articleService;
 
-        public ChapterService(IChapterRepository chapterRepository)
+        public ChapterService(IChapterRepository chapterRepository, IArticleService articleService)
         {
             _chapterRepository = chapterRepository;
+            _articleService = articleService;
         }
 
         public void AddChapter(Chapter chapter)
@@ -30,6 +32,12 @@ namespace BookWormProject.Data.Services
         public Chapter GetById(int id)
         {
             return _chapterRepository.GetById(id);
+        }
+
+        public Chapter? GetChapterByIndex(int articleId, int index)
+        {
+            var chapters = _articleService.GetChaptersForArticle(articleId);
+            return chapters.SingleOrDefault(x => x.Index == index);
         }
 
         public void UpdateChapter(Chapter chapter)

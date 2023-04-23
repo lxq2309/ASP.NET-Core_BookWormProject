@@ -1,12 +1,11 @@
 ﻿@{
     Layout = "_LayoutBookWorm";
-    ViewData["Title"] = @Model.CurrentGenre.Name;
+    ViewData["Title"] = $"Thể loại {Model.Name}";
 }
 
-@model BookWormProject.ViewModels.Genre.GenreIndexViewModel
+@model Genre
 @{
-    var currentCategory = Model.CurrentGenre;
-    var articles = Model.Articles;
+    var currentGenre = Model;
 }
 
 <div class="container" id="list-page">
@@ -19,7 +18,7 @@
         </div>
     </div>
     <div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
-        @await Component.InvokeAsync("RightSidebar");
+        @await Component.InvokeAsync("RightSidebar", currentGenre);
     </div>
 </div>
 <div class="row category">
@@ -31,7 +30,9 @@
 </div>
 
 @section GetArticlesScripts
-    {
+{
+    <script src="/resource/js/render_articles.js"></script>
+    <script src="/resource/js/render_pagination.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -41,7 +42,7 @@
 
         function loadArticles(page) {
             $.ajax({
-                url: "/api/article/get_articles_for_genre?page=" + page + '&genreId=@Model.CurrentGenre.GenreId',
+                url: "/api/article/get_articles_for_genre?page=" + page + '&genreId=@currentGenre.GenreId',
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
@@ -56,115 +57,6 @@
                     $("#pagination").html(paginationHtml);
                 }
             });
-        }
-
-        $(document).on('click', '#pagination a', function (e) {
-            e.preventDefault();
-            var page = $(this).data('page');
-            loadArticles(page);
-        });
-
-        function renderArticles(articles, title) {
-            let articleHtml =
-                `
-                            <div class="title-list">
-                                <h2>
-                                    ${title}
-                                </h2>
-                            </div>
-                        `;
-            for (let i = 0; i < articles.length; i++) {
-                const article = articles[i];
-                let chapterHtml = '';
-                if (article.chapters.length === 0) {
-                    chapterHtml = `
-                                    <span class="chapter-text">
-                                      Chưa có chương nào
-                                    </span>
-                                  `;
-                } else {
-                    const newestChapter = article.chapters.reduce((max, current) => max.Index > current.Index ? max : current);
-                    chapterHtml = `
-                                    <a title="${newestChapter.title}" href="/p/${article.articleId}/${newestChapter.chapterId}">
-                                      <span class="chapter-text">
-                                        ${newestChapter.title}
-                                      </span>
-                                    </a>
-                                  `;
-                }
-
-                let labelHtml = '';
-                if (article.isCompleted) {
-                    labelHtml = '<span class="label-title label-full"></span>';
-                }
-
-                let authorHtml = '';
-                for (let j = 0; j < article.authors.length; j++) {
-                    authorHtml += `
-                                    <span class="author" itemprop="author">
-                                      ${article.authors[j].name}
-                                    </span>
-                                  `;
-                }
-
-                articleHtml += `
-                                  <div class="row" itemscope="" itemtype="https://schema.org/Book">
-                                    <div class="col-xs-3">
-                                      <div><img src="${article.coverImage}" class="cover" alt="title"></div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                      <div>
-                                        <span class="glyphicon glyphicon-book"></span>
-                                        <h3 class="truyen-title" itemprop="name">
-                                          <a href="/" title="${article.title}" itemprop="url">
-                                            ${article.title}
-                                          </a>
-                                        </h3>
-                                        ${labelHtml}
-                                        ${authorHtml}
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-2 text-info">
-                                      <div>
-                                        ${chapterHtml}
-                                      </div>
-                                    </div>
-                                  </div>
-                                `;
-            }
-
-            return articleHtml;
-        }
-
-        function renderPagination(pageInfo) {
-            var paginationHtml =
-                `
-                            <ul class="pagination pagination-sm">
-                        `;
-            if (pageInfo.hasPreviousPage) {
-                var firstLink = "<li><a href='#' data-page='" + 1 + "'>&laquo; First</a></li>";
-                var prevLink = "<li><a href='#' data-page='" + (pageInfo.pageNumber - 1) + "'><span class='glyphicon glyphicon-menu-left'></span></a></li>";
-                paginationHtml += firstLink;
-                paginationHtml += prevLink;
-            }
-            for (var i = 1; i <= pageInfo.totalPages; i++) {
-                var pageLink = "<li><a href='#' data-page='" + i + "'>" + i + "</a></li>";
-                if (i == pageInfo.pageNumber) {
-                    pageLink = "<li class='active'><span>" + i + "<span class='sr-only'> (đang xem)</span></span></li>";
-                }
-                paginationHtml += pageLink;
-            }
-            if (pageInfo.hasNextPage) {
-                var nextLink = "<li><a href='#' data-page='" + (pageInfo.pageNumber + 1) + "'><span class='glyphicon glyphicon-menu-right'></span></a></li>";
-                var lastLink = "<li><a href='#' data-page='" + pageInfo.totalPages + "'>Last &raquo;</a></li>";
-                paginationHtml += nextLink;
-                paginationHtml += lastLink;
-            }
-
-            paginationHtml +=
-                `</ul>`;
-
-            return paginationHtml;
         }
     </script>
 }

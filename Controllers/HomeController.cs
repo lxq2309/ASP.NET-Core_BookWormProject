@@ -2,12 +2,10 @@
 using BookWormProject.Models;
 using BookWormProject.ViewModels;
 using BookWormProject.ViewModels.Article;
-using BookWormProject.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using X.PagedList;
+using BookWormProject.ViewModels.Home;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookWormProject.Controllers
 {
@@ -55,6 +53,7 @@ namespace BookWormProject.Controllers
                                                 Chapters = _articleService.GetChaptersForArticle(x.ArticleId)
                                             })
                                             .ToList();
+
             var viewModels = new IndexViewModel(hotArticles, newArticles, completedArticles);
             return View(viewModels);
         }
@@ -76,6 +75,7 @@ namespace BookWormProject.Controllers
         {
             return View();
         }
+
 
         public IActionResult Privacy()
         {

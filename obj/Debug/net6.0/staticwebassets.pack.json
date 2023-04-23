@@ -89,6 +89,14 @@
       "PackagePath": "staticwebassets\\resource\\images\\bgnoel.jpg"
     },
     {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\default_avatar.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\default_avatar.jpg"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\default_avatar.png",
+      "PackagePath": "staticwebassets\\resource\\images\\default_avatar.png"
+    },
+    {
       "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\images\\favicon.ico",
       "PackagePath": "staticwebassets\\resource\\images\\favicon.ico"
     },
@@ -147,6 +155,18 @@
     {
       "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\main.js",
       "PackagePath": "staticwebassets\\resource\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\render_articles.js",
+      "PackagePath": "staticwebassets\\resource\\js\\render_articles.js"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\render_comment.js",
+      "PackagePath": "staticwebassets\\resource\\js\\render_comment.js"
+    },
+    {
+      "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\js\\render_pagination.js",
+      "PackagePath": "staticwebassets\\resource\\js\\render_pagination.js"
     },
     {
       "Id": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\wwwroot\\resource\\style.css",

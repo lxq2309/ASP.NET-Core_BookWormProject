@@ -39,7 +39,7 @@ namespace BookWormProject.Data.Services
 
         public IEnumerable<Genre>? GetGenresForArticle(int articleId)
         {
-            return _articleRepository.GetGenresForArticle(articleId);
+            return _articleRepository.GetGenresForArticle(articleId).OrderByDescending(x => x.Name);
         }
 
         public IEnumerable<Chapter>? GetChaptersForArticle(int articleId)
@@ -54,7 +54,17 @@ namespace BookWormProject.Data.Services
 
         public IEnumerable<Author>? GetAuthorsForArticle(int articleId)
         {
-            return _articleRepository.GetAuthorsForArticle(articleId);
+            return _articleRepository.GetAuthorsForArticle(articleId).OrderByDescending(x => x.Name);
+        }
+
+        public IEnumerable<Comment>? GetCommentsForArticle(int articleId)
+        {
+            return _articleRepository.GetCommentsForArticle(articleId);
+        }
+
+        public Chapter? GetNewestChapterForArticle(int articleId)
+        {
+            return GetChaptersForArticle(articleId).MaxBy(x => x.Index);
         }
     }
 }

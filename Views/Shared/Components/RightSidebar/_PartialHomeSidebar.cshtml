@@ -1,0 +1,16 @@
+﻿@model List<Genre>
+@{
+    var allGenres = Model;
+}
+
+<div class="list list-truyen list-cat col-xs-12">
+    <div class="title-list">
+        <h4>Thể loại</h4>
+    </div>
+    <div class="row">
+        @foreach (var item in allGenres)
+        {
+            <div class="col-xs-6"><a href="#" title="@item.Name">@item.Name</a></div>
+        }
+    </div>
+</div>

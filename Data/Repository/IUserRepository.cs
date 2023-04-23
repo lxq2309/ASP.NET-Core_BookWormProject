@@ -13,5 +13,9 @@ namespace BookWormProject.Data.Repository
         void Update(User user);
 
         void Delete(User user);
+        User? GetByEmail(string email);
+        User? GetByUserName(string userName);
+        IEnumerable<Bookmark>? GetBookmarksForUser(int userId);
+        IEnumerable<Comment>? GetCommentsForUser(int userId);
     }
 }

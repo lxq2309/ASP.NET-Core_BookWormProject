@@ -20,6 +20,7 @@ namespace BookWormProject.Data.Services
 
         Category GetCategoryForArticle(int articleId);
         IEnumerable<Author>? GetAuthorsForArticle(int articleId);
-
+        IEnumerable<Comment>? GetCommentsForArticle(int articleId);
+        Chapter? GetNewestChapterForArticle(int articleId);
     }
 }

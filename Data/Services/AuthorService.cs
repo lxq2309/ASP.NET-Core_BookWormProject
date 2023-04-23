@@ -27,6 +27,11 @@ namespace BookWormProject.Data.Services
             return _authorRepository.GetAll();
         }
 
+        public IEnumerable<Article>? GetArticlesForAuthor(int id)
+        {
+            return _authorRepository.GetArticlesForAuthor(id);
+        }
+
         public Author GetAuthorById(int id)
         {
             return _authorRepository.GetById(id);

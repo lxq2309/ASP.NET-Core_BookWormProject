@@ -8,13 +8,37 @@
     <meta name="google-site-verification" content="NpqS36hKNT71PXOCitWUqI8ixOBrAPIr-DJ9VNwLmKY" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="rating" content="General">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="/resource/style.css" />
     <script src="/resource/js/main.js"></script>
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="" />
 </head>
 
-<body id="có nhiều id ứng với từng trang, lưu ý xem lại trang php">
+@{
+    string bodyId;
+    switch (ViewBag.CurrentController)
+    {
+        case "Genre":
+        case "Category":
+            bodyId = "body_cat";
+            break;
+        case "Article":
+            bodyId = "body_truyen";
+            break;
+        case "Author":
+            bodyId = "body_author";
+            break;
+        case "Chapter":
+            bodyId = "body_chapter";
+            break;
+        default:
+            bodyId = "body_home";
+            break;
+    }
+}
+
+<body id="@bodyId">
     <div id="wrap">
         @await Html.PartialAsync("_PartialHeader")
         @RenderBody()
@@ -22,6 +46,8 @@
     </div>
 
     @RenderSection("GetArticlesScripts", required:false)
+    @RenderSection("ChapterScripts", required:false)
+    @RenderSection("CommentScripts", required:false)
 </body>
 
 </html>

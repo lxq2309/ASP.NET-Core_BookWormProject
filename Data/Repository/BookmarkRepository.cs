@@ -1,4 +1,5 @@
 ﻿using BookWormProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookWormProject.Data.Repository
 {
@@ -26,6 +27,17 @@ namespace BookWormProject.Data.Repository
         public IEnumerable<Bookmark> GetAll()
         {
             return _context.Bookmarks.ToList();
+        }
+
+        public Article? GetArticleForBookmark(int bookmarkId)
+        {
+            var bookmark = _context.Bookmarks.Include(x => x.Article).FirstOrDefault(x => x.BookmarkId == bookmarkId);
+            if (bookmark != null)
+            {
+                return bookmark.Article;
+            }
+
+            return null;
         }
 
         public Bookmark GetById(int id)

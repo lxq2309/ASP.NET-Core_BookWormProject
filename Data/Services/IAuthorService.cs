@@ -9,5 +9,6 @@ namespace BookWormProject.Data.Services
         void AddAuthor(Author author);
         void UpdateAuthor(Author author);
         void DeleteAuthor(int id);
+        IEnumerable<Article>? GetArticlesForAuthor(int id);
     }
 }

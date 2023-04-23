@@ -13,5 +13,6 @@ namespace BookWormProject.Data.Services
         void UpdateChapter(Chapter chapter);
 
         void DeleteChapter(int id);
+        Chapter? GetChapterByIndex(int articleId, int index);
     }
 }

@@ -27,6 +27,11 @@ namespace BookWormProject.Data.Services
             return _bookmarkRepository.GetAll();
         }
 
+        public Article? GetArticleForBookmark(int bookmarkId)
+        {
+            return _bookmarkRepository.GetArticleForBookmark(bookmarkId);
+        }
+
         public Bookmark GetById(int id)
         {
             return _bookmarkRepository.GetById(id);

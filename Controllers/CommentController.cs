@@ -2,7 +2,7 @@
 
 namespace BookWormProject.Controllers
 {
-    public class ReviewController : Controller
+    public class CommentController : Controller
     {
         public IActionResult Index()
         {
@@ -15,10 +15,6 @@ namespace BookWormProject.Controllers
             return View();
         }
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
 
         public IActionResult Delete()
         {

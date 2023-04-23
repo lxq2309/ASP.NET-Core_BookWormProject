@@ -7442,7 +7442,7 @@ h4,
     padding: 0;
 }
 
-#list-article{
+#list-article {
     padding: 0;
     margin: 0;
 }
@@ -9939,6 +9939,7 @@ h4,
     padding-top: 4px;
     font-size: 11px
 }
+
 }
 
 .label {
@@ -10018,4 +10019,611 @@ h4,
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.scroll-up {
+    transition: transform 0.5s ease;
+}
+
+#comment {
+    text-align: left;
+    margin-top: 10px;
+}
+
+#comment-list .item {
+    padding: 10px 0;
+}
+
+    #comment-list .item .avatar {
+        overflow: hidden;
+        float: left;
+        height: 40px;
+        width: 40px;
+    }
+
+#comment-list img, canvas {
+    max-width: 100%;
+}
+
+#comment-list .item .summary {
+    margin-left: 55px;
+    position: relative;
+}
+
+    #comment-list .item .summary .fa-arrow {
+        position: absolute;
+        top: 5px;
+        left: -10px;
+        font-size: 20px;
+        line-height: 11px;
+        background-color: transparent;
+        color: #d8d8d8;
+    }
+
+#comment-list .fa, .fa-stack {
+    display: inline-block;
+}
+
+#comment-list .fa {
+    font-family: icomanga !important;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#comment-list .item .summary .info {
+    border: 1px solid #d8d8d8;
+    padding: 5px 10px;
+    background-color: #fffdfd;
+}
+
+#comment-list .comment-header {
+    overflow: hidden;
+    border-bottom: solid 1px #d8d8d8;
+    padding-bottom: 5px;
+}
+
+#comment-list .item .comment-content {
+    overflow: hidden;
+    display: block;
+    padding: 10px 0 5px;
+    word-wrap: break-word;
+}
+
+#comment-list .fa-angle-left:before {
+    content: "<";
+}
+
+#comment-list .authorname {
+    font-weight: 700;
+    color: #03f;
+    font-size: 13px;
+}
+
+#comment abbr[title] {
+    border-bottom: unset;
+}
+
+
+
+#login-signup-form .row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+@media (min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 25%;
+    }
+}
+
+@media (max-width: 768px) {
+    #login-signup-form .row {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+#login-signup-form .user-page {
+    position: relative;
+}
+
+.mrb20 {
+    margin-bottom: 20px;
+}
+
+#login-signup-form .user-page .form-group .control-label {
+    font-weight: 400;
+}
+
+#login-signup-form label {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+#login-signup-form .form-control {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+#login-signup-form .form-control, output {
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #555;
+    display: block;
+}
+
+#login-signup-form .loginpage .remember-me label {
+    font-weight: 400;
+    margin: 0 0 0 5px;
+}
+
+#login-signup-form .user-page .login-action {
+    text-align: right;
+}
+
+    #login-signup-form .user-page .login-action .login-link {
+        display: inline-block;
+        font-size: 13px;
+    }
+
+#login-signup-form a {
+    color: #288ad6;
+    cursor: pointer;
+}
+
+#login-signup-form .user-page .login-action .login-link:last-child {
+    margin-left: 10px;
+}
+
+#login-signup-form .user-page .login-action input[type="submit"], .btn-fullwidth {
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #4a4a4a;
+    background: #fdd835;
+    border-color: #fdd835;
+}
+
+#login-signup-form .open-login a.login-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0,0,0,.2);
+}
+
+#login-signup-form .open-login a {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#login-signup-form .open-login p a {
+    display: inline;
+    padding-left: 0;
+}
+
+#login-signup-form .open-login a.login-google {
+    color: #fff;
+    background-color: #dd4b39;
+    border-color: rgba(0,0,0,.2);
+}
+
+#login-signup-form .open-login a .fa {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0,0,0,.2);
+    height: 39px;
+    padding-top: 3px;
+}
+
+#login-signup-form .fa, .fa-stack {
+    display: inline-block;
+}
+
+
+#login-signup-form {
+    min-height: calc(100vh - 200px);
+}
+
+    #login-signup-form .postname {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 22px;
+        line-height: 1.5;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+        #login-signup-form .postname:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #ee2c74;
+            margin-top: 5px;
+        }
+
+
+.validation-error {
+    color: red;
+}
+
+#logout button {
+    width: 100%;
+    text-align: left;
+    padding: 6px 15px;
+    font-size: 15px;
+    background-color: unset;
+    border: none;
+    color: white;
+    border-top: 1px solid white;
+    margin-top: 20px;
+}
+
+    #logout button:hover {
+        background-color: #14425d;
+    }
+
+@media (max-width: 991px) {
+    #logout button {
+        padding: 5px 15px 5px 25px;
+        border-top: unset;
+        margin-top: unset;
+    }
+}
+
+#account-information .main .container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+#account-information .row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+#account-information .user-page {
+    position: relative;
+}
+
+    #account-information .user-page .postname {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 22px;
+        line-height: 1.5;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+        #account-information .user-page .postname:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #ee2c74;
+            margin-top: 5px;
+        }
+
+#account-information h1 {
+    font-size: 2em;
+    margin: .67em 0;
+}
+
+
+#account-information .user-page .account-info {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#account-information .user-page .posttitle {
+    font-weight: 500;
+    border-left: 3px solid #ee2c74;
+    padding-left: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    min-height: 27px;
+}
+
+#account-information .user-page .link {
+    font-size: 13px;
+    color: #333;
+    position: absolute;
+    top: 3px;
+    right: 0;
+}
+
+    #account-information .user-page .link:after {
+        content: '>';
+        margin-left: 10px;
+    }
+
+#account-information .account-info .info-detail {
+    border: 1px solid #a3b5c2;
+    border-radius: 3px;
+    padding: 15px 20px;
+}
+
+    #account-information .account-info .info-detail .group {
+        margin-bottom: 10px;
+    }
+
+        #account-information .account-info .info-detail .group .label {
+            float: left;
+            width: 100px;
+            color: #000;
+            font-size: 100%;
+            text-align: left;
+            font-weight: 400;
+        }
+
+#account-information .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    background-color: unset;
+}
+
+#account-information .account-info .info-detail .group .detail {
+    display: table-cell;
+    font-weight: 500;
+}
+
+#account-information .relative {
+    position: relative !important;
+}
+
+#account-information .user-table {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+    #account-information .user-table .table-responsive {
+        margin-bottom: 20px;
+    }
+
+#account-information .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#account-information .user-table .table {
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+#account-information table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#account-information .user-table .table th {
+    vertical-align: bottom;
+    padding: .75rem;
+    white-space: nowrap;
+    border-bottom: 2px solid #eceeef;
+    text-transform: uppercase;
+    border: none;
+    border-top: 2px solid #ee2c74;
+    background: #14425d;
+    color: #fff;
+    white-space: nowrap;
+    text-align: left;
+}
+
+#account-information .user-table .table .nowrap {
+    white-space: nowrap;
+}
+
+#account-information .user-sidebar {
+    margin: 0 0 20px;
+    position: relative;
+}
+
+    #account-information .user-sidebar .userinfo {
+        background: #222;
+    }
+
+        #account-information .user-sidebar .userinfo figure {
+            padding: 10px;
+        }
+            #account-information .user-sidebar .userinfo figure .user-img {
+                display: block;
+                width: 80px;
+                float: left;
+            }
+#account-information img, canvas {
+    max-width: 100%;
+}
+
+#account-information .user-sidebar .userinfo figure figcaption {
+    display: table-cell;
+    padding: 15px 5px 15px 10px;
+}
+
+    #account-information .user-sidebar .userinfo figure figcaption .title {
+        color: #fff;
+        opacity: .8;
+        font-weight: 300;
+    }
+
+    #account-information .user-sidebar .userinfo figure figcaption .user-name {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 14px;
+        color: #fff;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+#account-information .user-sidebar .fa {
+    position: absolute;
+    top: 40%;
+    right: 5px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#account-information .user-sidelink {
+    background: #f2f2f2;
+    margin-bottom: 60px;
+}
+
+    #account-information .user-sidelink ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        #account-information .user-sidelink ul li.active {
+            background: #e6e6e6;
+            border-left: 3px solid #ee2c74;
+        }
+
+            #account-information .user-sidelink ul li.active a {
+                font-weight: 700;
+            }
+
+        #account-information .user-sidelink ul li a {
+            display: block;
+            color: #333;
+            padding: 9px 30px;
+        }
+
+        #account-information .user-sidelink ul li {
+            width: 100%;
+        }
+
+#account-information .hvr-sweep-to-right {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+}
+
+#account-information .user-table .table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-bottom: 1px solid #eceeef;
+    text-align: left;
+}
+
+#account-information .user-table .table a.image {
+    display: block;
+    width: 50px;
+    max-height: 50px;
+    overflow: hidden;
+    line-height: 50px;
+}
+
+#account-information .user-table .unread .comic-name {
+    font-weight: 700;
+}
+
+#account-information a {
+    color: #288ad6;
+    cursor: pointer;
+}
+
+#account-information .user-table .follow-action {
+    margin: 5px 0 7px;
+    font-size: 13px;
+}
+
+    #account-information .user-table .follow-action .follow-link {
+        white-space: nowrap;
+        color: #d9534f;
+    }
+
+#account-information .user-table .chapter .time {
+    float: none;
+}
+
+#account-information .user-table .time {
+    font-size: 12px;
+    color: #999;
+}
+
+#account-information .chapter .time {
+    color: gray;
+    font-size: 11px;
+    line-height: 20px;
+    font-style: italic;
+    float: right;
+    max-width: 47%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#account-information .chapter a {
+    font-size: 13px;
+    color: #000;
+}
+
+#account-information table {
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+#account-information table tr:nth-child(even) {
+    background-color: #f2f9fa;
 }

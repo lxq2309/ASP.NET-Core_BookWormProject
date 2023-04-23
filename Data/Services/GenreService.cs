@@ -32,6 +32,11 @@ namespace BookWormProject.Data.Services
             return _genresRepository.GetArticlesForGenre(id);
         }
 
+        public IEnumerable<Category> GetCategoriesForGenre(int id)
+        {
+            return _genresRepository.GetCategoriesForGenre(id);
+        }
+
         public Genre GetGenreById(int id)
         {
             return _genresRepository.GetById(id);

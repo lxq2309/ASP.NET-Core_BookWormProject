@@ -1,33 +1,22 @@
-﻿@model List<Genre>
-
-<div id="novel-history-sidebar" class="list list-truyen list-history col-xs-12">
-    <div class="title-list">
-        <h2>Đang đọc</h2>
-    </div>
-    <div class="row">
-        <div class="col-md-5 col-lg-7">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <h3 itemprop="name">
-                <a href="/">
-                    Ta Ở Hiện
-                    Đại Làm Đại Boss
-                </a>
-            </h3>
-        </div>
-        <div class="col-md-7 col-lg-5 text-info">
-            <a href="/">Đọc tiếp C333</a>
-        </div>
-    </div>
-</div>
-<!-- Right Sidebar -->
-<div class="list list-truyen list-cat col-xs-12">
-    <div class="title-list">
-        <h4>Thể loại</h4>
-    </div>
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-xs-6"><a href="#" title="@item.Name">@item.Name</a></div>
-        }
-    </div>
-</div>
+﻿@using BookWormProject.Views.Shared.Components.RightSidebar.ViewModels
+@switch (ViewBag.CurrentController)
+{
+    case "Article":
+        @await Html.PartialAsync("_PartialArticleSidebar.cshtml")
+        break;
+    case "Home":
+        @await Html.PartialAsync("_PartialHomeSidebar.cshtml", (List<Genre>)ViewBag.AllGenres)
+        break;
+    case "Genre":
+        @await Html.PartialAsync("_PartialGenreSidebar.cshtml", (GenreCategoriesViewModel)ViewBag.GenreCategories)
+        break;
+    case "Category":
+        @await Html.PartialAsync("_PartialCategorySidebar.cshtml", (CategoryGenresViewModel)ViewBag.CategoryGenres)
+        break;
+    case "Author":
+        @await Html.PartialAsync("_PartialAuthorSidebar.cshtml", (Author)ViewBag.CurrentAuthor)
+        break;
+    default:
+        // Nếu không phù hợp với bất kỳ trường hợp nào trên, thực hiện hành động mặc định
+        break;
+}

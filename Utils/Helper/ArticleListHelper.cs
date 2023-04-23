@@ -2,7 +2,6 @@
 using BookWormProject.DTOs;
 using BookWormProject.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using X.PagedList;
 
 namespace BookWormProject.Utils.Helper

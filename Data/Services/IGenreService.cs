@@ -14,5 +14,6 @@ namespace BookWormProject.Data.Services
 
         void DeleteGenre(int id);
         IEnumerable<Article>? GetArticlesForGenre(int id);
+        IEnumerable<Category> GetCategoriesForGenre(int id);
     }
 }

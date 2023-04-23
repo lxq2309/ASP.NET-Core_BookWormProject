@@ -9,8 +9,6 @@ public partial class User
 
     public string UserName { get; set; } = null!;
 
-    public string Password { get; set; } = null!;
-
     public string Name { get; set; } = null!;
 
     public string Email { get; set; } = null!;
@@ -29,11 +27,14 @@ public partial class User
 
     public int Role { get; set; }
 
+    public byte[]? Password { get; set; }
+
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
     public virtual ICollection<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
 
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
     public virtual ICollection<ReadHistory> ReadHistories { get; set; } = new List<ReadHistory>();
 
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

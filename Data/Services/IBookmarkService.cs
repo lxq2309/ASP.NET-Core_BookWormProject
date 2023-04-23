@@ -13,5 +13,6 @@ namespace BookWormProject.Data.Services
         void UpdateBookmark(Bookmark bookmark);
 
         void DeleteBookmark(int id);
+        Article? GetArticleForBookmark(int bookmarkId);
     }
 }

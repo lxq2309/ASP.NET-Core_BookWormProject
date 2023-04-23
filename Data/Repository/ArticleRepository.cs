@@ -79,5 +79,15 @@ namespace BookWormProject.Data.Repository
             }
             return null;
         }
+
+        public IEnumerable<Comment>? GetCommentsForArticle(int articleId)
+        {
+            var article = _context.Articles.Include(x => x.Comments).SingleOrDefault(x => x.ArticleId == articleId);
+            if (article != null)
+            {
+                return article.Comments;
+            }
+            return null;
+        }
     }
 }

@@ -31,9 +31,9 @@ public partial class Article
 
     public virtual ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 
-    public virtual ICollection<ReadHistory> ReadHistories { get; set; } = new List<ReadHistory>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+    public virtual ICollection<ReadHistory> ReadHistories { get; set; } = new List<ReadHistory>();
 
     public virtual User User { get; set; } = null!;
 

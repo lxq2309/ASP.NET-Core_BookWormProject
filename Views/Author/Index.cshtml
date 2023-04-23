@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+    ViewData["Title"] = $"Tác giả {Model.Name}";
+
+}
+
+@model BookWormProject.Models.Author
+@{
+    var currentAuthor = Model;
+}
+
+<div class="container" id="list-page">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+        <div class="text-center"></div>
+        <div class="list list-truyen col-xs-12">
+
+            @*Hiển thị các bài viết bằng AJAX ở đây*@
+
+        </div>
+    </div>
+    <div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
+        @await Component.InvokeAsync("RightSidebar", currentAuthor);
+    </div>
+</div>
+<div class="row category">
+    <div class="container text-center pagination-container">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+            <div id="pagination"></div>
+        </div>
+    </div>
+</div>
+
+@section GetArticlesScripts
+    {
+    <script src="/resource/js/render_articles.js"></script>
+    <script src="/resource/js/render_pagination.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            loadArticles(1);
+        });
+
+
+        function loadArticles(page) {
+            $.ajax({
+                url: "/api/article/get_articles_for_author?page=" + page + '&authorId=@currentAuthor.AuthorId',
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    // Hiển thị danh sách truyện
+                    console.log(result);
+                    var title = document.title + ` - Trang ${page}`;
+                    var data = renderArticles(result.articles, title);
+                    $('#list-page .col-truyen-main .list-truyen').html(data);
+
+                    // Hiển thị phân trang
+                    var paginationHtml = renderPagination(result.pageInfo);
+                    $("#pagination").html(paginationHtml);
+                }
+            });
+        }
+    </script>
+}

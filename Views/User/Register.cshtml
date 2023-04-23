@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+}
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BookWormProject.ViewModels.User.RegisterViewModel
+
+<form asp-controller="User" asp-action="Register" method="post">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="login-signup-form">
+                <div id="ctl00_mainContent_pnlStandardLogin">
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="user-page clearfix">
+                                <div class="form-group">
+                                    <label for="UserName">UserName</label>
+                                    <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName" required>
+                                    <span asp-validation-for="UserName" class="validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="example@email.com" required>
+                                    <span asp-validation-for="Email" class="validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Password">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="Password" name="Password" value="@Model.Password" required>
+                                    <span asp-validation-for="Password" class="validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword" required>
+                                    <span asp-validation-for="ConfirmPassword" class="validation-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name">Họ và tên</label>
+                                    <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required>
+                                    <span asp-validation-for="Name" class="validation-error"></span>
+                                </div>
+
+                                <div class="login-action">
+                                    <div class="form-group">
+                                        <input type="submit" value="Đăng ký" id="user-login" tabindex="10" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="open-login mrb20">
+                                <div class="form-group">
+                                    <a class="btn login-facebook" href="">
+                                        <i class="fa fa-brands fa-facebook-f"></i>
+                                        <span>Đăng ký bằng Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn login-google" href="">
+                                        <i class="fa fa-sharp fa-solid fa-g"></i>
+                                        <span>Đăng ký bằng Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

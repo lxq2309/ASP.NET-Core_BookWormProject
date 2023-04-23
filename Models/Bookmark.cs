@@ -13,13 +13,8 @@ public partial class Bookmark
 
     public string Description { get; set; } = null!;
 
-    public DateTime CreatedAt { get; set; }
 
     public bool IsPublic { get; set; }
-
-    public string Tags { get; set; } = null!;
-
-    public DateTime UpdatedAt { get; set; }
 
     public int ArticleId { get; set; }
 

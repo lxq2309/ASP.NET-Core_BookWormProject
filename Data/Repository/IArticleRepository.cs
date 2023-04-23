@@ -20,5 +20,6 @@ namespace BookWormProject.Data.Repository
 
         public Category? GetCategoryForArticle(int articleId);
         public IEnumerable<Author>? GetAuthorsForArticle(int articleId);
+        public IEnumerable<Comment>? GetCommentsForArticle(int articleId);
     }
 }
