@@ -5,9 +5,9 @@ using BookWormProject.ViewModels.Comment;
 
 namespace BookWormProject.ViewModels.User
 {
-    public class UserIndexViewModel
+    public class UserGeneralInfoViewModel
     {
-        public UserIndexViewModel(Models.User currentUser, List<BookmarkDetailViewModel> bookmarks, List<CommentDetailViewModel> commentsForCurrentUser)
+        public UserGeneralInfoViewModel(Models.User currentUser, List<BookmarkDetailViewModel> bookmarks, List<CommentDetailViewModel> commentsForCurrentUser)
         {
             CurrentUser = currentUser;
             Bookmarks = bookmarks;

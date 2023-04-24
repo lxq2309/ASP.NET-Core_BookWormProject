@@ -13,7 +13,6 @@ public partial class Bookmark
 
     public string Description { get; set; } = null!;
 
-
     public bool IsPublic { get; set; }
 
     public int ArticleId { get; set; }

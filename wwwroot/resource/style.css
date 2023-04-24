@@ -10609,20 +10609,6 @@ h4,
     color: #000;
 }
 
-#account-information table {
-    animation: fadeIn 2s;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 
 #account-information table tr:nth-child(even) {
     background-color: #f2f9fa;

@@ -29,6 +29,8 @@ public partial class User
 
     public byte[]? Password { get; set; }
 
+    public bool? Gender { get; set; }
+
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
     public virtual ICollection<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
@@ -36,5 +38,4 @@ public partial class User
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual ICollection<ReadHistory> ReadHistories { get; set; } = new List<ReadHistory>();
-
 }

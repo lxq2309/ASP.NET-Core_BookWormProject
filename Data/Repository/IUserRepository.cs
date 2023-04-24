@@ -17,5 +17,6 @@ namespace BookWormProject.Data.Repository
         User? GetByUserName(string userName);
         IEnumerable<Bookmark>? GetBookmarksForUser(int userId);
         IEnumerable<Comment>? GetCommentsForUser(int userId);
+        IEnumerable<Article>? GetArticlesForUser(int userId);
     }
 }

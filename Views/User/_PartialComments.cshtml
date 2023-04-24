@@ -1,0 +1,68 @@
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<BookWormProject.ViewModels.Comment.CommentDetailViewModel>
+@{
+    var comments = Model;
+}
+<div class="col-xs-12">
+    <section class="user-table clearfix">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th class="nowrap">Tên truyện</th>
+                    <th class="nowrap">Thời gian bình luận</th>
+                    <th class="nowrap">Nội dung</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var comment in comments)
+                {
+                    <tr>
+                        <td>
+                            <a class="image" href="/p/@comment.ArticleId">
+                                <img src="@comment.ArticleCoverImage" class="lazy" data-original="@comment.ArticleCoverImage" alt="@comment.ArticleTitle">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="comic-name" href="/p/@comment.ArticleId">@comment.ArticleTitle</a>
+                            <div class="follow-action">
+                                <a href="javascript:void(0)" class="follow-link">
+                                    <i class="fa fa-times">
+                                    </i> Xoá
+                                </a>
+                            </div>
+                        </td>
+                        <td class="nowrap chapter">
+                            <time class="time">@comment.TimeAgo</time>
+                        </td>
+                        <td class="nowrap chapter">
+                            <time class="time">@comment.Content</time>
+                        </td>
+
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+    @if (comments.PageCount > 1)
+    {
+        <div class="container text-center pagination-container">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+                <div class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("GetPartialCommentsResult", new { page }))
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).on('click', '.pagination a', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        loadComments(page);
+    });
+</script>

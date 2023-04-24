@@ -28,7 +28,7 @@ namespace BookWormProject.Data.Services
 
             user.PhoneNumber = "";
             user.Address = "";
-            user.DateOfBirth = DateTime.MinValue;
+            user.DateOfBirth = DateTime.Today;
             user.Description = "";
             user.CreatedAt = DateTime.Now;
             user.Role = 0;
@@ -58,6 +58,30 @@ namespace BookWormProject.Data.Services
 
         public void UpdateUser(User user)
         {
+            if (user.PhoneNumber == null)
+            {
+                user.PhoneNumber = "";
+            }
+            if (user.Address == null)
+            {
+                user.Address = "";
+            }
+            if (user.Avatar == null)
+            {
+                user.Avatar = "";
+            }
+            if (user.Description == null)
+            {
+                user.Description = "";
+            }
+            _userRepository.Update(user);
+        }
+
+        public void ChangePassword(User user, string newPassword)
+        {
+            var hashedPassword = _passwordHasher.HashPassword(null, newPassword);
+            var passwordBytes = Encoding.UTF8.GetBytes(hashedPassword);
+            user.Password = passwordBytes;
             _userRepository.Update(user);
         }
 
@@ -102,6 +126,36 @@ namespace BookWormProject.Data.Services
         public IEnumerable<Comment>? GetCommentsForUser(int userId)
         {
             return _userRepository.GetCommentsForUser(userId);
+        }
+
+        public string GetRoleForUser(int userId)
+        {
+            if (userId == 0)
+            {
+                return "Guest";
+            }
+
+            string role;
+            var user = GetById(userId);
+            if (user.Role == 0)
+            {
+                role = "User";
+            }
+            else if (user.Role == 1)
+            {
+                role = "Admin";
+            }
+            else
+            {
+                role = "Other";
+            }
+
+            return role;
+        }
+
+        public IEnumerable<Article> GetArticlesForUser(int userId)
+        {
+            return _userRepository.GetArticlesForUser(userId);
         }
     }
 }

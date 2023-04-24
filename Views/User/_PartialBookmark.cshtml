@@ -1,0 +1,83 @@
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<BookWormProject.ViewModels.Bookmark.BookmarkDetailViewModel>
+@{
+    var bookmarks = Model;
+}
+<div class="col-xs-12">
+    <section class="comics-followed comics-followed-nopaging user-table clearfix">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th class="nowrap">Tên bài viết</th>
+                        <th class="nowrap">Chap mới nhất</th>
+                        <th class="nowrap">Tên bookmark</th>
+                        <th class="nowrap">Description</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var bookmark in bookmarks)
+                    {
+                        <tr>
+                            <td>
+                                <a class="image" href="/p/@bookmark.ArticleId">
+                                    <img src="@bookmark.ArticleCoverImage" class="lazy" data-original="@bookmark.ArticleCoverImage" alt="@bookmark.ArticleTitle">
+                                </a>
+                            </td>
+                            <td>
+                                <a class="comic-name" href="/p/@bookmark.ArticleId">@bookmark.ArticleTitle</a>
+                                <div class="follow-action">
+                                    <a href="javascript:void(0)" class="follow-link">
+                                        <i class="fa fa-times">
+                                        </i> Xoá
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="nowrap chapter">
+                                @if (bookmark.NewestChapter == null)
+                                {
+                                    <a href="#">Chưa có chương nào</a>
+                                }
+                                else
+                                {
+                                    <a href="/p/@bookmark.ArticleId/@bookmark.NewestChapter.ChapterId" title="@bookmark.NewestChapter.Title">@bookmark.NewestChapter.Title</a>
+                                }
+                                <br>
+                                <time class="time">@bookmark.ArticleUpdatedTimeAgo</time>
+                            </td>
+                            <td class="nowrap chapter">
+                                <a class="comic-name" href="/">@bookmark.BookmarkName</a>
+                            </td>
+                            <td class="nowrap chapter">
+                                <time class="time">@bookmark.BookmarkDescription</time>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+    @if (bookmarks.PageCount > 1)
+    {
+        <div class="container text-center pagination-container">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+                <div class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("GetPartialBookmarksResult", new { page }))
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).on('click', '.pagination a', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        loadBookmarks(page);
+    });
+</script>

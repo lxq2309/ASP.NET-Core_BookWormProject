@@ -1,0 +1,64 @@
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Article>
+@{
+    var articles = Model;
+    var userId = 0;
+    if (articles.Count != 0)
+    {
+        userId = articles[0].UserId;
+    }
+}
+<div class="col-xs-12">
+    <section class="user-table clearfix">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="nowrap">Danh sách bài viết đã đăng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (articles.Count == 0)
+                    {
+                        <tr>
+                            <td>Chưa có bài viết nào</td>
+                        </tr>
+                    }
+                    @foreach (var article in articles)
+                    {
+                        <tr>
+                            <td>
+                                <a class="image" href="/p/@article.ArticleId">
+                                    <img src="@article.CoverImage" class="lazy" data-original="@article.CoverImage" alt="@article.Title">
+                                </a>
+                            </td>
+                            <td>
+                                <a class="comic-name" href="/p/@article.ArticleId">@article.Title</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+    @if (articles.PageCount > 1)
+    {
+        <div class="container text-center pagination-container">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+                <div class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("GetPartialPostedArticle", new { page }))
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).on('click', '.pagination a', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        loadPostedArticle(page, @userId);
+    });
+</script>

@@ -21,8 +21,8 @@ else
     </a>
     <ul class="dropdown-menu" role="menu">
         <li><a href="/tai-khoan/" title="Thông tin tài khoản"><i class="fa fa-solid fa-circle-info"></i> Thông tin tài khoản</a></li>
-        <li><a href="/tai-khoan/" title="Bookmark"><i class="fa fa-solid fa-bookmark"></i> Bookmark</a></li>
-        <li><a href="/tai-khoan/" title="Bài viết đã đăng"><i class="fa fa-list"></i> Bài viết đã đăng</a></li>
+        <li><a href="/tai-khoan/?query=bookmark" title="Bookmark"><i class="fa fa-solid fa-bookmark"></i> Bookmark</a></li>
+        <li><a href="/tai-khoan/?query=posted_article" title="Bài viết đã đăng"><i class="fa fa-list"></i> Bài viết đã đăng</a></li>
         <li>
             <form asp-controller="User" asp-action="Logout" method="post" id="logout">
                 <button type="submit"><i class="fa fa-sign-out"></i> Đăng xuất</button>

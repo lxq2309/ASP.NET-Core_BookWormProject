@@ -11,6 +11,7 @@ namespace BookWormProject.Data.Services
         void AddUser(User user);
 
         void UpdateUser(User user);
+        public void ChangePassword(User user, string newPassword);
 
         void DeleteUser(int id);
         public User? GetByEmail(string email);
@@ -20,5 +21,7 @@ namespace BookWormProject.Data.Services
         public int GetCurrentUserId();
         public IEnumerable<Bookmark>? GetBookmarksForUser(int userId);
         public IEnumerable<Comment>? GetCommentsForUser(int userId);
+        public string GetRoleForUser(int userId);
+        public IEnumerable<Article>? GetArticlesForUser(int userId);
     }
 }

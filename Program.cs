@@ -4,6 +4,7 @@ using BookWormProject.Models;
 using BookWormProject.Utils.Filter;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Đăng kí BookWormDbContext và cấu hình nó để sử dụng SqlServer làm cơ sở dữ liệu
 builder.Services.AddDbContext<BookWormDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookWormDb")));
-// Đăng kí các controller và view cho ứng dụng, sau đó thêm CurrentControllerFilter vào option
+
+// Đăng kí các controller và view cho ứng dụng, sau đó thêm các Filter vào option
 builder.Services.AddControllersWithViews(option =>
 {
     option.Filters.Add(typeof(CurrentControllerFilter));
+    option.Filters.Add<RoleFilter>();
 });
 // Đăng kí các Repository
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
@@ -41,6 +44,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+// Đăng ký Filter
+builder.Services.AddScoped<IAuthorizationFilter, RoleFilter>();
+
 // Đăng kí HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
 
@@ -54,6 +60,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Account/AccessDenied";
         options.ExpireTimeSpan = TimeSpan.FromDays(30);
     });
+
 
 
 var app = builder.Build();
@@ -74,9 +81,9 @@ app.UseAuthentication(); // Thêm middleware xác thực
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
 
-app.UseAuthorization();
+app.UseRouting();
+app.UseAuthorization(); // Thêm middleware phân quyền
 
 app.MapControllerRoute(
     name: "default",
