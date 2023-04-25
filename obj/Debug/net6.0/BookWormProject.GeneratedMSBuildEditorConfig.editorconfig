@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/_PartialComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxfUGFydGlhbENvbW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Author/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -108,10 +112,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRCb29rV29ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialComment.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsQ29tbWVudC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialFooter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsRm9vdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -120,20 +120,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialListArticle.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTGlzdEFydGljbGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialNewArticle.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTmV3QXJ0aWNsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialPagination.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsUGFnaW5hdGlvbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Index.cshtml]
@@ -146,6 +138,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/VerifyCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWZXJpZnlDb2RlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialBookmark.cshtml]

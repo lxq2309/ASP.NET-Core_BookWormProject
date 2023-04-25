@@ -89,3 +89,9 @@ D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\JetBrain
 D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\X.PagedList.dll
 D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll
 D:\Working\Thực tập chuyên môn\BookWormProject\obj\Debug\net6.0\BookWormProject.MvcApplicationPartsAssemblyInfo.cs
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\SendGrid.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\StarkbankEcdsa.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\SendGrid.Extensions.DependencyInjection.dll

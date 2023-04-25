@@ -11,6 +11,5 @@
         public string ArticleCoverImage { get; set; }
         public string ArticleUpdatedTimeAgo { get; set; }
         public Models.Chapter NewestChapter { get; set; }
-
     }
 }

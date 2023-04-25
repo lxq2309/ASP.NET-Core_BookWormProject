@@ -1,0 +1,150 @@
+﻿@model int
+@{
+    var articleId = Model;
+}
+
+<div class="title-list">
+    <h2>Bình luận</h2>
+</div>
+@*Chia tab*@
+<div class="tab">
+    <ul class="nav nav-tabs main-tab lazy-module">
+        <li class="tablinks active" data-tab="tab1">
+            <a data-toggle="tab">
+                <i class="fa fa-comments"></i> BookWorm (<span class="comment-count"></span>)
+            </a>
+        </li>
+        <li class="tablinks" data-tab="tab2">
+            <a data-toggle="tab">
+                <i class="fa fa-facebook-official"></i> Facebook (<span class="fb-comments-count fb_comments_count_zero_fluid_desktop" data-href="https://www.nettruyen.uk/truyen-tranh/anh-hau-lao-ba-khong-duoc-chay-21420" fb-xfbml-state="parsed" fb-iframe-plugin-query="app_id=745819368841087&amp;container_width=0&amp;count=true&amp;height=100&amp;href=https%3A%2F%2Fwww.nettruyen.uk%2Ftruyen-tranh%2Fanh-hau-lao-ba-khong-duoc-chay-21420&amp;locale=en_US&amp;sdk=joey&amp;version=v2.0&amp;width=550"><span class="fb_comments_count">0</span></span>)
+            </a>
+        </li>
+    </ul>
+
+    <div class="col-xs-12">
+        @*Xử lí cho commnet trên BookWorm*@
+        <div id="bw_comments" class="tabcontent" data-tab="tab1">
+            <div class="row">
+                <form id="comment-form">
+                    <input type="hidden" id="comment-articleId" name="articleId" value="@articleId" />
+                    <input type="text" id="comment-content" name="content" placeholder="Write your comment here..." required />
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
+            <div class="row" id="comment-list">
+            </div>
+            <div class="container text-center pagination-container">
+                <div class="col-xs-12 col-sm-12 col-md-9">
+                    <div id="comment-pagination"></div>
+                </div>
+            </div>
+        </div>
+        @*Xử lí cho comment bằng facebook*@
+        <div id="fb-comments" class="tabcontent" data-tab="tab2">
+            No handle
+        </div>
+    </div>
+</div>
+
+
+<script src="/resource/js/render_pagination.js"></script>
+<script src="/resource/js/render_comment.js"></script>
+<script>
+    $(document).ready(function () {
+        loadComments(1);
+    });
+
+    var currentPage;
+    function loadComments(page) {
+        $.ajax({
+            url: "/api/comment/get_comments_for_article?page=" + page + '&articleId=@articleId',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                // Hiển thị danh sách comment
+                console.log(result);
+                var data = renderComment(result.comments);
+                $('#comment-list').html(data);
+                // cập nhật comment count
+                $('.comment-count').html(result.comments.length)
+
+                // Hiển thị phân trang
+                var paginationHtml = renderPagination(result.pageInfo);
+                $("#comment-pagination").html(paginationHtml);
+                currentPage = page;
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Ẩn tất cả các nội dung tabcontent
+        $('.tabcontent').hide();
+        $('.tablinks').removeClass('active');
+        // Hiển thị nội dung của tab đầu tiên
+        $('.tabcontent[data-tab="tab1"]').show();
+        $('.tablinks[data-tab="tab1"]').addClass('active');
+
+        // Xử lý khi click vào các tablink
+        $('.tablinks').click(function () {
+            // Ẩn tất cả các nội dung tabcontent
+            $('.tabcontent').hide();
+            $('.tablinks').removeClass('active');
+
+            // Lấy giá trị của data-tab của tablink được click
+            var tabId = $(this).data('tab');
+
+            // Hiển thị nội dung tabcontent tương ứng
+            $('.tabcontent[data-tab="' + tabId + '"]').show();
+            $('.tablinks[data-tab="' + tabId + '"]').addClass('active');
+        });
+    });
+
+    $(function () {
+        $('#bw_comments #comment-list').on('click', '.single-comment', function () {
+            var commentId = $(this).data('comment-id');
+            $.ajax({
+                url: '/api/Comment/Delete/?commentId=' + commentId,
+                type: 'DELETE',
+                success: function (result) {
+                    if (result) {
+                        alert("Xoá comment thành công");
+                        loadComments(currentPage);
+                    } else {
+                        // Không tìm thấy Comment
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+
+
+    $(function() {
+        $('#comment-form').on('submit', function(e) {
+            e.preventDefault();
+            var content = $('#comment-content').val();
+            var articleId = $('#comment-articleId').val();
+            $.ajax({
+                type: 'POST',
+                url: '/api/Comment/Create',
+                contentType: 'application/json',
+                data: {
+                    content: content,
+                    articleId: articleId
+                },
+                success: function(result) {
+                    if (result === true) {
+                        loadComments(1);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert("Error");
+                }
+            });
+        });
+    });
+
+
+</script>

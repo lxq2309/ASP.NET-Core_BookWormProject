@@ -1,73 +1,101 @@
 ﻿@model BookWormProject.ViewModels.User.UserChangeInfoViewModel
 
-<form asp-controller="User" asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div class="user-page clearfix">
-        <h1 class="postname">
-            Thông tin tài khoản
-        </h1>
-        <div class="account-info clearfix">
-            <h2 class="posttitle">Cập nhật thông tin tài khoản</h2>
-            <div class="account-form clearfix">
-                <div class="row">
+<div id="changeInfoResult">
+    <form asp-controller="User" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="user-page clearfix">
+            <h1 class="postname">
+                Thông tin tài khoản
+            </h1>
+            <div class="account-info clearfix">
+                <h2 class="posttitle">Cập nhật thông tin tài khoản</h2>
+                <div class="account-form clearfix">
+                    <div class="row">
 
-                    <div class="col-md-9 col-sm-8">
-                        <div class="form-group">
-                            <label class="control-label">UserName</label>
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Email</label>
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Tên</label>
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
-                        </div>
+                        <div class="col-md-9 col-sm-8">
+                            <div class="form-group">
+                                <label class="control-label">UserName</label>
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Tên</label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Giới tính</label>
-                            @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
-                            {
+                            <div class="form-group">
+                                <label class="control-label">Giới tính</label>
+                                @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+                                {
                                 new SelectListItem { Text = "Nam", Value = "Nam" },
                                 new SelectListItem { Text = "Nữ", Value = "Nữ" }
-                            }, "Chọn giới tính", new { @class = "form-control", @required = "required" })
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Ngày sinh</label>
-                            <div class="input-group date" data-provide="datepicker">
-                                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                                }, "Chọn giới tính", new { @class = "form-control", @required = "required" })
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Số điện thoại</label>
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Ngày sinh</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Địa chỉ</label>
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Số điện thoại</label>
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Avatar</label>
-                            <input type="file" name="Avatar" id="Avatar" accept="image/*" />
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Địa chỉ</label>
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Giới thiệu</label>
-                            <textarea name="Description" id="Description" rows="5" class="form-control">@Model.Description</textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                            <div class="form-group">
+                                <label class="control-label">Avatar</label>
+                                <input type="file" name="Avatar" id="Avatar" accept="image/*" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Giới thiệu</label>
+                                <textarea name="Description" id="Description" rows="5" class="form-control">@Model.Description</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                            </div>
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#changeInfoResult form').submit(function (e) {
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function (result) {
+                    $('#changeInfoResult').html(result);
+                },
+                error: function () {
+                    $('#changeInfoResult').html('<div class="text-danger">Có lỗi xảy ra</div>');
+                }
+            });
+        });
+    });
+</script>

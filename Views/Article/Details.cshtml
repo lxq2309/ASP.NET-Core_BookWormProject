@@ -173,7 +173,7 @@
 
             </div>
             <div id="comment" class="col-xs-12 comment-box">
-                @await Html.PartialAsync("_PartialComment")
+                @await Html.PartialAsync("_PartialComments", @Model.ArticleId)
             </div>
         </div>
     </div>
@@ -268,25 +268,5 @@
 
 @section CommentScripts
 {
-    <script>
-    $(document).ready(function () {
-        // Hiển thị nội dung của tab đầu tiên
-        $('.tabcontent[data-tab="tab1"]').show();
-        $('.tablinks[data-tab="tab1"]').addClass('active');
-
-        // Xử lý khi click vào các tablink
-        $('.tablinks').click(function () {
-            // Ẩn tất cả các nội dung tabcontent
-            $('.tabcontent').hide();
-            $('.tablinks').removeClass('active');
-
-            // Lấy giá trị của data-tab của tablink được click
-            var tabId = $(this).data('tab');
-
-            // Hiển thị nội dung tabcontent tương ứng
-            $('.tabcontent[data-tab="' + tabId + '"]').show();
-            $('.tablinks[data-tab="' + tabId + '"]').addClass('active');
-        });
-    });
-</script>
+    
 }

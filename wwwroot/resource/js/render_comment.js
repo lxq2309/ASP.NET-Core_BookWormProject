@@ -11,10 +11,13 @@ function renderComment(comments) {
                         <i class="fa fa-angle-left fa-arrow">
                         </i>
                         <div class="info">
-                            <div class="comment-header"><a href="/u/${comments[i].user.userId}"><span class="authorname">${comments[i].user.userName}</span></a>
+                            <div class="comment-header"><a href="/tai-khoan/${comments[i].user.userId}"><span class="authorname">${comments[i].user.userName}</span></a>
                                 <abbr title="${comments[i].createdAt}">
                                     <i class="fa-regular fa-clock"></i> ${comments[i].timeAgo}
                                 </abbr>
+                                <a class="single-comment" data-comment-id="${comments[i].commentId}">
+                                    <i class="glyphicon glyphicon-trash" style="color: #ff0000;"></i> delete
+                                </a>
                             </div>
                             <div class="comment-content">${comments[i].content}</div>
                         </div>

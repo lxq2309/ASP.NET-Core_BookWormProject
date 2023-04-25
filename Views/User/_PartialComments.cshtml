@@ -1,21 +1,29 @@
 ﻿@using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<BookWormProject.ViewModels.Comment.CommentDetailViewModel>
+@model BookWormProject.ViewModels.User.UserCommentsViewModel
 @{
-    var comments = Model;
+    var comments = Model.PagedComments;
+    var isMyAccount = Model.IsMyAccount;
 }
-<div class="col-xs-12">
+<div class="col-xs-12" id="comments">
     <section class="user-table clearfix">
         <div class="table-responsive">
             <table class="table">
                 <thead>
-                <tr>
-                    <th></th>
-                    <th class="nowrap">Tên truyện</th>
-                    <th class="nowrap">Thời gian bình luận</th>
-                    <th class="nowrap">Nội dung</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th class="nowrap">Tên truyện</th>
+                        <th class="nowrap">Thời gian bình luận</th>
+                        <th class="nowrap">Nội dung</th>
+                    </tr>
                 </thead>
                 <tbody>
+                @if (comments.Count == 0)
+                {
+                    <tr>
+                        <td></td>
+                        <td>Chưa có comment nào</td>
+                    </tr>
+                }
                 @foreach (var comment in comments)
                 {
                     <tr>
@@ -26,12 +34,15 @@
                         </td>
                         <td>
                             <a class="comic-name" href="/p/@comment.ArticleId">@comment.ArticleTitle</a>
-                            <div class="follow-action">
-                                <a href="javascript:void(0)" class="follow-link">
-                                    <i class="fa fa-times">
-                                    </i> Xoá
-                                </a>
-                            </div>
+                            @if (isMyAccount)
+                            {
+                                <div class="follow-action">
+                                    <a href="javascript:void(0)" class="follow-link" data-comment-id="@comment.CommentId">
+                                        <i class="fa fa-times">
+                                        </i> Xoá
+                                    </a>
+                                </div>
+                            }
                         </td>
                         <td class="nowrap chapter">
                             <time class="time">@comment.TimeAgo</time>
@@ -52,7 +63,7 @@
         <div class="container text-center pagination-container">
             <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
                 <div class="pagination">
-                    @Html.PagedListPager(Model, page => Url.Action("GetPartialCommentsResult", new { page }))
+                    @Html.PagedListPager(comments, page => Url.Action("GetPartialCommentsResult", new { page }))
                 </div>
             </div>
         </div>
@@ -60,9 +71,32 @@
 </div>
 
 <script>
+    var currentPage;
     $(document).on('click', '.pagination a', function (event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
+        currentPage = page;
         loadComments(page);
+    });
+
+    $(function () {
+        $('#comments .follow-link').click(function () {
+            var commentId = $(this).data('comment-id');
+            $.ajax({
+                url: '/api/Comment/Delete/?commentId=' + commentId,
+                type: 'DELETE',
+                success: function (result) {
+                    if (result) {
+                        alert("Xoá comment thành công");
+                        loadComments(currentPage);
+                    } else {
+                        // Không tìm thấy Comment
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
     });
 </script>

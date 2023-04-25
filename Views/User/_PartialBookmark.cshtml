@@ -1,9 +1,10 @@
 ﻿@using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<BookWormProject.ViewModels.Bookmark.BookmarkDetailViewModel>
+@model BookWormProject.ViewModels.User.UserBookmarksViewModel
 @{
-    var bookmarks = Model;
+    var bookmarks = Model.PagedBookmarks;
+    var isMyAccount = Model.IsMyAccount;
 }
-<div class="col-xs-12">
+<div class="col-xs-12" id="bookmarks">
     <section class="comics-followed comics-followed-nopaging user-table clearfix">
         <div class="table-responsive">
             <table class="table">
@@ -19,44 +20,61 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var bookmark in bookmarks)
+                @if (bookmarks.Count == 0)
+                {
+                    <tr>
+                        <td></td>
+                        <td>Chưa có bookmark nào</td>
+                    </tr>
+                }
+                @foreach (var bookmark in bookmarks)
+                {
+                    @if (!bookmark.IsPublic && !isMyAccount)
                     {
                         <tr>
-                            <td>
-                                <a class="image" href="/p/@bookmark.ArticleId">
-                                    <img src="@bookmark.ArticleCoverImage" class="lazy" data-original="@bookmark.ArticleCoverImage" alt="@bookmark.ArticleTitle">
-                                </a>
-                            </td>
-                            <td>
-                                <a class="comic-name" href="/p/@bookmark.ArticleId">@bookmark.ArticleTitle</a>
+                            <td colspan="5">Đây là bookmark riêng tư nên đã bị ẩn đi</td>
+                        </tr>
+                        continue;
+                    }
+                    <tr>
+                        <td>
+                            <a class="image" href="/p/@bookmark.ArticleId">
+                                <img src="@bookmark.ArticleCoverImage" class="lazy" data-original="@bookmark.ArticleCoverImage" alt="@bookmark.ArticleTitle">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="comic-name" href="/p/@bookmark.ArticleId">@bookmark.ArticleTitle</a>
+                            @if (isMyAccount)
+                            {
                                 <div class="follow-action">
-                                    <a href="javascript:void(0)" class="follow-link">
+                                    <a href="javascript:void(0)" class="follow-link" data-bookmark-id="@bookmark.BookmarkId">
                                         <i class="fa fa-times">
                                         </i> Xoá
                                     </a>
                                 </div>
-                            </td>
-                            <td class="nowrap chapter">
-                                @if (bookmark.NewestChapter == null)
-                                {
-                                    <a href="#">Chưa có chương nào</a>
-                                }
-                                else
-                                {
-                                    <a href="/p/@bookmark.ArticleId/@bookmark.NewestChapter.ChapterId" title="@bookmark.NewestChapter.Title">@bookmark.NewestChapter.Title</a>
-                                }
-                                <br>
-                                <time class="time">@bookmark.ArticleUpdatedTimeAgo</time>
-                            </td>
-                            <td class="nowrap chapter">
-                                <a class="comic-name" href="/">@bookmark.BookmarkName</a>
-                            </td>
-                            <td class="nowrap chapter">
-                                <time class="time">@bookmark.BookmarkDescription</time>
-                            </td>
+                            }
+                        </td>
+                        <td class="nowrap chapter">
+                            @if (bookmark.NewestChapter == null)
+                            {
+                                <a href="#">Chưa có chương nào</a>
+                            }
+                            else
+                            {
+                                <a href="/p/@bookmark.ArticleId/@bookmark.NewestChapter.ChapterId" title="@bookmark.NewestChapter.Title">@bookmark.NewestChapter.Title</a>
+                            }
+                            <br>
+                            <time class="time">@bookmark.ArticleUpdatedTimeAgo</time>
+                        </td>
+                        <td class="nowrap chapter">
+                            <a class="comic-name" href="/">@bookmark.BookmarkName</a>
+                        </td>
+                        <td class="nowrap chapter">
+                            <time class="time">@bookmark.BookmarkDescription</time>
+                        </td>
 
-                        </tr>
-                    }
+                    </tr>
+                }
 
                 </tbody>
             </table>
@@ -67,7 +85,7 @@
         <div class="container text-center pagination-container">
             <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
                 <div class="pagination">
-                    @Html.PagedListPager(Model, page => Url.Action("GetPartialBookmarksResult", new { page }))
+                    @Html.PagedListPager(bookmarks, page => Url.Action("GetPartialBookmarksResult", new { page }))
                 </div>
             </div>
         </div>
@@ -75,9 +93,32 @@
 </div>
 
 <script>
+    var currentPage;
     $(document).on('click', '.pagination a', function (event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
+        currentPage = page;
         loadBookmarks(page);
+    });
+
+    $(function () {
+        $('#bookmarks .follow-link').click(function () {
+            var bookmarkId = $(this).data('bookmark-id');
+            $.ajax({
+                url: '/api/Bookmark/Delete/?bookmarkId=' + bookmarkId,
+                type: 'DELETE',
+                success: function (result) {
+                    if (result) {
+                        alert("Xoá bookmark thành công");
+                        loadBookmarks(currentPage);
+                    } else {
+                        // Không tìm thấy Bookmark
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
     });
 </script>

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using SendGrid;
+using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,12 +46,21 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Đăng ký Filter
 builder.Services.AddScoped<IAuthorizationFilter, RoleFilter>();
 
 // Đăng kí HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
+
+// Đăng ký cache
+builder.Services.AddMemoryCache();
+
+// Đăng ký SendGrid
+builder.Services.AddSendGrid(option =>
+    option.ApiKey = "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");
+
 
 // Thêm chế độ xác thực dựa trên cookie
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -59,8 +71,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/dang-xuat";
         options.AccessDeniedPath = "/Account/AccessDenied";
         options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    })
+    .AddFacebook(options =>
+    {
+        options.AppId = "165784553012702";
+        options.AppSecret = "0f232f4899a9adb388e6e2f12f5b544d";
+    }).AddGoogle(options =>
+    {
+        options.ClientId = "934602762375-h4o5lllie4h6npohnncvbi6ilvu6i7pk.apps.googleusercontent.com";
+        options.ClientSecret = "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";
     });
-
 
 
 var app = builder.Build();

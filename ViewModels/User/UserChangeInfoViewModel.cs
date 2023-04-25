@@ -23,6 +23,7 @@ namespace BookWormProject.ViewModels.User
         [Display(Name = "Avatar")]
         public IFormFile? Avatar { get; set; }
 
+        [RegularExpression(@"^0[2-9][0-9]{8}$", ErrorMessage = "Số điện thoại không hợp lệ.")]
         [Display(Name = "Số điện thoại")]
         public string? PhoneNumber { get; set; }
 

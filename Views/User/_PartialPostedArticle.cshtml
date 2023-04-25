@@ -1,12 +1,8 @@
 ﻿@using X.PagedList.Mvc.Core
+@using BookWormProject.Utils.Helper
 @model X.PagedList.IPagedList<Article>
 @{
     var articles = Model;
-    var userId = 0;
-    if (articles.Count != 0)
-    {
-        userId = articles[0].UserId;
-    }
 }
 <div class="col-xs-12">
     <section class="user-table clearfix">
@@ -22,6 +18,7 @@
                     @if (articles.Count == 0)
                     {
                         <tr>
+                            <td></td>
                             <td>Chưa có bài viết nào</td>
                         </tr>
                     }
@@ -35,6 +32,9 @@
                             </td>
                             <td>
                                 <a class="comic-name" href="/p/@article.ArticleId">@article.Title</a>
+                                <div class="follow-action">
+                                    <time class="time"><i class="fa-solid fa-calendar"></i> @article.CreatedAt</time>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -59,6 +59,6 @@
     $(document).on('click', '.pagination a', function (event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
-        loadPostedArticle(page, @userId);
+        loadPostedArticle(page);
     });
 </script>

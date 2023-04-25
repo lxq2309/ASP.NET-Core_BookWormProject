@@ -59,5 +59,30 @@ namespace BookWormProject.APIControllers
             var commentListDTO = new CommentListDTO(commentsDTO, pageInfoDTO);
             return Ok(commentListDTO);
         }
+
+        [HttpPost("Create")]
+        public bool CreateComment([FromBody] CommentDTO comment)
+        {
+            var newComment = new Comment()
+            {
+                Content = comment.Content,
+                ArticleId = comment.ArticleId
+            };
+            _commentService.AddComment(newComment);
+            return true;
+        }
+
+
+        [HttpDelete("Delete")]
+        public bool Delete(int commentId)
+        {
+            var comment = _commentService.GetById(commentId);
+            if (comment == null)
+            {
+                return false;
+            }
+            _commentService.DeleteComment(commentId);
+            return true;
+        }
     }
 }

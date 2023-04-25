@@ -17,5 +17,6 @@ namespace BookWormProject.ViewModels.User
         public Models.User CurrentUser { get; set; }
         public List<BookmarkDetailViewModel> Bookmarks { get; set; }
         public List<CommentDetailViewModel> CommentsForCurrentUser { get; set; }
+        public bool IsMyAccount { get; set; }
     }
 }

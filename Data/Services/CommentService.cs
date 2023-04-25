@@ -6,14 +6,18 @@ namespace BookWormProject.Data.Services
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserService _userService;
 
-        public CommentService(ICommentRepository commentRepository)
+        public CommentService(ICommentRepository commentRepository, IUserService userService)
         {
             _commentRepository = commentRepository;
+            _userService = userService;
         }
 
         public void AddComment(Comment comment)
         {
+            comment.UserId = _userService.GetCurrentUserId();
+            comment.CreatedAt = DateTime.Now;
             _commentRepository.Add(comment);
         }
 

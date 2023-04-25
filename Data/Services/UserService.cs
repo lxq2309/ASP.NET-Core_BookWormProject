@@ -26,6 +26,7 @@ namespace BookWormProject.Data.Services
                 throw new Exception("Email already exists.");
             }
 
+            user.Gender = false;
             user.PhoneNumber = "";
             user.Address = "";
             user.DateOfBirth = DateTime.Today;

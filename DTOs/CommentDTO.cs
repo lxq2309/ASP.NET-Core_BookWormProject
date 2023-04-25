@@ -10,5 +10,6 @@
 
         public DateTime CreatedAt { get; set; }
         public string TimeAgo { get; set; }
+        public int ArticleId { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿function renderPagination(pageInfo) {
-    //if (pageInfo.totalPages == 1) {
-    //    return;
-    //}
+    if (pageInfo.totalPages == 1) {
+        return;
+    }
     var paginationHtml =
         `
                     <ul class="pagination pagination-sm">

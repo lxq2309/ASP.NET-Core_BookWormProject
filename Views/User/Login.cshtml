@@ -6,48 +6,64 @@
 @model BookWormProject.ViewModels.User.LoginViewModel
 
 <form asp-controller="User" asp-action="Login" method="post">
-<div class="row">
-    <div class="col-sm-12">
-        <div id="login-signup-form">
-            <div id="ctl00_mainContent_pnlStandardLogin">
-                <div class="row">
-                    <div class="col-sm-offset-3 col-sm-6">
-                        <div class="user-page clearfix">
-                            <div class="form-group">
-                                <label for="Email">Email</label>
-                                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="example@email.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Password">Mật khẩu</label>
-                                <input type="password" class="form-control" id="Password" name="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="RememberMe" name="RememberMe" value="true">
-                                <label for="RememberMe">Ghi nhớ</label>
-                            </div>
-                            <div class="login-action">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="login-signup-form">
+                <div id="ctl00_mainContent_pnlStandardLogin">
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            @if (TempData["Notification"] != null)
+                            {
+                                <div class="alert alert-info">
+                                    <strong>Chú ý:</strong> @TempData["Notification"]
+
+                                </div>
+                            }
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    @foreach (var error in ViewData.ModelState.Values.SelectMany(x => x.Errors))
+                                    {
+                                        <p>@error.ErrorMessage</p>
+                                    }
+                                </div>
+                            }
+                            <div class="user-page clearfix">
                                 <div class="form-group">
-                                    <a class="login-link" href="">Quên mật khẩu</a>
-                                    <a id="user-password-recovery" class="login-link hidden hide" href="">Quên mật khẩu</a>
-                                    <a id="user-signup-link" class="login-link" href="/dang-ky">Đăng ký mới</a>
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="example@email.com" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Đăng nhập" id="user-login" tabindex="10" class="btn btn-primary">
+                                    <label for="Password">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="Password" name="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="RememberMe" name="RememberMe" value="true">
+                                    <label for="RememberMe">Ghi nhớ</label>
+                                </div>
+                                <div class="login-action">
+                                    <div class="form-group">
+                                        <a id="user-password-recovery" class="login-link" href="/quen-mat-khau">Quên mật khẩu</a>
+                                        <a id="user-signup-link" class="login-link" href="/dang-ky">Đăng ký mới</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Đăng nhập" id="user-login" tabindex="10" class="btn btn-primary">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="open-login mrb20">
-                            <div class="form-group">
-                                <a class="btn login-facebook" href="">
-                                    <i class="fa fa-brands fa-facebook-f"></i>
-                                    <span>Đăng nhập bằng Facebook</span>
-                                </a>
-                            </div>
-                            <div class="form-group">
-                                <a class="btn login-google" href="">
-                                    <i class="fa fa-sharp fa-solid fa-g"></i>
-                                    <span>Đăng nhập bằng Google</span>
-                                </a>
+                            <div class="open-login mrb20">
+                                <div class="form-group">
+                                    <a class="btn login-facebook" href="/facebook-login">
+                                        <i class="fa fa-brands fa-facebook-f"></i>
+                                        <span>Đăng nhập bằng Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn login-google" href="/google-login">
+                                        <i class="fa fa-sharp fa-solid fa-g"></i>
+                                        <span>Đăng nhập bằng Google</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,5 +71,4 @@
             </div>
         </div>
     </div>
-</div>
 </form>

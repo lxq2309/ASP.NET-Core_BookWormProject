@@ -12,6 +12,13 @@
                 <div id="ctl00_mainContent_pnlStandardLogin">
                     <div class="row">
                         <div class="col-sm-offset-3 col-sm-6">
+                            @if (TempData["Notification"] != null)
+                            {
+                                <div class="alert alert-info">
+                                    <strong>Chú ý:</strong> @TempData["Notification"]
+                
+                                </div>
+                            }
                             <div class="user-page clearfix">
                                 <div class="form-group">
                                     <label for="UserName">UserName</label>
@@ -20,7 +27,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Email">Email</label>
-                                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="example@email.com" required>
+                                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="example@email.com" required @(TempData["LockEmail"] != null ? "readonly" : "")>
                                     <span asp-validation-for="Email" class="validation-error"></span>
                                 </div>
                                 <div class="form-group">
@@ -43,20 +50,6 @@
                                     <div class="form-group">
                                         <input type="submit" value="Đăng ký" id="user-login" tabindex="10" class="btn btn-primary">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="open-login mrb20">
-                                <div class="form-group">
-                                    <a class="btn login-facebook" href="">
-                                        <i class="fa fa-brands fa-facebook-f"></i>
-                                        <span>Đăng ký bằng Facebook</span>
-                                    </a>
-                                </div>
-                                <div class="form-group">
-                                    <a class="btn login-google" href="">
-                                        <i class="fa fa-sharp fa-solid fa-g"></i>
-                                        <span>Đăng ký bằng Google</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>

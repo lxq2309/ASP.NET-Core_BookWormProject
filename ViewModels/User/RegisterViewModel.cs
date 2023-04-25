@@ -16,7 +16,7 @@ namespace BookWormProject.ViewModels.User
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Mật khẩu mới phải chứa ít nhất 8 ký tự, trong đó có ít nhất 1 chữ cái và 1 số.")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Mật khẩu phải chứa ít nhất 8 ký tự, trong đó có ít nhất 1 chữ cái và 1 số.")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }

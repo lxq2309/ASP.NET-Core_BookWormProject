@@ -65,7 +65,7 @@ namespace BookWormProject.Data.Repository
             var user = _context.Users.Include(x => x.Comments).FirstOrDefault(x => x.UserId == userId);
             if (user != null)
             {
-                return _context.Comments;
+                return user.Comments;
             }
 
             return null;

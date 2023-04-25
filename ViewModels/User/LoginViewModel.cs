@@ -16,6 +16,9 @@ namespace BookWormProject.ViewModels.User
 
         [Display(Name = "Ghi nhớ tài khoản")]
         public bool RememberMe { get; set; }
+
+        public bool IsLoggedFacebook { get; set; } = false;
+        public bool IsLoggedGoogle { get; set; } = false;
     }
 
 }

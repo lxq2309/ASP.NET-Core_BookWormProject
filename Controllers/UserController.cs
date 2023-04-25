@@ -14,6 +14,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.AspNetCore.Authentication.Google;
+using System.Net.Mail;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookWormProject.Controllers
 {
@@ -22,26 +30,36 @@ namespace BookWormProject.Controllers
         private readonly IUserService _userService;
         private readonly IBookmarkService _bookmarkService;
         private readonly IArticleService _articleService;
+        private readonly IEmailService _emailService;
+        private readonly IMemoryCache _cache;
 
-        public UserController(IUserService userService, IBookmarkService bookmarkService, IArticleService articleService)
+        public UserController(IUserService userService, IBookmarkService bookmarkService, IArticleService articleService, IEmailService emailService, IMemoryCache cache)
         {
             _userService = userService;
             _bookmarkService = bookmarkService;
             _articleService = articleService;
+            _emailService = emailService;
+            _cache = cache;
         }
 
-        [Route("/tai-khoan")]
-        public IActionResult Index()
+        [Route("/tai-khoan/{id?}")]
+        public IActionResult Index(int? id)
         {
             var currentId = _userService.GetCurrentUserId();
             var currentUser = _userService.GetById(currentId);
-            return View(currentUser);
+            var targetUser = (id == null) ? currentUser : _userService.GetById((int)id);
+            var viewModels = new UserIndexViewModel()
+            {
+                CurrentUser = currentUser,
+                TargetUser = targetUser,
+                IsMyAccount = currentUser.UserId == targetUser.UserId
+            };
+            return View(viewModels);
         }
 
-        public IActionResult GetPartialGeneralResult()
+        public IActionResult GetPartialGeneralResult(int id)
         {
-            var currentUserId = _userService.GetCurrentUserId();
-            var currentUser = _userService.GetById(currentUserId);
+            var currentUser = _userService.GetById(id);
             var bookmarks = _userService.GetBookmarksForUser(currentUser.UserId).Select(x =>
             {
                 var article = _bookmarkService.GetArticleForBookmark(x.BookmarkId);
@@ -74,6 +92,7 @@ namespace BookWormProject.Controllers
                 };
             }).OrderByDescending(x => x.CommentId).Take(10).ToList();
             var viewModels = new UserGeneralInfoViewModel(currentUser, bookmarks, comments);
+            viewModels.IsMyAccount = id == _userService.GetCurrentUserId();
             return PartialView("_PartialGeneral", viewModels);
         }
 
@@ -85,7 +104,7 @@ namespace BookWormProject.Controllers
             {
                 UserName = currentUser.UserName,
                 Email = currentUser.Email,
-                Gender = (currentUser.Gender == false)?"Nam":"Nữ",
+                Gender = (currentUser.Gender == false) ? "Nam" : "Nữ",
                 Name = currentUser.Name,
                 Address = currentUser.Address,
                 DateOfBirth = currentUser.DateOfBirth,
@@ -97,10 +116,10 @@ namespace BookWormProject.Controllers
             return PartialView("_PartialChangeInfo", viewModels);
         }
 
-        public IActionResult GetPartialBookmarksResult(int? page)
+        public IActionResult GetPartialBookmarksResult(int? page, int id)
         {
-            var currentUser = _userService.GetById(_userService.GetCurrentUserId());
-            var bookmarks = _userService.GetBookmarksForUser(currentUser.UserId).Select(x =>
+            var currentUser = _userService.GetById(id);
+            var bookmarks = _userService.GetBookmarksForUser(id).Select(x =>
             {
                 var article = _bookmarkService.GetArticleForBookmark(x.BookmarkId);
                 return new BookmarkDetailViewModel()
@@ -120,13 +139,19 @@ namespace BookWormProject.Controllers
             int pageSize = 10; // Số lượng đối tượng trên mỗi trang
             int pageNumber = (page ?? 1); // Số trang hiện tại
 
-            return PartialView("_PartialBookmark", bookmarks.ToPagedList(pageNumber, pageSize));
+            var pagedBookmarks = bookmarks.ToPagedList(pageNumber, pageSize);
+            var isMyAccount = id == _userService.GetCurrentUserId();
+            var viewModels = new UserBookmarksViewModel()
+            {
+                PagedBookmarks = pagedBookmarks,
+                IsMyAccount = isMyAccount
+            };
+            return PartialView("_PartialBookmark" ,viewModels);
         }
 
-        public IActionResult GetPartialCommentsResult(int? page)
+        public IActionResult GetPartialCommentsResult(int? page, int id)
         {
-            var currentUser = _userService.GetById(_userService.GetCurrentUserId());
-            var comments = _userService.GetCommentsForUser(currentUser.UserId).Select(x =>
+            var comments = _userService.GetCommentsForUser(id).Select(x =>
             {
                 var article = _articleService.GetArticleById(x.ArticleId);
                 return new CommentDetailViewModel()
@@ -143,22 +168,25 @@ namespace BookWormProject.Controllers
             int pageSize = 10; // Số lượng đối tượng trên mỗi trang
             int pageNumber = (page ?? 1); // Số trang hiện tại
 
-            return PartialView("_PartialComments", comments.ToPagedList(pageNumber, pageSize));
+            var pagedComments = comments.ToPagedList(pageNumber, pageSize);
+            var isMyAccount = id == _userService.GetCurrentUserId();
+            var viewModels = new UserCommentsViewModel()
+            {
+                PagedComments = pagedComments,
+                IsMyAccount = isMyAccount
+            };
+            return PartialView("_PartialComments", viewModels);
         }
 
-        public IActionResult GetPartialPostedArticle(int? page, int userId)
+        public IActionResult GetPartialPostedArticle(int? page, int id)
         {
-            var articles = _userService.GetArticlesForUser(userId);
+            var articles = _userService.GetArticlesForUser(id);
             int pageSize = 10; // Số lượng đối tượng trên mỗi trang
             int pageNumber = (page ?? 1); // Số trang hiện tại
 
             return PartialView("_PartialPostedArticle", articles.ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult Details()
-        {
-            return View();
-        }
 
         public IActionResult GetPartialChangePassword()
         {
@@ -170,7 +198,7 @@ namespace BookWormProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("_PartialChangePassword",model);
+                return PartialView("_PartialChangePassword", model);
             }
 
             var currentUser = _userService.GetById(_userService.GetCurrentUserId());
@@ -182,6 +210,10 @@ namespace BookWormProject.Controllers
         [HttpPost]
         public IActionResult Edit(UserChangeInfoViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_PartialChangeInfo", model);
+            }
             var id = _userService.GetCurrentUserId();
             var user = _userService.GetById(id);
             // Update thông tin user
@@ -227,20 +259,35 @@ namespace BookWormProject.Controllers
 
             // Cập nhật thông tin user
             _userService.UpdateUser(user);
+            TempData["SuccessMessage"] = "Cập nhật thông tin thành công";
 
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete()
-        {
-            return View();
+            return PartialView("_PartialChangeInfo", model);
         }
 
         [Route("/dang-ky")]
         [Role("Guest")]
         public IActionResult Register()
         {
-            return View(new RegisterViewModel());
+            var registerViewModels = new RegisterViewModel();
+
+            // Lấy dữ liệu từ TempData
+            var thirdLoginDataJson = TempData["ThirdLoginData"] as string;
+            // Nếu có dữ liệu từ Facebook, tiến hành gán sẵn dữ liệu cho người dùng
+            if (!string.IsNullOrEmpty(thirdLoginDataJson))
+            {
+                // Chuyển đổi chuỗi JSON thành đối tượng thirdLoginData
+                var thirdLoginData = JsonConvert.DeserializeObject<dynamic>(thirdLoginDataJson);
+
+                // Gán giá trị vào view model
+                registerViewModels.Name = thirdLoginData.Name;
+                registerViewModels.Email = thirdLoginData.Email;
+                // Thông báo cho người dùng biết đây là lần đầu họ đăng nhập bằng Facebook/Google nên phải đăng ký
+                TempData["Notification"] =
+                    "Đây là lần đầu bạn đăng nhập, vui lòng đăng ký để tiếp tục nhé";
+                // Khoá Email input để người dùng không thể thay đổi được email
+                TempData["LockEmail"] = true;
+            }
+            return View(registerViewModels);
         }
 
         [Route("/dang-ky")]
@@ -302,7 +349,7 @@ namespace BookWormProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userService.GetByEmail(model.Email);
-                if (_userService.Authenticate(user, model.Password))
+                if (model.IsLoggedFacebook || model.IsLoggedGoogle || _userService.Authenticate(user, model.Password))
                 {
                     var claims = new List<Claim>
                     {
@@ -323,7 +370,6 @@ namespace BookWormProject.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-
                 ModelState.AddModelError("", "Sai email hoặc mật khẩu");
             }
 
@@ -338,5 +384,165 @@ namespace BookWormProject.Controllers
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+        [Route("/facebook-login")]
+        [Role("Guest")]
+        public IActionResult FacebookLogin()
+        {
+            var properties = new AuthenticationProperties { RedirectUri = Url.Action("FacebookResponse") };
+            return Challenge(properties, FacebookDefaults.AuthenticationScheme);
+        }
+
+        [Route("/facebook-response")]
+        [Role("Guest")]
+        public async Task<IActionResult> FacebookResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var claims = result.Principal.Identities.FirstOrDefault().Claims;
+
+            // Tạo đối tượng Anonymous và gán giá trị
+            var ThirdLoginData = new
+            {
+                Name = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value,
+                Email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+            };
+
+            var user = _userService.GetByEmail(ThirdLoginData.Email);
+            if (user != null)
+            {
+                // Nếu user đã tồn tại thì đăng nhập và trả về trang chủ
+                var loginViewModel = new LoginViewModel
+                {
+                    Email = user.Email,
+                    IsLoggedFacebook = true
+                };
+                return Login(loginViewModel);
+            }
+
+            // Lưu dữ liệu vào TempData để gửi cho action khác
+            TempData["ThirdLoginData"] = JsonConvert.SerializeObject(ThirdLoginData);
+
+            // Nếu chưa tồn tại thì đăng ký mới
+            return RedirectToAction("Register");
+        }
+
+        [Route("/google-login")]
+        [Role("Guest")]
+        public IActionResult GoogleLogin()
+        {
+            var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [Route("/google-response")]
+        [Role("Guest")]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var claims = result.Principal.Identities.FirstOrDefault().Claims;
+
+            // Tạo đối tượng Anonymous và gán giá trị
+            var thirdLoginData = new
+            {
+                Name = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value,
+                Email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+            };
+
+            var user = _userService.GetByEmail(thirdLoginData.Email);
+            if (user != null)
+            {
+                // Nếu user đã tồn tại thì đăng nhập và trả về trang chủ
+                var loginViewModel = new LoginViewModel
+                {
+                    Email = user.Email,
+                    IsLoggedGoogle = true
+                };
+                return Login(loginViewModel);
+            }
+
+            // Lưu dữ liệu vào TempData để gửi cho action khác
+            TempData["ThirdLoginData"] = JsonConvert.SerializeObject(thirdLoginData);
+
+            // Nếu chưa tồn tại thì đăng ký mới
+            return RedirectToAction("Register");
+        }
+
+        [Route("/quen-mat-khau")]
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [Route("/quen-mat-khau")]
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Kiểm tra email người dùng đã tồn tại trong hệ thống hay chưa
+                var user = _userService.GetByEmail(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Email không tồn tại trong hệ thống.");
+                    return View(model);
+                }
+
+                // Tạo mã xác nhận ngẫu nhiên
+                var token = StringHelper.RandomString(10);
+
+                // Lưu mã xác nhận vào Cache
+                _cache.Set(token, user.UserId, new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+
+                // Gửi email chứa mã xác nhận đến email người dùng
+                await _emailService.SendCodeAsync(user.Email, token);
+
+                // Chuyển hướng đến trang nhập mã xác nhận
+                return RedirectToAction("VerifyCode");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult VerifyCode()
+        {
+            return View(new VerifyCodeViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Lấy mã xác nhận từ Cache
+                var userId = _cache.Get<int>(model.Code);
+
+                // Kiểm tra mã xác nhận có hợp lệ hay không
+                if (userId == 0)
+                {
+                    ModelState.AddModelError("", "Mã xác nhận không hợp lệ hoặc đã hết hạn.");
+                    return View(model);
+                }
+
+                // Hợp lệ, gửi mật khẩu mới vào email cho người dùng
+                string newPassword = StringHelper.RandomString(20);
+                var user = _userService.GetById(userId);
+                _userService.ChangePassword(user, newPassword);
+                _emailService.SendPasswordAsync(user.Email, newPassword);
+
+                // Chuyển đến trang đăng nhập và gửi thông báo check mail để lấy mật khẩu
+                TempData["Notification"] = "Vui lòng kiểm tra email để nhận mật khẩu mới";
+                return RedirectToAction("Login");
+            }
+
+            return View(model);
+        }
+
+
+
+
+
     }
 }
