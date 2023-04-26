@@ -2,6 +2,7 @@
 using BookWormProject.Data.Services;
 using BookWormProject.Models;
 using BookWormProject.Utils.Filter;
+using BookWormProject.Utils.Options;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -11,8 +12,6 @@ using SendGrid;
 using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 // Đăng kí BookWormDbContext và cấu hình nó để sử dụng SqlServer làm cơ sở dữ liệu
 builder.Services.AddDbContext<BookWormDbContext>(options =>
@@ -47,6 +46,17 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IGithubService, GithubService>();
+
+// Cấu hình cho GithubOption
+builder.Services.Configure<GithubOption>(option =>
+{
+    option.AccessToken = "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";
+    option.RepositoryName = "UploadImage";
+    option.RepositoryOwner = "lxq2309";
+});
+
+
 
 // Đăng ký Filter
 builder.Services.AddScoped<IAuthorizationFilter, RoleFilter>();
@@ -59,7 +69,9 @@ builder.Services.AddMemoryCache();
 
 // Đăng ký SendGrid
 builder.Services.AddSendGrid(option =>
-    option.ApiKey = "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");
+{
+    option.ApiKey = "";
+});
 
 
 // Thêm chế độ xác thực dựa trên cookie
