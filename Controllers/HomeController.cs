@@ -76,6 +76,14 @@ namespace BookWormProject.Controllers
             return View();
         }
 
+        [Route("~/search")]
+        public IActionResult Search(string? keyword)
+        {
+            var articles = _articleService.GetAllArticles().Where(x => x.Title.ToLower().Contains(keyword.ToLower())).ToList();
+            ViewBag.Keyword = keyword;
+            return View(articles);
+        }
+
 
         public IActionResult Privacy()
         {

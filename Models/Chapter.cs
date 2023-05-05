@@ -19,5 +19,7 @@ public partial class Chapter
 
     public int ArticleId { get; set; }
 
+    public bool? IsDeleted { get; set; }
+
     public virtual Article Article { get; set; } = null!;
 }

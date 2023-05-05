@@ -1,17 +1,21 @@
-﻿@{
-    Layout = "_LayoutBookWorm";
-}
+﻿
 @model BookWormProject.ViewModels.Article.ArticleDetailViewModel
 @{
     var article = Model;
     var authors = Model.Authors.ToList();
     var genres = Model.Genres.ToList();
     var chapters = Model.Chapters.ToList();
+    var category = Model.Category;
 }
-<input id="id_post" type="hidden" value="@article.ArticleId">
+
+@{
+    Layout = "_LayoutBookWorm";
+    ViewData["Title"] = article.Title;
+}
+
 <div class="container csstransforms3d" id="truyen">
     <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
-        <div class="col-xs-12 col-info-desc" itemscope="" itemtype="https://schema.org/Book">
+        <div class="col-xs-12 col-info-desc">
             <div class="title-list book-intro">
                 <h2>Thông tin bài đăng</h2>
             </div>
@@ -32,13 +36,21 @@
                         {
                             if (i != authors.Count - 1)
                             {
-                                <a itemprop="author" href="/" title="@authors[i].Name">@authors[i].Name,</a>
+                                <a itemprop="author" href="/tac-gia/@authors[i].AuthorId" title="@authors[i].Name">@authors[i].Name,</a>
                             }
                             else
                             {
-                                <a itemprop="author" href="/" title="@authors[i].Name">@authors[i].Name</a>
+                                <a itemprop="author" href="/tac-gia/@authors[i].AuthorId" title="@authors[i].Name">@authors[i].Name</a>
                             }
                         }
+                    </div>
+                    <div>
+                        <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Danh mục:</h3>
+                        @if (category != null)
+                        {
+                            <a itemprop="genre" href="/danh-muc/@category.CategoryId" title="@category.Name">@category.Name</a>
+                        }
+
                     </div>
                     <div>
                         <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Thể loại:</h3>
@@ -46,11 +58,11 @@
                         {
                             if (i != authors.Count - 1)
                             {
-                                <a itemprop="genre" href="" title="@genres[i].Name">@genres[i].Name,</a>
+                                <a itemprop="genre" href="/the-loai/@genres[i].GenreId" title="@genres[i].Name">@genres[i].Name,</a>
                             }
                             else
                             {
-                                <a itemprop="genre" href="" title="@genres[i].Name">@genres[i].Name</a>
+                                <a itemprop="genre" href="/the-loai/@genres[i].GenreId" title="@genres[i].Name">@genres[i].Name</a>
                             }
 
                         }
@@ -73,29 +85,6 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-8 col-md-8 desc">
-                <div class="rate">
-                    <div class="rate-holder" data-score="5" style="cursor: pointer;">
-                    </div>
-                    <em class="rate-text"></em>
-                    <div class="small" itemprop="aggregateRating" itemscope
-                         itemtype="http://schema.org/AggregateRating">
-                        <em>
-                            Đánh giá:
-                            <strong>
-                                <span itemprop="ratingValue">
-                                    5
-                                </span>
-                            </strong>
-                            <span class="text-muted" itemprop="bestRating">10</span> từ
-                            <strong>
-                                <span itemprop="ratingCount">
-                                    1000
-                                </span> lượt
-                            </strong>
-                        </em>
-                    </div>
-                </div>
-
                 <div id="gioi-thieu-truyen" class="desc-text desc-text-full" itemprop="description">
                     @article.Description
                 </div>
@@ -109,7 +98,11 @@
                     <a href="/p/@article.ArticleId/1" class="btn btn-danger btn-block btn-style btn-border">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;ĐỌC TỪ ĐẦU
                     </a>
+                    <a id="add-bookmark-btn" class="btn btn-info btn-border">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;BOOKMARK
+                    </a>
                 </div>
+
 
 
                 <div class="l-chapter">
@@ -121,7 +114,7 @@
                         {
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                <a href="/p/@article.ArticleId/@chapters[i].ChapterId" title="@chapters[i].Title">
                                     <span class="chapter-text">
                                         @chapters[i].Title
                                     </span>
@@ -143,7 +136,7 @@
                         {
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                <a href="/p/@article.ArticleId/@chapters[i].ChapterId" title="@chapters[i].Title">
                                     <span class="chapter-text">
                                         @chapters[i].Title
                                     </span>
@@ -181,6 +174,33 @@
         @await Component.InvokeAsync("RightSidebar")
     </div>
 </div>
+
+<!-- HTML code for the modal -->
+<div id="bookmark-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="bookmark-form">
+            <input type="hidden" id="bookmarkId" name="bookmarkId" value="">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="bookmark-name" name="name" class="form-control" value="@article.Title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="bookmark-description" name="description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="isPublic" name="isPublic">
+                <label for="isPublic">Public</label>
+            </div>
+
+            <input type="hidden" id="bookmark-articleId" name="articleId" value="@article.ArticleId" required>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+
 <style>
     .group-buttons {
         display: flex;
@@ -264,9 +284,84 @@
         .group-gt .btn {
             border-radius: 30px;
         }
+
 </style>
 
-@section CommentScripts
-{
-    
-}
+
+<!-- JavaScript code to handle the modal and form submission -->
+<script>
+    $(document).ready(function () {
+        // Get the modal
+        var modal = $("#bookmark-modal");
+
+        // Get the <span> element that closes the modal
+        var closeBtn = $(".close");
+
+        // When the user clicks the button, open the modal
+        $("#add-bookmark-btn").click(function () {
+            modal.css("display", "block");
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        closeBtn.click(function () {
+            modal.css("display", "none");
+        });
+
+        // When the user clicks anywhere outside of the modal, close it
+        $(window).click(function (event) {
+            if (event.target == modal[0]) {
+                modal.css("display", "none");
+            }
+        });
+
+        // Handle form submission
+        $("#bookmark-form").submit(function (event) {
+            event.preventDefault();
+
+
+            var bookmarkId = $("#bookmarkId").val();
+            var name = $("#bookmark-name").val();
+            var description = $("#bookmark-description").val();
+            var isPublic = $("#isPublic").is(":checked");
+            var articleId = $("#bookmark-articleId").val();
+
+
+            var bookmark = {
+                bookmarkId: 0,
+                name: name,
+                description: description,
+                isPublic: isPublic,
+                articleId: articleId
+            };
+
+            var bookmarkJson = JSON.stringify(bookmark);
+            // Send the bookmark data to the server
+            $.ajax({
+                url: "/api/bookmark/create",
+                method: "POST",
+                dataType: 'json',
+                contentType: 'application/json',
+                data: bookmarkJson,
+                success: function (res) {
+                    // Clear the form and close the modal
+                    $("#bookmark-form")[0].reset();
+                    modal.css("display", "none");
+                    var str = `
+                                    <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;ĐÃ THÊM
+                                      `;
+                    $('#add-bookmark-btn').html(str);
+                    if (res == false) {
+                        alert("Đã tồn tại bookmark này rồi !");
+                    }
+                    else {
+                        alert("Thêm bookmark thành công !");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // handle error
+                    alert('Error: ' + errorThrown);
+                }
+            });
+        });
+    });
+</script>

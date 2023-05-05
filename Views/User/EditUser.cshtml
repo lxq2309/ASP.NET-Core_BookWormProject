@@ -1,0 +1,61 @@
+﻿@model BookWormProject.ViewModels.User.UserCreateEditViewModel
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/user">User</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fa fa-user-edit"></i> Edit User</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditUser" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label">UserName</label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" class="form-control" type="email"></input>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Name</label>
+                        <input asp-for="Name" class="form-control"></input>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="UserId" class="form-control" type="hidden"/>
+                        <input asp-for="Password" class="form-control" type="hidden" value="password"/>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

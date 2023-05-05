@@ -20,18 +20,18 @@ namespace BookWormProject.Data.Repository
 
         public void Delete(Genre genre)
         {
-            _context.Genres.Remove(genre);
+            genre.IsDeleted = true;
             _context.SaveChanges();
         }
 
         public IEnumerable<Genre> GetAll()
         {
-            return _context.Genres.ToList();
+            return _context.Genres.Where(x => x.IsDeleted == null).ToList();
         }
 
         public IEnumerable<Article>? GetArticlesForGenre(int id)
         {
-            var genre = _context.Genres.Include(x => x.Articles).FirstOrDefault(x => x.GenreId == id);
+            var genre = _context.Genres.Include(x => x.Articles).FirstOrDefault(x => x.IsDeleted == null && x.GenreId == id);
             if (genre != null)
             {
                 return genre.Articles;
@@ -40,7 +40,7 @@ namespace BookWormProject.Data.Repository
         }
         public IEnumerable<Category>? GetCategoriesForGenre(int id)
         {
-            var genre = _context.Genres.Include(x => x.Categories).FirstOrDefault(x => x.GenreId == id);
+            var genre = _context.Genres.Include(x => x.Categories).FirstOrDefault(x => x.IsDeleted == null && x.GenreId == id);
             if (genre != null)
             {
                 return genre.Categories;
@@ -50,7 +50,7 @@ namespace BookWormProject.Data.Repository
 
         public Genre GetById(int id)
         {
-            return _context.Genres.SingleOrDefault(x => x.GenreId == id);
+            return _context.Genres.SingleOrDefault(x => x.IsDeleted == null && x.GenreId == id);
         }
 
         public void Update(Genre genre)

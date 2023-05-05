@@ -34,10 +34,25 @@ namespace BookWormProject.Data.Services
             return _chapterRepository.GetById(id);
         }
 
+        public IEnumerable<Chapter>? GetChapterByArticleId(int articleId)
+        {
+            return _chapterRepository.GetAll().Where(x => x.ArticleId == articleId);
+        }
+
         public Chapter? GetChapterByIndex(int articleId, int index)
         {
             var chapters = _articleService.GetChaptersForArticle(articleId);
             return chapters.SingleOrDefault(x => x.Index == index);
+        }
+
+        public int GetNewestChapterIndex(int articleId)
+        {
+            var maxIndex = _chapterRepository.GetAll().Where(x => x.ArticleId == articleId).Max(x => x.Index);
+            if (maxIndex != null)
+            {
+                return maxIndex;
+            }
+            return 1;
         }
 
         public void UpdateChapter(Chapter chapter)

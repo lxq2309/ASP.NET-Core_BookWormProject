@@ -13,5 +13,7 @@ public partial class Author
 
     public string Description { get; set; } = null!;
 
+    public bool? IsDeleted { get; set; }
+
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 }

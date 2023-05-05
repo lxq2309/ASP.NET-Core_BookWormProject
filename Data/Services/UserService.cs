@@ -78,6 +78,29 @@ namespace BookWormProject.Data.Services
             _userRepository.Update(user);
         }
 
+        public async Task UpdateUserAsync(User user)
+        {
+            if (user.PhoneNumber == null)
+            {
+                user.PhoneNumber = "";
+            }
+            if (user.Address == null)
+            {
+                user.Address = "";
+            }
+            if (user.Avatar == null)
+            {
+                user.Avatar = "";
+            }
+            if (user.Description == null)
+            {
+                user.Description = "";
+            }
+
+            await _userRepository.UpdateAsync(user);
+        }
+
+
         public void ChangePassword(User user, string newPassword)
         {
             var hashedPassword = _passwordHasher.HashPassword(null, newPassword);

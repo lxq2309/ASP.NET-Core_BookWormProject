@@ -67,10 +67,6 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Lưu thông tin</button>
                             </div>
-                            @if (TempData["SuccessMessage"] != null)
-                            {
-                                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-                            }
                         </div>
                     </div>
                 </div>
@@ -84,13 +80,16 @@
         $('#changeInfoResult form').submit(function (e) {
             e.preventDefault();
 
-            var formData = $(this).serialize();
+            var formData = new FormData(this);
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function (result) {
-                    $('#changeInfoResult').html(result);
+                    alert("Cập nhật thông tin thành công");
+                    window.location.reload();
                 },
                 error: function () {
                     $('#changeInfoResult').html('<div class="text-danger">Có lỗi xảy ra</div>');
@@ -98,4 +97,5 @@
             });
         });
     });
+
 </script>

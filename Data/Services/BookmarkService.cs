@@ -6,14 +6,17 @@ namespace BookWormProject.Data.Services
     public class BookmarkService : IBookmarkService
     {
         private readonly IBookmarkRepository _bookmarkRepository;
+        private readonly IUserService _userService;
 
-        public BookmarkService(IBookmarkRepository bookmarkRepository)
+        public BookmarkService(IBookmarkRepository bookmarkRepository, IUserService userService)
         {
             _bookmarkRepository = bookmarkRepository;
+            _userService = userService;
         }
 
         public void AddBookmark(Bookmark bookmark)
         {
+            bookmark.UserId = _userService.GetCurrentUserId();
             _bookmarkRepository.Add(bookmark);
         }
 
@@ -40,6 +43,16 @@ namespace BookWormProject.Data.Services
         public void UpdateBookmark(Bookmark bookmark)
         {
             _bookmarkRepository.Update(bookmark);
+        }
+
+        public Bookmark? GetByArticleId(int articleId)
+        {
+            var bookmark = _bookmarkRepository.GetAll().FirstOrDefault(x => x.ArticleId == articleId);
+            if (bookmark != null)
+            {
+                return bookmark;
+            }
+            return null;
         }
     }
 }

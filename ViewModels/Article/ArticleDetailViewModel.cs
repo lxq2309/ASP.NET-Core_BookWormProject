@@ -24,7 +24,7 @@ namespace BookWormProject.ViewModels.Article
         public IEnumerable<Models.Genre>? Genres { get; set; }
         public string CoverImage { get; set; }
         public IEnumerable<Models.Chapter>? Chapters { get; set; }
-        public IEnumerable<Author>? Authors { get; set; }
+        public IEnumerable<Models.Author>? Authors { get; set; }
         public Models.Category Category { get; set; }
     }
 }

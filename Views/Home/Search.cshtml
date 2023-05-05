@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "_LayoutBookWorm";
+    ViewData["Title"] = "Kết quả tìm kiếm cho " + ViewBag.Keyword;
+}
+@model List<Article>
+<div class="container" id="list-page">
+    <div class="list list-truyen col-xs-12">
+        <div class="title-list">
+            <h2>
+                @ViewData["Title"]
+            </h2>
+        </div>
+
+
+        @foreach (var article in Model)
+        {
+            <div class="row" itemscope="" itemtype="https://schema.org/Book">
+                <div class="col-xs-7">
+                    <div>
+                        <span class="glyphicon glyphicon-book"></span>
+                        <h3 class="truyen-title" itemprop="name">
+                            <a href="/p/@article.ArticleId" title="" itemprop="url">
+                                @article.Title
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+    <div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
+    </div>
+</div>
+<div class="row category">
+    <div class="container text-center pagination-container">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+            <div id="pagination"></div>
+        </div>
+    </div>
+</div>

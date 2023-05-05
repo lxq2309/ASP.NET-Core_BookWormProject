@@ -1,7 +1,9 @@
-﻿@model int
+﻿@using BookWormProject.Data.Services
+@model int
 @{
     var articleId = Model;
 }
+@inject IUserService UserService
 
 <div class="title-list">
     <h2>Bình luận</h2>
@@ -22,15 +24,23 @@
     </ul>
 
     <div class="col-xs-12">
-        @*Xử lí cho commnet trên BookWorm*@
+        @*Xử lí cho comment trên BookWorm*@
         <div id="bw_comments" class="tabcontent" data-tab="tab1">
-            <div class="row">
-                <form id="comment-form">
-                    <input type="hidden" id="comment-articleId" name="articleId" value="@articleId" />
-                    <input type="text" id="comment-content" name="content" placeholder="Write your comment here..." required />
-                    <button type="submit">Comment</button>
-                </form>
-            </div>
+            @if (UserService.GetCurrentUserId() != 0)
+            {
+                <div class="row">
+                    <form id="comment-form">
+                        <input type="hidden" id="article-id" name="articleId" value="@articleId"/>
+                        <div class="form-group">
+                            <textarea id="comment-content" name="content" class="form-control"></textarea>
+                        </div>
+                        <button id="submit-comment" class="btn btn-primary">Submit</button>
+                        <div id="comment-success" class="alert alert-success mt-3" role="alert">
+                            Gửi bình luận thành công !
+                        </div>
+                    </form>
+                </div>
+            }
             <div class="row" id="comment-list">
             </div>
             <div class="container text-center pagination-container">
@@ -63,10 +73,10 @@
             success: function (result) {
                 // Hiển thị danh sách comment
                 console.log(result);
-                var data = renderComment(result.comments);
+                var data = renderComment(result.comments, @UserService.GetCurrentUserId());
                 $('#comment-list').html(data);
                 // cập nhật comment count
-                $('.comment-count').html(result.comments.length)
+                $('.comment-count').html(result.comments.length);
 
                 // Hiển thị phân trang
                 var paginationHtml = renderPagination(result.pageInfo);
@@ -121,30 +131,33 @@
     });
 
 
-    $(function() {
-        $('#comment-form').on('submit', function(e) {
-            e.preventDefault();
+    $(document).ready(function () {
+        $('#submit-comment').click(function (event) {
+            event.preventDefault();
+
+            var articleId = $('#article-id').val();
             var content = $('#comment-content').val();
-            var articleId = $('#comment-articleId').val();
+            var comment = {
+                articleId: articleId,
+                content: content
+            };
+            var commentJson = JSON.stringify(comment);
             $.ajax({
+                url: '/api/Comment/Post',
                 type: 'POST',
-                url: '/api/Comment/Create',
+                dataType: 'json',
                 contentType: 'application/json',
-                data: {
-                    content: content,
-                    articleId: articleId
+                data: commentJson,
+                success: function (data) {
+                    // handle success
+                    loadComments(1);
+                    $('#comment-success').show();
                 },
-                success: function(result) {
-                    if (result === true) {
-                        loadComments(1);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    alert("Error");
+                error: function (xhr, textStatus, errorThrown) {
+                    // handle error
+                    alert('Error posting comment: ' + errorThrown);
                 }
             });
         });
     });
-
-
 </script>

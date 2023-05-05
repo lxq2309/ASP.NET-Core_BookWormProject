@@ -29,8 +29,6 @@ public partial class BookWormDbContext : DbContext
 
     public virtual DbSet<Genre> Genres { get; set; }
 
-    public virtual DbSet<ReadHistory> ReadHistories { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -145,9 +143,6 @@ public partial class BookWormDbContext : DbContext
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Description).HasMaxLength(1000);
             entity.Property(e => e.Name).HasMaxLength(255);
-            entity.Property(e => e.Thumbnails)
-                .HasMaxLength(255)
-                .HasDefaultValueSql("('/resource/images/default_thumbnails.jpg')");
 
             entity.HasMany(d => d.Genres).WithMany(p => p.Categories)
                 .UsingEntity<Dictionary<string, object>>(
@@ -216,35 +211,11 @@ public partial class BookWormDbContext : DbContext
             entity.Property(e => e.GenreId).HasColumnName("GenreID");
             entity.Property(e => e.Description).HasMaxLength(1000);
             entity.Property(e => e.Name).HasMaxLength(255);
-            entity.Property(e => e.Thumbnails)
-                .HasMaxLength(255)
-                .HasDefaultValueSql("('/resource/images/default_thumbnails.jpg')");
-        });
-
-        modelBuilder.Entity<ReadHistory>(entity =>
-        {
-            entity.HasKey(e => new { e.UserId, e.ArticleId }).HasName("PK__ReadHist__8E4EEBA0FD2A096F");
-
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
-            entity.Property(e => e.WatchedAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.Article).WithMany(p => p.ReadHistories)
-                .HasForeignKey(d => d.ArticleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ReadHisto__Artic__44FF419A");
-
-            entity.HasOne(d => d.User).WithMany(p => p.ReadHistories)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ReadHisto__UserI__45F365D3");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACAEDADFA5");
-
-            entity.HasIndex(e => e.UserName, "UQ__Users__C9F28456245368B3").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Avatar)

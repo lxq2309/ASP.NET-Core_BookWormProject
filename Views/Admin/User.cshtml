@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "List User";
+}
+
+@model List<User>
+
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/user">User</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">users</h3>
+                <div class="card-tools">
+                    <a href="@Url.Action("Create", "User")" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add user</a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">
+                                ID
+                            </th>
+                            <th style="width: 10%">
+                                Avatar
+                            </th>
+                            <th style="width: 10%">
+                                UserName
+                            </th>
+                            <th style="width: 10%">
+                                Email
+                            </th>
+                            <th style="width: 20%">
+                                Name
+                            </th>
+                            <th style="width: 10%">
+                                Gender
+                            </th>
+                            <th style="width: 10%">
+                                Role
+                            </th>
+                            <th style="width: 10%">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => user.UserId)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(user.Avatar)" width="50" height="50" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => user.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => user.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => user.Name)
+                                </td>
+                                <td>
+                                    @(user.Gender == false ? "Nam" : "Nữ")
+                                </td>
+                                <td>
+                                    @(user.Role == 1 ? "Admin" : "User")
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("EditUser", "User", new { id = user.UserId })" class="btn btn-outline-primary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a class="btn btn-outline-danger btn-sm" onclick="deleteUser(@user.UserId)"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteUser(id) {
+        if (confirm("Xoá người dùng này đồng nghĩa với việc xoá mọi hoạt động của họ, bao gồm bài đăng, bình luận,... bạn có chắc chắn muốn xoá không?")) {
+            // Send delete request to server
+            $.ajax({
+                url: "/User/Delete/" + id,
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    alert("Đã xoá");
+                    window.location.reload();
+                }
+            });
+        }
+    }
+</script>

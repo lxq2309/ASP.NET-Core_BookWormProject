@@ -29,7 +29,6 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IGenresRepository, GenreRepository>();
 builder.Services.AddScoped<IBookmarkRepository, BookmarkRepository>();
 builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
-builder.Services.AddScoped<IReadHistoryRepository, ReadHistoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
@@ -40,7 +39,6 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IBookmarkService, BookmarkService>();
 builder.Services.AddScoped<IChapterService, ChapterService>();
-builder.Services.AddScoped<IReadHistoryService, ReadHistoryService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
@@ -51,12 +49,10 @@ builder.Services.AddScoped<IGithubService, GithubService>();
 // Cấu hình cho GithubOption
 builder.Services.Configure<GithubOption>(option =>
 {
-    option.AccessToken = "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";
+    option.AccessToken = "";
     option.RepositoryName = "UploadImage";
     option.RepositoryOwner = "lxq2309";
 });
-
-
 
 // Đăng ký Filter
 builder.Services.AddScoped<IAuthorizationFilter, RoleFilter>();

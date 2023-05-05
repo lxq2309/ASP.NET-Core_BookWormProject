@@ -14,7 +14,7 @@ namespace BookWormProject.Data.Services
 
         public async Task SendCodeAsync(string email, string code)
         {
-            var from = new EmailAddress("lxq.2309@gmail.com", "BookWorm");
+            var from = new EmailAddress("saobangkhoc10x@gmail.com", "BookWorm");
             var to = new EmailAddress(email, "");
             var subject = "Reset Password";
             var htmlContent = $"<p><strong>Your verification code is: <span style='color: red;'>{code}</span></strong></p>";
@@ -25,7 +25,7 @@ namespace BookWormProject.Data.Services
 
         public async Task SendPasswordAsync(string email, string password)
         {
-            var from = new EmailAddress("lxq.2309@gmail.com", "BookWorm");
+            var from = new EmailAddress("saobangkhoc10x@gmail.com", "BookWorm");
             var to = new EmailAddress(email, "");
             var subject = "Reset Password";
             var htmlContent = $"<p><strong>Your new password is: <span style='color: green;'>{password}</span></strong></p>";

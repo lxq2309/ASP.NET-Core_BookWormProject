@@ -25,6 +25,8 @@ public partial class Article
 
     public int CategoryId { get; set; }
 
+    public bool? IsDeleted { get; set; }
+
     public virtual ICollection<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
 
     public virtual Category Category { get; set; } = null!;
@@ -32,8 +34,6 @@ public partial class Article
     public virtual ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-    public virtual ICollection<ReadHistory> ReadHistories { get; set; } = new List<ReadHistory>();
 
     public virtual User User { get; set; } = null!;
 

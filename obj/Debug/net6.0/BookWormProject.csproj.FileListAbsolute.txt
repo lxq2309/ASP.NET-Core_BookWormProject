@@ -95,3 +95,6 @@ D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\Microsof
 D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\SendGrid.dll
 D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\StarkbankEcdsa.dll
 D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\SendGrid.Extensions.DependencyInjection.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\RestSharp.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\SoftDeletes.dll
+D:\Working\Thực tập chuyên môn\BookWormProject\bin\Debug\net6.0\HtmlAgilityPack.dll

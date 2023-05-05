@@ -20,18 +20,18 @@ namespace BookWormProject.Data.Repository
 
         public void Delete(Author author)
         {
-            _context.Authors.Remove(author);
+            author.IsDeleted = true;
             _context.SaveChanges();
         }
 
         public IEnumerable<Author> GetAll()
         {
-            return _context.Authors.ToList();
+            return _context.Authors.Where(x => x.IsDeleted == null);
         }
 
         public IEnumerable<Article>? GetArticlesForAuthor(int id)
         {
-            var author = _context.Authors.Include(x => x.Articles).FirstOrDefault(x => x.AuthorId == id);
+            var author = _context.Authors.Include(x => x.Articles).FirstOrDefault(x => x.IsDeleted == null && x.AuthorId == id);
             if (author != null)
             {
                 return author.Articles;
@@ -41,7 +41,7 @@ namespace BookWormProject.Data.Repository
 
         public Author GetById(int id)
         {
-            return _context.Authors.SingleOrDefault(x => x.AuthorId == id);
+            return _context.Authors.SingleOrDefault(x => x.IsDeleted == null &&  x.AuthorId == id);
         }
 
         public void Update(Author author)

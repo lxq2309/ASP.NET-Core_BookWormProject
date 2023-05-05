@@ -22,6 +22,7 @@ using System.Net.Mail;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Caching.Memory;
+using BookWormProject.ViewModels.Author;
 
 namespace BookWormProject.Controllers
 {
@@ -32,14 +33,16 @@ namespace BookWormProject.Controllers
         private readonly IArticleService _articleService;
         private readonly IEmailService _emailService;
         private readonly IMemoryCache _cache;
+        private readonly IGithubService _githubService;
 
-        public UserController(IUserService userService, IBookmarkService bookmarkService, IArticleService articleService, IEmailService emailService, IMemoryCache cache)
+        public UserController(IUserService userService, IBookmarkService bookmarkService, IArticleService articleService, IEmailService emailService, IMemoryCache cache, IGithubService githubService)
         {
             _userService = userService;
             _bookmarkService = bookmarkService;
             _articleService = articleService;
             _emailService = emailService;
             _cache = cache;
+            _githubService = githubService;
         }
 
         [Route("/tai-khoan/{id?}")]
@@ -146,7 +149,7 @@ namespace BookWormProject.Controllers
                 PagedBookmarks = pagedBookmarks,
                 IsMyAccount = isMyAccount
             };
-            return PartialView("_PartialBookmark" ,viewModels);
+            return PartialView("_PartialBookmark", viewModels);
         }
 
         public IActionResult GetPartialCommentsResult(int? page, int id)
@@ -238,28 +241,12 @@ namespace BookWormProject.Controllers
             // Nếu có Avatar mới thì lưu lại
             if (model.Avatar != null && model.Avatar.Length > 0)
             {
-                string avatarPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resource", "images", "avatar");
-                if (!Directory.Exists(avatarPath))
-                {
-                    Directory.CreateDirectory(avatarPath);
-                }
-
-                var fileName = user.UserName + Path.GetFileName(model.Avatar.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resource", "images", "avatar", fileName);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    model.Avatar.CopyToAsync(fileStream);
-                }
-
-                user.Avatar = "/resource/images/avatar/" + fileName;
+                var linkImage = _githubService.UploadImage(model.Avatar);
+                user.Avatar = linkImage;
             }
-
-
 
             // Cập nhật thông tin user
             _userService.UpdateUser(user);
-            TempData["SuccessMessage"] = "Cập nhật thông tin thành công";
 
             return PartialView("_PartialChangeInfo", model);
         }
@@ -354,7 +341,7 @@ namespace BookWormProject.Controllers
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Email, user.Email),
                     };
 
                     var identity = new ClaimsIdentity(
@@ -532,7 +519,7 @@ namespace BookWormProject.Controllers
                 _userService.ChangePassword(user, newPassword);
                 _emailService.SendPasswordAsync(user.Email, newPassword);
 
-                // Chuyển đến trang đăng nhập và gửi thông báo check mail để lấy mật khẩu
+                // Chuyển đến trang đăng nhập và gửi thông báo kiểm tra mail để nhận mật khẩu mới
                 TempData["Notification"] = "Vui lòng kiểm tra email để nhận mật khẩu mới";
                 return RedirectToAction("Login");
             }
@@ -540,9 +527,86 @@ namespace BookWormProject.Controllers
             return View(model);
         }
 
+        public IActionResult Create()
+        {
+            return View(new UserCreateEditViewModel());
+        }
 
+        [HttpPost]
+        public IActionResult Create(UserCreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var existingUserByMail = _userService.GetByEmail(model.Email);
+            var existingUserByUserName = _userService.GetByUserName(model.UserName);
 
+            if (existingUserByMail != null || existingUserByUserName != null)
+            {
+                if (existingUserByMail != null)
+                {
+                    ModelState.AddModelError("Email", "Email đã được sử dụng!");
+                }
+                if (existingUserByUserName != null)
+                {
+                    ModelState.AddModelError("UserName", "UserName đã được sử dụng!");
+                }
 
+                return View(model);
+            }
 
+            var newUser = new User()
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                Name = model.Name
+            };
+            var passwordHasher = new PasswordHasher<User>();
+            var hashedPassword = passwordHasher.HashPassword(null, model.Password);
+            var passwordBytes = Encoding.UTF8.GetBytes(hashedPassword);
+
+            newUser.Password = passwordBytes;
+            _userService.AddUser(newUser);
+            TempData["SuccessMessage"] = "Thêm tài khoản thành công";
+            return RedirectToAction("Create");
+        }
+
+        public IActionResult EditUser(int id)
+        {
+            var user = _userService.GetById(id);
+            return View(new UserCreateEditViewModel()
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                UserName = user.UserName,
+                Email = user.Email
+            });
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(UserCreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = _userService.GetById(model.UserId);
+            user.Name = model.Name;
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+
+            _userService.UpdateUser(user);
+            TempData["SuccessMessage"] = "Sửa thông tin người dùng thành công";
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _userService.DeleteUser(id);
+            return RedirectToAction("User", "Admin");
+        }
     }
 }

@@ -20,6 +20,15 @@ else
         <span class="glyphicon glyphicon-user"></span> @Model.UserName <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
+        @if (Model.Role == 1)
+        {
+            <li><a href="/admin/" title="Admin Panel"><i class="fa fa-cog" aria-hidden="true"></i> Admin Panel</a></li>
+            <li><a href="/article/create" title="Thêm bài viết"><i class="fa fa-plus" aria-hidden="true"></i> Thêm bài viêt</a></li>
+            <li><a href="/author/create" title="Thêm tác giả"><i class="fa fa-plus" aria-hidden="true"></i> Thêm tác giả</a></li>
+            <li><a href="/user/create" title="Thêm tài khoản"><i class="fa fa-plus" aria-hidden="true"></i> Thêm tài khoản</a></li>
+            <li><a href="/category/create" title="Thêm danh mục"><i class="fa fa-plus" aria-hidden="true"></i> Thêm danh mục</a></li>
+            <li><a href="/genre/create" title="Thêm thể loại"><i class="fa fa-plus" aria-hidden="true"></i> Thêm thể loại</a></li>
+        }
         <li><a href="/tai-khoan/" title="Thông tin tài khoản"><i class="fa fa-solid fa-circle-info"></i> Thông tin tài khoản</a></li>
         <li><a href="/tai-khoan/?query=bookmark" title="Bookmark"><i class="fa fa-solid fa-bookmark"></i> Bookmark</a></li>
         <li><a href="/tai-khoan/?query=posted_article" title="Bài viết đã đăng"><i class="fa fa-list"></i> Bài viết đã đăng</a></li>

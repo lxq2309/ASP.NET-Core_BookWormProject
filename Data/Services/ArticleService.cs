@@ -5,15 +5,25 @@ namespace BookWormProject.Data.Services
 {
     public class ArticleService : IArticleService
     {
-        public readonly IArticleRepository _articleRepository;
+        private readonly IArticleRepository _articleRepository;
+        private readonly IUserService _userService;
 
-        public ArticleService(IArticleRepository articleRepository)
+        public ArticleService(IArticleRepository articleRepository, IUserService userService)
         {
             _articleRepository = articleRepository;
+            _userService = userService;
         }
 
         public void AddArticle(Article article)
         {
+            if (article.Description == null)
+            {
+                article.Description = "Chưa có mô tả dành cho bài viết này";
+            }
+            article.CreatedAt = DateTime.Now;
+            article.UpdatedAt = DateTime.Now;
+            article.UserId = _userService.GetCurrentUserId();
+            article.ViewCount = 0;
             _articleRepository.Add(article);
         }
 
@@ -64,7 +74,12 @@ namespace BookWormProject.Data.Services
 
         public Chapter? GetNewestChapterForArticle(int articleId)
         {
-            return GetChaptersForArticle(articleId).MaxBy(x => x.Index);
+            var chapters = GetChaptersForArticle(articleId);
+            if (chapters == null)
+            {
+                return null;
+            }
+            return chapters.MaxBy(x => x.ChapterId);
         }
     }
 }

@@ -1,0 +1,76 @@
+﻿@model BookWormProject.ViewModels.Genre.GenreCreateEditViewModel
+@{
+    ViewData["Title"] = "Add Genre";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/Genre">Genre</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add Genre</h3>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Genre" asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="Description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <div class="row">
+                            @foreach (var category in ViewBag.AllCategories)
+                            {
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="category_@category.CategoryId" name="Categories" onchange="validateForm()" value="@category.CategoryId">
+                                        <label class="custom-control-label" for="category_@category.CategoryId">@category.Name</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Categories)
+                    </div>
+
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var categories = document.getElementsByName("Categories");
+        var isCategoriesChecked = false;
+
+        for (var i = 0; i < categories.length; i++) {
+            if (categories[i].checked) {
+                isCategoriesChecked = true;
+                break;
+            }
+        }
+
+        if (!isCategoriesChecked) {
+            document.getElementById("submit-btn").disabled = true;
+        } else {
+            document.getElementById("submit-btn").disabled = false;
+        }
+    }
+</script>

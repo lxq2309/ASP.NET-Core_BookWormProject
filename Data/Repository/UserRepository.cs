@@ -20,18 +20,18 @@ namespace BookWormProject.Data.Repository
 
         public void Delete(User user)
         {
-            _context.Users.Remove(user);
+            user.IsDeleted = true;
             _context.SaveChanges();
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.Users.Where(x => x.IsDeleted == null);
         }
 
         public IEnumerable<Bookmark>? GetBookmarksForUser(int userId)
         {
-            var user = _context.Users.Include(x => x.Bookmarks).FirstOrDefault(x => x.UserId == userId);
+            var user = _context.Users.Include(x => x.Bookmarks).FirstOrDefault(x => x.IsDeleted == null && x.UserId == userId);
             if (user != null)
             {
                 return user.Bookmarks;
@@ -41,17 +41,17 @@ namespace BookWormProject.Data.Repository
 
         public User? GetByEmail(string email)
         {
-            return _context.Users.SingleOrDefault(x => x.Email == email);
+            return _context.Users.SingleOrDefault(x => x.IsDeleted == null && x.Email == email);
         }
 
         public User GetById(int id)
         {
-            return _context.Users.SingleOrDefault(x => x.UserId == id);
+            return _context.Users.SingleOrDefault(x => x.IsDeleted == null && x.UserId == id);
         }
 
         public User? GetByUserName(string userName)
         {
-            return _context.Users.SingleOrDefault(x => x.UserName == userName);
+            return _context.Users.SingleOrDefault(x => x.IsDeleted == null && x.UserName == userName);
         }
 
         public void Update(User user)
@@ -62,7 +62,7 @@ namespace BookWormProject.Data.Repository
 
         public IEnumerable<Comment>? GetCommentsForUser(int userId)
         {
-            var user = _context.Users.Include(x => x.Comments).FirstOrDefault(x => x.UserId == userId);
+            var user = _context.Users.Include(x => x.Comments).FirstOrDefault(x => x.IsDeleted == null && x.UserId == userId);
             if (user != null)
             {
                 return user.Comments;
@@ -73,12 +73,19 @@ namespace BookWormProject.Data.Repository
 
         public IEnumerable<Article>? GetArticlesForUser(int userId)
         {
-            var user = _context.Users.Include(x => x.Articles).FirstOrDefault(x => x.UserId == userId);
+            var user = _context.Users.Include(x => x.Articles).FirstOrDefault(x => x.IsDeleted == null && x.UserId == userId);
             if (user != null)
             {
                 return user.Articles;
             }
             return null;
         }
+
+        public async Task UpdateAsync(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

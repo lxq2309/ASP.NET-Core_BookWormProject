@@ -24,7 +24,7 @@ namespace BookWormProject.APIControllers
         [HttpGet("get_comments_for_article")]
         public IActionResult GetCommentsForArticle(int articleId, int? page, int pageSize = 10)
         {
-            var pagedComment = _articleService.GetCommentsForArticle(articleId).ToPagedList(page ?? 1, pageSize);
+            var pagedComment = _articleService.GetCommentsForArticle(articleId).OrderByDescending(x => x.CommentId).ToPagedList(page ?? 1, pageSize);
             var commentsDTO = pagedComment.Select(x =>
             {
                 var currentUser = _commentService.GetUserForComment(x.CommentId);
@@ -60,16 +60,23 @@ namespace BookWormProject.APIControllers
             return Ok(commentListDTO);
         }
 
-        [HttpPost("Create")]
-        public bool CreateComment([FromBody] CommentDTO comment)
+        [HttpPost("Post")]
+        public IActionResult PostComment([FromBody] CommentDTO commentDto)
         {
-            var newComment = new Comment()
+            if (!ModelState.IsValid)
             {
-                Content = comment.Content,
-                ArticleId = comment.ArticleId
+                return BadRequest(ModelState);
+            }
+
+            var comment = new Comment
+            {
+                Content = commentDto.Content,
+                ArticleId = commentDto.ArticleId,
             };
-            _commentService.AddComment(newComment);
-            return true;
+
+            _commentService.AddComment(comment);
+
+            return Ok(new { comment.CommentId });
         }
 
 

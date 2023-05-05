@@ -1,4 +1,4 @@
-function renderComment(comments) {
+function renderComment(comments, currentUserId) {
     let commentHtml = "";
     for (var i = 0; i < comments.length; i++) {
         commentHtml +=
@@ -16,7 +16,11 @@ function renderComment(comments) {
                                     <i class="fa-regular fa-clock"></i> ${comments[i].timeAgo}
                                 </abbr>
                                 <a class="single-comment" data-comment-id="${comments[i].commentId}">
-                                    <i class="glyphicon glyphicon-trash" style="color: #ff0000;"></i> delete
+                                    ${
+                                        comments[i].user.userId == currentUserId
+                                        ? '<i class="glyphicon glyphicon-trash" style="color: #ff0000;"></i> delete'
+                                        : ''
+                                    }
                                 </a>
                             </div>
                             <div class="comment-content">${comments[i].content}</div>

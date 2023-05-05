@@ -1,4 +1,5 @@
 ﻿using BookWormProject.Data.Services;
+using BookWormProject.Models;
 using BookWormProject.ViewModels.Article;
 using BookWormProject.ViewModels.Chapter;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,16 @@ namespace BookWormProject.Controllers
             _articleService = articleService;
         }
 
-        [Route("~/p/{articleId}/{chapterIndex}")]
-        public IActionResult Index(int articleId, int chapterIndex)
+        [Route("~/p/{articleId}/{chapterId}")]
+        public IActionResult Index(int articleId, int chapterId)
         {
             var parentArticle = _articleService.GetArticleById(articleId);
-            var currentChapter = _chapterService.GetChapterByIndex(articleId, chapterIndex);
+            var currentChapter = _chapterService.GetById(chapterId);
             if (currentChapter == null)
             {
                 return RedirectToAction("Index", "Home");
             }
+            var chapterIndex = currentChapter.Index;
 
             var nextChapter = _chapterService.GetChapterByIndex(articleId, chapterIndex + 1);
             var previousChapter = _chapterService.GetChapterByIndex(articleId, chapterIndex - 1);
@@ -42,19 +44,73 @@ namespace BookWormProject.Controllers
 
 
 
-        public IActionResult Create()
+        public IActionResult Create(int articleId)
         {
-            return View();
+            var article = _articleService.GetArticleById(articleId);
+            ViewBag.Article = article;
+            return View(new ChapterCreateEditViewModel()
+            {
+                Index = _chapterService.GetNewestChapterIndex(articleId) + 1
+            });
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        public IActionResult Create(ChapterCreateEditViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var newChapter = new Chapter()
+            {
+                Title = model.Title,
+                Content = model.Content,
+                Index = model.Index,
+                ArticleId = model.ArticleId,
+                CreatedAt = DateTime.Now
+            };
+
+            _chapterService.AddChapter(newChapter);
+
+            return RedirectToAction("Chapter", "Admin", new { articleId = model.ArticleId });
         }
 
-        public IActionResult Delete()
+
+        public IActionResult Edit(int id)
         {
-            return View();
+            var chapter = _chapterService.GetById(id);
+            var article = _articleService.GetArticleById(chapter.ArticleId);
+            ViewBag.Article = article;
+            return View(new ChapterCreateEditViewModel()
+            {
+                Title = chapter.Title,
+                Content = chapter.Content,
+                Index = chapter.Index,
+                ChapterId = chapter.ChapterId,
+                ArticleId = chapter.ArticleId
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ChapterCreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var chapter = _chapterService.GetById(model.ChapterId);
+            chapter.Title = model.Title;
+            chapter.Content = model.Content;
+            chapter.Index = model.Index;
+            _chapterService.UpdateChapter(chapter);
+            return RedirectToAction("Chapter", "Admin", new { articleId = model.ArticleId });
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _chapterService.DeleteChapter(id);
+            return RedirectToAction("Article", "Admin");
         }
     }
 }

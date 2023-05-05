@@ -18,5 +18,6 @@ namespace BookWormProject.Data.Repository
         IEnumerable<Bookmark>? GetBookmarksForUser(int userId);
         IEnumerable<Comment>? GetCommentsForUser(int userId);
         IEnumerable<Article>? GetArticlesForUser(int userId);
+        Task UpdateAsync(User user);
     }
 }

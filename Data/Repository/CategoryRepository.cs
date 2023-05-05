@@ -20,18 +20,18 @@ namespace BookWormProject.Data.Repository
 
         public void Delete(Category category)
         {
-            _context.Categories.Remove(category);
+            category.IsDeleted = true;
             _context.SaveChanges();
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return _context.Categories.ToList();
+            return _context.Categories.Where(x => x.IsDeleted == null).ToList();
         }
 
         public Category GetCategoryById(int id)
         {
-            return _context.Categories.SingleOrDefault(x => x.CategoryId == id);
+            return _context.Categories.SingleOrDefault(x => x.IsDeleted == null && x.CategoryId == id);
         }
 
         public void Update(Category category)
@@ -42,7 +42,7 @@ namespace BookWormProject.Data.Repository
 
         public IEnumerable<Genre>? GetGenresForCategory(int categorizationId)
         {
-            var category = _context.Categories.Include(x => x.Genres).FirstOrDefault(x => x.CategoryId == categorizationId);
+            var category = _context.Categories.Include(x => x.Genres).FirstOrDefault(x => x.IsDeleted == null && x.CategoryId == categorizationId);
             if (category != null)
             {
                 return category.Genres;
@@ -53,7 +53,7 @@ namespace BookWormProject.Data.Repository
         public IEnumerable<Article>? GetArticlesForCategory(int categorizationId)
         {
             var category = _context.Categories.Include(x => x.Articles)
-                .FirstOrDefault(x => x.CategoryId == categorizationId);
+                .FirstOrDefault(x => x.IsDeleted == null && x.CategoryId == categorizationId);
             if (category != null)
             {
                 return category.Articles;

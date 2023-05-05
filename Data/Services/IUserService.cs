@@ -11,6 +11,7 @@ namespace BookWormProject.Data.Services
         void AddUser(User user);
 
         void UpdateUser(User user);
+        Task UpdateUserAsync(User user);
         public void ChangePassword(User user, string newPassword);
 
         void DeleteUser(int id);

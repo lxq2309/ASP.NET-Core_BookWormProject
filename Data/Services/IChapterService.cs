@@ -14,5 +14,7 @@ namespace BookWormProject.Data.Services
 
         void DeleteChapter(int id);
         Chapter? GetChapterByIndex(int articleId, int index);
+        IEnumerable<Chapter>? GetChapterByArticleId(int articleId);
+        int GetNewestChapterIndex (int articleId);
     }
 }
