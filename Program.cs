@@ -49,7 +49,7 @@ builder.Services.AddScoped<IGithubService, GithubService>();
 // Cấu hình cho GithubOption
 builder.Services.Configure<GithubOption>(option =>
 {
-    option.AccessToken = "";
+    option.AccessToken = "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";
     option.RepositoryName = "UploadImage";
     option.RepositoryOwner = "lxq2309";
 });
@@ -66,7 +66,7 @@ builder.Services.AddMemoryCache();
 // Đăng ký SendGrid
 builder.Services.AddSendGrid(option =>
 {
-    option.ApiKey = "";
+    option.ApiKey = "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";
 });
 
 

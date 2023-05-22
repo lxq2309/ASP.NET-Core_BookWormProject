@@ -63,40 +63,7 @@ namespace BookWormProject.Controllers
         public IActionResult GetPartialGeneralResult(int id)
         {
             var currentUser = _userService.GetById(id);
-            var bookmarks = _userService.GetBookmarksForUser(currentUser.UserId).Select(x =>
-            {
-                var article = _bookmarkService.GetArticleForBookmark(x.BookmarkId);
-                return new BookmarkDetailViewModel()
-                {
-                    BookmarkId = x.BookmarkId,
-                    BookmarkName = x.Name,
-                    BookmarkDescription = x.Description,
-                    ArticleCoverImage = article.CoverImage,
-                    ArticleTitle = article.Title,
-                    ArticleId = article.ArticleId,
-                    ArticleUpdatedTimeAgo = DateTimeHelper.ToTimeAgo(article.UpdatedAt),
-                    IsPublic = x.IsPublic,
-                    NewestChapter = _articleService.GetNewestChapterForArticle(article.ArticleId)
-                };
-            }).OrderByDescending(x => x.BookmarkId).Take(5).ToList();
-
-            var comments = _userService.GetCommentsForUser(currentUser.UserId).Select(x =>
-            {
-                var article = _articleService.GetArticleById(x.ArticleId);
-                return new CommentDetailViewModel()
-                {
-                    ArticleId = article.ArticleId,
-                    ArticleTitle = article.Title,
-                    ArticleCoverImage = article.CoverImage,
-                    CommentId = x.CommentId,
-                    Content = x.Content,
-                    CreatedAt = x.CreatedAt,
-                    TimeAgo = DateTimeHelper.ToTimeAgo(x.CreatedAt)
-                };
-            }).OrderByDescending(x => x.CommentId).Take(10).ToList();
-            var viewModels = new UserGeneralInfoViewModel(currentUser, bookmarks, comments);
-            viewModels.IsMyAccount = id == _userService.GetCurrentUserId();
-            return PartialView("_PartialGeneral", viewModels);
+            return PartialView("_PartialGeneral", currentUser);
         }
 
         public IActionResult GetPartialChangeInfoResult()
@@ -157,6 +124,10 @@ namespace BookWormProject.Controllers
             var comments = _userService.GetCommentsForUser(id).Select(x =>
             {
                 var article = _articleService.GetArticleById(x.ArticleId);
+                if (article == null)
+                {
+                    return null;
+                }
                 return new CommentDetailViewModel()
                 {
                     ArticleId = article.ArticleId,
@@ -167,7 +138,8 @@ namespace BookWormProject.Controllers
                     CreatedAt = x.CreatedAt,
                     TimeAgo = DateTimeHelper.ToTimeAgo(x.CreatedAt)
                 };
-            }).OrderByDescending(x => x.CommentId);
+            });
+            comments = comments.Where(x => x != null).OrderByDescending(x => x.CommentId).ToList();
             int pageSize = 10; // Số lượng đối tượng trên mỗi trang
             int pageNumber = (page ?? 1); // Số trang hiện tại
 
