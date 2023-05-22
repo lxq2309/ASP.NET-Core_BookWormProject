@@ -84,10 +84,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.AppId = "165784553012702";
         options.AppSecret = "0f232f4899a9adb388e6e2f12f5b544d";
+        options.CallbackPath = "/facebook-response";
     }).AddGoogle(options =>
     {
         options.ClientId = "934602762375-h4o5lllie4h6npohnncvbi6ilvu6i7pk.apps.googleusercontent.com";
         options.ClientSecret = "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";
+        options.CallbackPath = "/google-response";
     });
 
 
