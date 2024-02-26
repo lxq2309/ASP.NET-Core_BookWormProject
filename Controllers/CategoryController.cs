@@ -27,7 +27,6 @@ namespace BookWormProject.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.AllGenres = _genreService.GetAllGenres();
             return View(new CategoryCreateEditViewModel());
         }
 
@@ -42,21 +41,9 @@ namespace BookWormProject.Controllers
             var category = new Category
             {
                 Name = model.Name,
+                Link = model.Link,
                 Description = model.Description
             };
-
-            // Lấy danh sách các thể loại
-            if (model.Genres != null)
-            {
-                foreach (var genreId in model.Genres)
-                {
-                    var genre = _genreService.GetGenreById(genreId);
-                    if (genre != null)
-                    {
-                        category.Genres.Add(genre);
-                    }
-                }
-            }
 
             _categoryService.AddCategory(category);
 
@@ -65,14 +52,13 @@ namespace BookWormProject.Controllers
 
         public IActionResult Edit(int id)
         {
-            ViewBag.AllGenres = _genreService.GetAllGenres();
             var category = _categoryService.GetCategoryById(id);
             return View(new CategoryCreateEditViewModel()
             {
                 CategoryId = category.CategoryId,
                 Name = category.Name,
+                Link = category.Link,
                 Description = category.Description,
-                SelectedGenres = _categoryService.GetGenresForCategory(id)
             });
         }
 
@@ -86,6 +72,7 @@ namespace BookWormProject.Controllers
 
             var category = _categoryService.GetCategoryById((int)model.CategoryId);
             category.Name = model.Name;
+            category.Link = model.Link;
             category.Description = model.Description;
 
             _categoryService.UpdateCategory(category);

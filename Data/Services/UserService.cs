@@ -154,13 +154,12 @@ namespace BookWormProject.Data.Services
 
         public string GetRoleForUser(int userId)
         {
-            if (userId == 0)
-            {
-                return "Guest";
-            }
-
-            string role;
+            var role = "Guest";
             var user = GetById(userId);
+            if (user == null)
+            {
+                return role;
+            }
             if (user.Role == 0)
             {
                 role = "User";
@@ -168,10 +167,6 @@ namespace BookWormProject.Data.Services
             else if (user.Role == 1)
             {
                 role = "Admin";
-            }
-            else
-            {
-                role = "Other";
             }
 
             return role;

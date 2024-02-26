@@ -1,53 +1,31 @@
 ﻿@model BookWormProject.ViewModels.Article.ArticleCreateEditViewModel
 @{
-    ViewData["Title"] = "Add Article";
+    ViewData["Title"] = "Thêm truyện mới";
     Layout = "_LayoutAdmin";
 }
 @{
-    var categories = Model.ListCategory;
     var genres = Model.ListGenre;
     var authors = Model.ListAuthor;
 }
 
 <div class="row">
     <div class="col-md-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/admin/article">Article</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Add Article</h3>
+                <h3 class="card-title">@ViewData["Title"]</h3>
             </div>
             <div class="card-body">
                 <form asp-controller="Article" asp-action="Create" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">Tên truyện</label>
                         <input type="text" class="form-control" id="title" name="Title" required>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Mô tả</label>
                         <textarea class="form-control" id="description" name="Description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select class="form-control" id="category" name="CategoryId" required>
-                            <option value="">-- Select a category --</option>
-                            @foreach (var category in categories)
-                            {
-                                <option value="@category.CategoryId">@category.Name</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Genres</label>
+                        <label>Thể loại</label>
                         <div class="row">
                             @foreach (var genre in genres)
                             {
@@ -63,7 +41,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Authors</label>
+                        <label>Tác giả</label>
                         <div class="row">
                             @foreach (var author in authors)
                             {
@@ -113,7 +91,7 @@
                         </div>
                         <img id="preview-img" class="img-fluid" src="#" alt="Preview image" style="display: none">
                     </div>
-                    <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Add</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Thêm</button>
                 </form>
             </div>
         </div>

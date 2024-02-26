@@ -1,5 +1,4 @@
-﻿@using BookWormProject.Views.Shared.Components.RightSidebar.ViewModels
-@switch (ViewBag.CurrentController)
+﻿@switch (ViewBag.CurrentController)
 {
     case "Article":
         @await Html.PartialAsync("_PartialArticleSidebar.cshtml")
@@ -8,10 +7,7 @@
         @await Html.PartialAsync("_PartialHomeSidebar.cshtml", (List<Genre>)ViewBag.AllGenres)
         break;
     case "Genre":
-        @await Html.PartialAsync("_PartialGenreSidebar.cshtml", (GenreCategoriesViewModel)ViewBag.GenreCategories)
-        break;
-    case "Category":
-        @await Html.PartialAsync("_PartialCategorySidebar.cshtml", (CategoryGenresViewModel)ViewBag.CategoryGenres)
+        @await Html.PartialAsync("_PartialGenreSidebar.cshtml", (Genre)ViewBag.CurrentGenre)
         break;
     case "Author":
         @await Html.PartialAsync("_PartialAuthorSidebar.cshtml", (Author)ViewBag.CurrentAuthor)

@@ -17,11 +17,11 @@ namespace BookWormProject.Controllers
             _articleService = articleService;
         }
 
-        [Route("~/p/{articleId}/{chapterId}")]
-        public IActionResult Index(int articleId, int chapterId)
+        [Route("~/p/{articleId}/{index}")]
+        public IActionResult Index(int articleId, int index)
         {
             var parentArticle = _articleService.GetArticleById(articleId);
-            var currentChapter = _chapterService.GetById(chapterId);
+            var currentChapter = _chapterService.GetChapterByIndex(articleId, index);
             if (currentChapter == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -71,6 +71,10 @@ namespace BookWormProject.Controllers
             };
 
             _chapterService.AddChapter(newChapter);
+            // Cập nhật thời gian sửa của Bài viết chứa chapter này
+            var article = _articleService.GetArticleById(newChapter.ArticleId);
+            article.UpdatedAt = DateTime.Now;
+            _articleService.UpdateArticle(article);
 
             return RedirectToAction("Chapter", "Admin", new { articleId = model.ArticleId });
         }
@@ -103,6 +107,11 @@ namespace BookWormProject.Controllers
             chapter.Content = model.Content;
             chapter.Index = model.Index;
             _chapterService.UpdateChapter(chapter);
+
+            // Cập nhật thời gian sửa của Bài viết chứa chapter này
+            var article = _articleService.GetArticleById(chapter.ArticleId);
+            article.UpdatedAt = DateTime.Now;
+            _articleService.UpdateArticle(article);
             return RedirectToAction("Chapter", "Admin", new { articleId = model.ArticleId });
         }
 

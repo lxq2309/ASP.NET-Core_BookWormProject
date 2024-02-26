@@ -6,7 +6,7 @@ namespace BookWormProject.ViewModels.Article
     public class ArticleDetailViewModel
     {
         public int ArticleId { get; set; }
-        public int UserId { get; set; }
+        public Models.User? User { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string TimeDiff
@@ -25,6 +25,5 @@ namespace BookWormProject.ViewModels.Article
         public string CoverImage { get; set; }
         public IEnumerable<Models.Chapter>? Chapters { get; set; }
         public IEnumerable<Models.Author>? Authors { get; set; }
-        public Models.Category Category { get; set; }
     }
 }

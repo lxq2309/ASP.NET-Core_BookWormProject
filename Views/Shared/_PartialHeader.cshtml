@@ -1,4 +1,5 @@
-﻿<div class="navbar navbar-default navbar-static-top" role="navigation" id="nav">
+﻿@using BookWormProject.Utils.Settings
+<div class="navbar navbar-default navbar-static-top" role="navigation" id="nav">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,7 +28,7 @@
             <form class="navbar-form navbar-right"  role="search" asp-action="Search" asp-controller="Home">
                 <div class="input-group search-holder">
                     <input aria-label="Keyword search" class="form-control" type="search" name="keyword"
-                           placeholder="Tìm kiếm..." value="" itemprop="query-input" required />
+                           placeholder="Tìm kiếm theo tên truyện" value="" itemprop="query-input" required />
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit" aria-label="Search">
                             <span class="glyphicon glyphicon-search"></span>
@@ -41,16 +42,18 @@
         </div>
     </div>
 
-
     <div class="navbar-breadcrumb">
         <div class="container breadcrumb-container">
             <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/"
-                       accesskey="1"><span class="glyphicon glyphicon-home"></span></a><a href="/"
-                                                                                          title="Đọc Truyện Hot Online" itemprop="item"><span itemprop="name">Home</span></a>
-                    <meta itemprop="position" content="1" />
-                </li>
+                @if (ViewBag.CurrentController != "Home")
+                {
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a href="/"
+                           accesskey="1"><span class="glyphicon glyphicon-home"></span></a><a href="/"
+                                                                                              title="@GeneralSetting.Title" itemprop="item"><span itemprop="name">Trang chủ</span></a>
+                        <meta itemprop="position" content="1" />
+                    </li>
+                }
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                     <a href="#" title="#" itemprop="item"><span itemprop="name">@ViewData["Title"]</span></a>
                     <meta itemprop="position" content="2" />

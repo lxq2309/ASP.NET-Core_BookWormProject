@@ -20,11 +20,11 @@ namespace BookWormProject.Utils.Filter
             var actionRole = (context.ActionDescriptor.EndpointMetadata.FirstOrDefault(m => m is RoleAttribute) as RoleAttribute)?.Role;
             if (actionRole == null)
             {
-                // Không có attribute Role trên phương thức, cho phép truy cập.
+                // Không có attribute Role trên phương thức, ai cũng được phép truy cập.
                 return;
             }
 
-            // Kiểm tra quyền truy cập của người dùng.
+            // Nếu có attribute Role thì kiểm tra quyền truy cập của người dùng.
             var userId = _userService.GetCurrentUserId();
             var userRole = _userService.GetRoleForUser(userId);
             if (userRole != actionRole)

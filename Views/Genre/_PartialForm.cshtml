@@ -1,0 +1,31 @@
+﻿@model dynamic
+@{
+    var item = Model.item;
+    var btnSubmitText = "";
+    var isSendID = false;
+    switch (Model.method)
+    {   
+        case "POST":
+            btnSubmitText = "Tạo mới";    
+            break;
+        case "PATCH":
+            btnSubmitText = "Sửa";
+            isSendID = true;
+            break;
+    }
+}
+<form asp-controller="Genre" asp-action="@Model.action" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Tên thể loại</label>
+        <input type="text" class="form-control" name="Name" value="@item.Name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Mô tả về thể loại</label>
+        <textarea class="form-control" name="Description">@item.Description</textarea>
+    </div>
+    @if (isSendID)
+    {
+        <input type="hidden" name="GenreId" value="@item.GenreId" />
+    }
+    <button type="submit" id="submit-btn" class="btn btn-primary">@btnSubmitText</button>
+</form>

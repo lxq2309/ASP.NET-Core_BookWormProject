@@ -33,16 +33,15 @@ public partial class BookWormDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("workstation id=BookWormDB.mssql.somee.com;packet size=4096;user id=lxq2309_SQLLogin_1;pwd=sr71vkwq3f;data source=BookWormDB.mssql.somee.com;persist security info=False;Initial Catalog=BookWormDB;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False; MultipleActiveResultSets=True");
+        => optionsBuilder.UseSqlServer("Data Source=ADMIN-PC;Initial Catalog=BookWormDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False; MultipleActiveResultSets=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C872EC3906");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8BD38A0EA");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
-            entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.CoverImage)
                 .HasMaxLength(255)
                 .HasDefaultValueSql("('/resource/images/default_cover_image.jpg')");
@@ -52,15 +51,10 @@ public partial class BookWormDbContext : DbContext
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Articles)
-                .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Articles__Catego__32E0915F");
-
             entity.HasOne(d => d.User).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Articles__UserID__33D4B598");
+                .HasConstraintName("FK__Articles__UserID__4E88ABD4");
 
             entity.HasMany(d => d.Authors).WithMany(p => p.Articles)
                 .UsingEntity<Dictionary<string, object>>(
@@ -68,14 +62,14 @@ public partial class BookWormDbContext : DbContext
                     r => r.HasOne<Author>().WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Articles___Autho__4CA06362"),
+                        .HasConstraintName("FK__Articles___Autho__5070F446"),
                     l => l.HasOne<Article>().WithMany()
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Articles___Artic__4BAC3F29"),
+                        .HasConstraintName("FK__Articles___Artic__4F7CD00D"),
                     j =>
                     {
-                        j.HasKey("ArticleId", "AuthorId").HasName("PK__Articles__CB6FDF09FD09FCB0");
+                        j.HasKey("ArticleId", "AuthorId").HasName("PK__Articles__CB6FDF09766C4C5D");
                         j.ToTable("Articles_Authors");
                         j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
                         j.IndexerProperty<int>("AuthorId").HasColumnName("AuthorID");
@@ -87,14 +81,14 @@ public partial class BookWormDbContext : DbContext
                     r => r.HasOne<Genre>().WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Articles___Genre__4222D4EF"),
+                        .HasConstraintName("FK__Articles___Genre__52593CB8"),
                     l => l.HasOne<Article>().WithMany()
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Articles___Artic__412EB0B6"),
+                        .HasConstraintName("FK__Articles___Artic__5165187F"),
                     j =>
                     {
-                        j.HasKey("ArticleId", "GenreId").HasName("PK__Articles__6C5A209D598FA4D2");
+                        j.HasKey("ArticleId", "GenreId").HasName("PK__Articles__6C5A209DBEF2F93B");
                         j.ToTable("Articles_Genres");
                         j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
                         j.IndexerProperty<int>("GenreId").HasColumnName("GenreID");
@@ -103,7 +97,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Author>(entity =>
         {
-            entity.HasKey(e => e.AuthorId).HasName("PK__Authors__70DAFC14AF6CC8EA");
+            entity.HasKey(e => e.AuthorId).HasName("PK__Authors__70DAFC1407999989");
 
             entity.Property(e => e.AuthorId).HasColumnName("AuthorID");
             entity.Property(e => e.Avatar)
@@ -115,7 +109,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<Bookmark>(entity =>
         {
-            entity.HasKey(e => new { e.BookmarkId, e.ArticleId, e.UserId }).HasName("PK__Bookmark__60CB9551E66BB79A");
+            entity.HasKey(e => new { e.BookmarkId, e.ArticleId, e.UserId }).HasName("PK__Bookmark__60CB9551395C8273");
 
             entity.Property(e => e.BookmarkId)
                 .ValueGeneratedOnAdd()
@@ -128,45 +122,27 @@ public partial class BookWormDbContext : DbContext
             entity.HasOne(d => d.Article).WithMany(p => p.Bookmarks)
                 .HasForeignKey(d => d.ArticleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookmarks__Artic__3D5E1FD2");
+                .HasConstraintName("FK__Bookmarks__Artic__534D60F1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Bookmarks)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookmarks__UserI__3E52440B");
+                .HasConstraintName("FK__Bookmarks__UserI__5441852A");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2B6BBF1D91");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2B45B06346");
 
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Link).HasMaxLength(1000);
             entity.Property(e => e.Name).HasMaxLength(255);
-
-            entity.HasMany(d => d.Genres).WithMany(p => p.Categories)
-                .UsingEntity<Dictionary<string, object>>(
-                    "CategoriesGenre",
-                    r => r.HasOne<Genre>().WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Categorie__Genre__2F10007B"),
-                    l => l.HasOne<Category>().WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Categorie__Categ__2E1BDC42"),
-                    j =>
-                    {
-                        j.HasKey("CategoryId", "GenreId").HasName("PK__Categori__E9316A7E87D182B1");
-                        j.ToTable("Categories_Genres");
-                        j.IndexerProperty<int>("CategoryId").HasColumnName("CategoryID");
-                        j.IndexerProperty<int>("GenreId").HasColumnName("GenreID");
-                    });
         });
 
         modelBuilder.Entity<Chapter>(entity =>
         {
-            entity.HasKey(e => e.ChapterId).HasName("PK__Chapters__0893A34AE3B8913F");
+            entity.HasKey(e => e.ChapterId).HasName("PK__Chapters__0893A34A116CE2E3");
 
             entity.Property(e => e.ChapterId).HasColumnName("ChapterID");
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
@@ -176,12 +152,12 @@ public partial class BookWormDbContext : DbContext
             entity.HasOne(d => d.Article).WithMany(p => p.Chapters)
                 .HasForeignKey(d => d.ArticleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Chapters__Articl__36B12243");
+                .HasConstraintName("FK__Chapters__Articl__571DF1D5");
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => new { e.CommentId, e.ArticleId, e.UserId }).HasName("PK__Comment__F765706A1DAE8089");
+            entity.HasKey(e => new { e.CommentId, e.ArticleId, e.UserId }).HasName("PK__Comment__F765706A3E62F25F");
 
             entity.ToTable("Comment");
 
@@ -196,17 +172,17 @@ public partial class BookWormDbContext : DbContext
             entity.HasOne(d => d.Article).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.ArticleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Comment__Article__398D8EEE");
+                .HasConstraintName("FK__Comment__Article__5812160E");
 
             entity.HasOne(d => d.User).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Comment__UserID__3A81B327");
+                .HasConstraintName("FK__Comment__UserID__59063A47");
         });
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.GenreId).HasName("PK__Genres__0385055E0B7E4285");
+            entity.HasKey(e => e.GenreId).HasName("PK__Genres__0385055E22116AC6");
 
             entity.Property(e => e.GenreId).HasColumnName("GenreID");
             entity.Property(e => e.Description).HasMaxLength(1000);
@@ -215,7 +191,7 @@ public partial class BookWormDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACAEDADFA5");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACE255297F");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Avatar)

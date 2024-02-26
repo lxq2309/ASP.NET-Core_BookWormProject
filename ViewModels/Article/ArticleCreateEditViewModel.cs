@@ -10,9 +10,6 @@ namespace BookWormProject.ViewModels.Article
 
         public string? Description { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
-
         [Required(ErrorMessage = "Please select at least one genre.")]
         public List<int> Genres { get; set; }
 
@@ -25,8 +22,6 @@ namespace BookWormProject.ViewModels.Article
 
         public string? AvatarLink { get; set; }
         public IFormFile? AvatarFile { get; set; }
-
-        public IEnumerable<Models.Category>? ListCategory { get; set; }
         public IEnumerable<Models.Genre>? ListGenre { get; set; }
         public IEnumerable<Models.Author>? ListAuthor { get; set; }
         public IEnumerable<Models.Genre>? SelectedGenres { get; set; }

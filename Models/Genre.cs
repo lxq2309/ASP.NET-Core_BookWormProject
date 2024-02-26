@@ -16,6 +16,4 @@ public partial class Genre
     public bool? IsDeleted { get; set; }
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
-
-    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 }

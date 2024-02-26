@@ -13,14 +13,16 @@ namespace BookWormProject.Controllers
         private readonly IGenreService _genreService;
         private readonly IAuthorService _authorService;
         private readonly IGithubService _githubService;
+        private readonly IUserService _userService;
 
-        public ArticleController(IArticleService articleService, ICategoryService categoryService, IGenreService genreService, IAuthorService authorService, IGithubService githubService)
+        public ArticleController(IArticleService articleService, ICategoryService categoryService, IGenreService genreService, IAuthorService authorService, IGithubService githubService, IUserService userService)
         {
             _articleService = articleService;
             _categoryService = categoryService;
             _genreService = genreService;
             _authorService = authorService;
             _githubService = githubService;
+            _userService = userService;
         }
 
 
@@ -28,12 +30,11 @@ namespace BookWormProject.Controllers
         public IActionResult Details(int id)
         {
             var article = _articleService.GetArticleById(id);
-            article.ViewCount++;
-            _articleService.UpdateArticle(article);
+            _articleService.IncreaseViewCount(article);
             var viewModels = new ArticleDetailViewModel()
             {
                 ArticleId = article.ArticleId,
-                UserId = article.UserId,
+                User = _userService.GetById(article.UserId),
                 Title = article.Title,
                 CoverImage = article.CoverImage,
                 Description = article.Description,
@@ -42,7 +43,6 @@ namespace BookWormProject.Controllers
                 UpdatedAt = article.UpdatedAt,
                 IsCompleted = article.IsCompleted,
                 Genres = _articleService.GetGenresForArticle(id),
-                Category = _articleService.GetCategoryForArticle(id),
                 Chapters = _articleService.GetChaptersForArticle(id).OrderByDescending(x => x.ChapterId),
                 Authors = _articleService.GetAuthorsForArticle(id)
             };
@@ -53,8 +53,6 @@ namespace BookWormProject.Controllers
 
         public IActionResult Create()
         {
-            // Lấy danh sách Category
-            var categories = _categoryService.GetAllCategories();
 
             // Lấy danh sách Genre
             var genres = _genreService.GetAllGenres();
@@ -64,7 +62,6 @@ namespace BookWormProject.Controllers
             return View(new ArticleCreateEditViewModel()
             {
                 ListAuthor = authors,
-                ListCategory = categories,
                 ListGenre = genres
             });
         }
@@ -81,7 +78,6 @@ namespace BookWormProject.Controllers
             {
                 Title = model.Title,
                 Description = model.Description,
-                CategoryId = model.CategoryId,
                 Genres = new List<Genre>(),
                 Authors = new List<Author>(),
                 IsCompleted = model.IsCompleted,
@@ -133,8 +129,6 @@ namespace BookWormProject.Controllers
         {
             // Lấy thông tin bài viết
             var article = _articleService.GetArticleById(id);
-            // Lấy danh sách Category
-            var categories = _categoryService.GetAllCategories();
 
             // Lấy danh sách Genre
             var genres = _genreService.GetAllGenres();
@@ -144,11 +138,9 @@ namespace BookWormProject.Controllers
             return View(new ArticleCreateEditViewModel()
             {
                 ListAuthor = authors,
-                ListCategory = categories,
                 ListGenre = genres,
                 Title = article.Title,
                 Description = article.Description,
-                CategoryId = article.CategoryId,
                 SelectedGenres = _articleService.GetGenresForArticle(id),
                 SelectedAuthors = _articleService.GetAuthorsForArticle(id),
                 IsCompleted = article.IsCompleted,
@@ -170,11 +162,54 @@ namespace BookWormProject.Controllers
             article.Description = model.Description;
             article.CoverImage = model.AvatarLink;
 
+            // Cập nhật ảnh
             if (model.AvatarFile != null && model.AvatarFile.Length > 0)
             {
                 var linkImage = _githubService.UploadImage(model.AvatarFile);
                 article.CoverImage = linkImage;
             }
+
+            // Cập nhật thể loại
+            // 1. Xoá các thể loại cũ
+            var genres = _articleService.GetGenresForArticle(article.ArticleId);
+            foreach (var genre in genres)
+            {
+                article.Genres.Remove(genre);
+            }
+            // 2. Thêm các thể loại đã chọn
+            if (model.Genres != null)
+            {
+                foreach (var genreId in model.Genres)
+                {
+                    var genre = _genreService.GetGenreById(genreId);
+                    if (genre != null)
+                    {
+                        article.Genres.Add(genre);
+                    }
+                }
+            }
+
+
+            // Cập nhật tác giả
+            // 1. Xoá các tác giả cũ
+            var authors = _articleService.GetAuthorsForArticle(article.ArticleId);
+            foreach (var author in authors)
+            {
+                article.Authors.Remove(author);
+            }
+            // 2. Thêm các tác giả đã chọn
+            if (model.Authors != null)
+            {
+                foreach (var authorId in model.Authors)
+                {
+                    var author = _authorService.GetAuthorById(authorId);
+                    if (author != null)
+                    {
+                        article.Authors.Add(author);
+                    }
+                }
+            }
+
 
             // Lưu bài viết vào cơ sở dữ liệu.
             _articleService.UpdateArticle(article);

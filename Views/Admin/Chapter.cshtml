@@ -1,28 +1,22 @@
-﻿@{
-    Layout = "_LayoutAdmin";
-    ViewData["Title"] = "List chapter";
-}
-
+﻿
 @{
     var article = (Article)ViewBag.Article;
 }
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Danh sách chương của truyện " + article.Title;
+}
+
 @model List<Chapter>
 
 <div class="row">
     <div class="col-md-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/admin/article">Article</a></li>
-            <li class="breadcrumb-item"><a href="/admin/chapter?articleId=@article.ArticleId">@article.Title</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Chapter</h3>
+                <h3 class="card-title">
+                    @ViewData["Title"]
+                </h3>
                 <div class="card-tools">
                     <a href="/p/@article.ArticleId" class="btn btn-outline-success"><i class="fa fa-eye" aria-hidden="true"></i> View article</a>
                     <a href="/Chapter/Create?articleId=@article.ArticleId" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add chapter</a>
@@ -33,16 +27,16 @@
                     <thead>
                         <tr>
                             <th style="width: 5%">
-                                Index
+                                Thứ tự chương
                             </th>
                             <th style="width: 20%">
-                                Name
+                                Tên chương
                             </th>
                             <th style="width: 20%">
-                                Created At
+                                Thời gian tạo
                             </th>
                             <th style="width: 10%">
-                                Actions
+                                Hành động
                             </th>
                         </tr>
                     </thead>

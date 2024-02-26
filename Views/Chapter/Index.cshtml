@@ -1,13 +1,15 @@
-﻿@{
-    Layout = "_LayoutBookWorm";
-}
-@model BookWormProject.ViewModels.Chapter.ChapterIndexViewModel
+﻿@model BookWormProject.ViewModels.Chapter.ChapterIndexViewModel
 @{
     var parentArticle = Model.ParentArticle;
     var currentChapter = Model.CurrentChapter;
     var nextChapter = Model.NextChapter;
     var previousChapter = Model.PreviousChapter;
     var chapters = Model.Chapters.ToList();
+}
+
+@{
+    Layout = "_LayoutBookWorm";
+    ViewData["Title"] = currentChapter.Title;
 }
 
 @{
@@ -39,7 +41,7 @@
                     @*Nút bấm về chương trước*@
                     @if (previousChapter != null)
                     {
-                        linkPrevious = $"/p/{parentArticle.ArticleId}/{previousChapter.ChapterId}";
+                        linkPrevious = $"/p/{parentArticle.ArticleId}/{previousChapter.Index}";
                         <a class="btn btn-success btn-chapter-nav" id="prev_chap" href="@linkPrevious">
                             <span class="glyphicon glyphicon-chevron-left"></span> Prev
                         </a>
@@ -59,11 +61,11 @@
                         {
                             if (chapter.ChapterId != currentChapter.ChapterId)
                             {
-                                <option value="@chapter.ChapterId">@chapter.Title</option>
+                                <option value="@chapter.Index">@chapter.Title</option>
                             }
                             else
                             {
-                                <option value="@chapter.ChapterId" selected="">@chapter.Title</option>
+                                <option value="@chapter.Index" selected="">@chapter.Title</option>
                             }
                         }
                     </select>
@@ -72,7 +74,7 @@
                     @*Nút bấm sang chương sau*@
                     @if (nextChapter != null)
                     {
-                        linkNext = $"/p/{parentArticle.ArticleId}/{nextChapter.ChapterId}";
+                        linkNext = $"/p/{parentArticle.ArticleId}/{nextChapter.Index}";
                         <a class="btn btn-success btn-chapter-nav" id="next_chap" href="@linkNext">
                             Next <span class="glyphicon glyphicon-chevron-right"></span>
                         </a>
@@ -99,7 +101,7 @@
                     @*Nút bấm về chương trước*@
                     @if (previousChapter != null)
                     {
-                        linkPrevious = $"/p/{parentArticle.ArticleId}/{previousChapter.ChapterId}";
+                        linkPrevious = $"/p/{parentArticle.ArticleId}/{previousChapter.Index}";
                         <a class="btn btn-success btn-chapter-nav" id="prev_chap" href="@linkPrevious">
                             <span class="glyphicon glyphicon-chevron-left"></span> Prev
                         </a>
@@ -119,11 +121,11 @@
                         {
                             if (chapter.ChapterId != currentChapter.ChapterId)
                             {
-                                <option value="@chapter.ChapterId">@chapter.Title</option>
+                                <option value="@chapter.Index">@chapter.Title</option>
                             }
                             else
                             {
-                                <option value="@chapter.ChapterId" selected="">@chapter.Title</option>
+                                <option value="@chapter.Index" selected="">@chapter.Title</option>
                             }
                         }
                     </select>
@@ -131,7 +133,7 @@
                     @*Nút bấm sang chương sau*@
                     @if (nextChapter != null)
                     {
-                        linkNext = $"/p/{parentArticle.ArticleId}/{nextChapter.ChapterId}";
+                        linkNext = $"/p/{parentArticle.ArticleId}/{nextChapter.Index}";
                         <a class="btn btn-success btn-chapter-nav" id="next_chap" href="@linkNext">
                             Next <span class="glyphicon glyphicon-chevron-right"></span>
                         </a>

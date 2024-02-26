@@ -32,7 +32,7 @@ namespace BookWormProject.Controllers
                                           CoverImage = x.CoverImage
                                       })
                                       .ToList();
-            var newArticles = articles.OrderByDescending(x => x.ArticleId)
+            var newArticles = articles.OrderByDescending(x => x.UpdatedAt)
                                       .Select(x => new ArticleDetailViewModel
                                       {
                                           ArticleId = x.ArticleId,

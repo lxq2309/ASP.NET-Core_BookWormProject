@@ -1,5 +1,6 @@
 ﻿using BookWormProject.Data.Repository;
 using BookWormProject.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookWormProject.Data.Services
 {
@@ -47,12 +48,16 @@ namespace BookWormProject.Data.Services
 
         public int GetNewestChapterIndex(int articleId)
         {
-            var maxIndex = _chapterRepository.GetAll().Where(x => x.ArticleId == articleId).Max(x => x.Index);
-            if (maxIndex != null)
+            var chapters = GetChapterByArticleId(articleId);
+            if (chapters.IsNullOrEmpty())
             {
+                return 0;
+            }
+            else
+            {
+                var maxIndex = chapters.Max(x => x.Index);
                 return maxIndex;
             }
-            return 1;
         }
 
         public void UpdateChapter(Chapter chapter)

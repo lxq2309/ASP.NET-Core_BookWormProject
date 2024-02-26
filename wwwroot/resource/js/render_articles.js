@@ -19,7 +19,7 @@
         } else {
             const newestChapter = article.chapters.reduce((max, current) => max.Index > current.Index ? max : current);
             chapterHtml = `
-                            <a title="${newestChapter.title}" href="/p/${article.articleId}/${newestChapter.chapterId}">
+                            <a title="${newestChapter.title}" href="/p/${article.articleId}/${newestChapter.index}">
                               <span class="chapter-text">
                                 ${newestChapter.title}
                               </span>

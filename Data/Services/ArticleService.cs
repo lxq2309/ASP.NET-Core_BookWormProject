@@ -44,6 +44,13 @@ namespace BookWormProject.Data.Services
 
         public void UpdateArticle(Article article)
         {
+            article.UpdatedAt = DateTime.Now;
+            _articleRepository.Update(article);
+        }
+
+        public void IncreaseViewCount(Article article)
+        {
+            article.ViewCount++;
             _articleRepository.Update(article);
         }
 
@@ -55,11 +62,6 @@ namespace BookWormProject.Data.Services
         public IEnumerable<Chapter>? GetChaptersForArticle(int articleId)
         {
             return _articleRepository.GetChaptersForArticle(articleId);
-        }
-
-        public Category? GetCategoryForArticle(int articleId)
-        {
-            return _articleRepository.GetCategoryForArticle(articleId);
         }
 
         public IEnumerable<Author>? GetAuthorsForArticle(int articleId)

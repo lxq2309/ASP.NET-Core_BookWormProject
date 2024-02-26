@@ -1,0 +1,15 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="/admin">Trang quản trị</a></li>
+            @if (ViewContext.RouteData.Values["controller"] != null && ViewContext.RouteData.Values["controller"].ToString() != "Admin")
+            {
+                <li class="breadcrumb-item"><a href="/admin/@ViewContext.RouteData.Values["controller"].ToString()">@ViewContext.RouteData.Values["controller"].ToString()</a></li>
+            }
+            @if (ViewContext.RouteData.Values["action"] != null)
+            {
+                <li class="breadcrumb-item active">@ViewContext.RouteData.Values["action"].ToString()</li>
+            }
+        </ol>
+    </div>
+</div>

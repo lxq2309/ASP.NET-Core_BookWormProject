@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\BookWormProject.csproj": {}
+    "D:\\UTC\\YEAR_4\\KI_2\\Thực tập tốt nghiệp\\BookWormProject\\BookWormProject.csproj": {}
   },
   "projects": {
-    "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\BookWormProject.csproj": {
+    "D:\\UTC\\YEAR_4\\KI_2\\Thực tập tốt nghiệp\\BookWormProject\\BookWormProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\BookWormProject.csproj",
+        "projectUniqueName": "D:\\UTC\\YEAR_4\\KI_2\\Thực tập tốt nghiệp\\BookWormProject\\BookWormProject.csproj",
         "projectName": "BookWormProject",
-        "projectPath": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\BookWormProject.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Working\\Thực tập chuyên môn\\BookWormProject\\obj\\",
+        "projectPath": "D:\\UTC\\YEAR_4\\KI_2\\Thực tập tốt nghiệp\\BookWormProject\\BookWormProject.csproj",
+        "packagesPath": "C:\\Users\\QuynhLe\\.nuget\\packages\\",
+        "outputPath": "D:\\UTC\\YEAR_4\\KI_2\\Thực tập tốt nghiệp\\BookWormProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\QuynhLe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,6 +51,10 @@
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[6.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.15, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -114,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -47,11 +47,12 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IGithubService, GithubService>();
 
 // Cấu hình cho GithubOption
+var githubSection = builder.Configuration.GetSection("GithubOption");
 builder.Services.Configure<GithubOption>(option =>
 {
-    option.AccessToken = "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";
-    option.RepositoryName = "UploadImage";
-    option.RepositoryOwner = "lxq2309";
+    option.AccessToken = githubSection.GetValue<string>("AccessToken");
+    option.RepositoryName = githubSection.GetValue<string>("RepositoryName");
+    option.RepositoryOwner = githubSection.GetValue<string>("RepositoryOwner");
 });
 
 // Đăng ký Filter
@@ -66,18 +67,19 @@ builder.Services.AddMemoryCache();
 // Đăng ký SendGrid
 builder.Services.AddSendGrid(option =>
 {
-    option.ApiKey = "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";
+    option.ApiKey = builder.Configuration.GetSection("SendGrid").GetValue<string>("ApiKey");
 });
 
 
 // Thêm chế độ xác thực dựa trên cookie
+var cookieAuthenticationSection = builder.Configuration.GetSection("Authentication:CookieAuthentication");
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.Cookie.Name = "MyApp.Cookie";
-        options.LoginPath = "/dang-nhap";
-        options.LogoutPath = "/dang-xuat";
-        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.Cookie.Name = cookieAuthenticationSection.GetValue<string>("CookieName");
+        options.LoginPath = cookieAuthenticationSection.GetValue<string>("LoginPath");
+        options.LogoutPath = cookieAuthenticationSection.GetValue<string>("LogoutPath");
+        options.AccessDeniedPath = cookieAuthenticationSection.GetValue<string>("AccessDeniedPath");
         options.ExpireTimeSpan = TimeSpan.FromDays(30);
     })
     .AddFacebook(options =>
@@ -120,4 +122,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-app.Run();
+    app.Run();

@@ -9,253 +9,259 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BookWormProject
 build_property.RootNamespace = BookWormProject
-build_property.ProjectDir = D:\Working\Thực tập chuyên môn\BookWormProject\
+build_property.ProjectDir = D:\UTC\YEAR_4\KI_2\Thực tập tốt nghiệp\BookWormProject\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Working\Thực tập chuyên môn\BookWormProject
+build_property.MSBuildProjectDirectory = D:\UTC\YEAR_4\KI_2\Thực tập tốt nghiệp\BookWormProject
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Article.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Article.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXJ0aWNsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Author.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Author.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXV0aG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Category.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Category.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Chapter.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Chapter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhcHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Genre.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Genre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2VucmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Admin/User.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Admin/User.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Article/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/Details.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Article/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/Edit.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Article/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Article/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Article/_PartialComments.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Article/_PartialComments.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxfUGFydGlhbENvbW1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Author/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Author/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Author/Edit.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Author/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Author/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Author/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Category/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Category/Edit.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Category/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Category/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Chapter/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Chapter/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Chapter/Edit.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Chapter/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Chapter/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Chapter/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Genre/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Genre/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Genre/Edit.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Genre/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Genre/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Genre/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/CompletedArticles.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Genre/_PartialForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcX1BhcnRpYWxGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/CompletedArticles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb21wbGV0ZWRBcnRpY2xlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/HotArticles.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/HotArticles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb3RBcnRpY2xlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/NewArticles.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/NewArticles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdBcnRpY2xlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/Privacy.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Home/Search.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Home/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/MenuAccount/Default.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/MenuAccount/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUFjY291bnRcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/MenuCategories/Default.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/MenuCategories/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUNhdGVnb3JpZXNcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/MenuGenres/Default.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/MenuGenres/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUdlbnJlc1xEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/Default.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/RightSidebar/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/_PartialArticleSidebar.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/RightSidebar/_PartialArticleSidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXF9QYXJ0aWFsQXJ0aWNsZVNpZGViYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/_PartialAuthorSidebar.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/RightSidebar/_PartialAuthorSidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXF9QYXJ0aWFsQXV0aG9yU2lkZWJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/_PartialCategorySidebar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXF9QYXJ0aWFsQ2F0ZWdvcnlTaWRlYmFyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/_PartialGenreSidebar.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/RightSidebar/_PartialGenreSidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXF9QYXJ0aWFsR2VucmVTaWRlYmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Components/RightSidebar/_PartialHomeSidebar.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Components/RightSidebar/_PartialHomeSidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRTaWRlYmFyXF9QYXJ0aWFsSG9tZVNpZGViYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/Error.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_LayoutAdmin.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_LayoutBookWorm.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_LayoutBookWorm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRCb29rV29ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialFooter.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_PartialAdminBreadCrumb.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsQWRtaW5CcmVhZENydW1iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_PartialFooter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsRm9vdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_PartialHeader.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_PartialHeader.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Create.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/EditUser.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/EditUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0VXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/ForgotPassword.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Index.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Login.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/Register.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/VerifyCode.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/VerifyCode.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWZXJpZnlDb2RlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialBookmark.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialBookmark.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbEJvb2ttYXJrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialChangeInfo.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialChangeInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbENoYW5nZUluZm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialChangePassword.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbENoYW5nZVBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialComments.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialComments.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbENvbW1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialGeneral.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialGeneral.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbEdlbmVyYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/User/_PartialPostedArticle.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/User/_PartialPostedArticle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfUGFydGlhbFBvc3RlZEFydGljbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/_ViewImports.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/_ViewStart.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Working/Thực tập chuyên môn/BookWormProject/Views/Shared/_Layout.cshtml]
+[D:/UTC/YEAR_4/KI_2/Thực tập tốt nghiệp/BookWormProject/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2glj7w6ak3

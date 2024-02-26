@@ -5,7 +5,7 @@
     var authors = Model.Authors.ToList();
     var genres = Model.Genres.ToList();
     var chapters = Model.Chapters.ToList();
-    var category = Model.Category;
+    var user = Model.User;
 }
 
 @{
@@ -17,7 +17,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
         <div class="col-xs-12 col-info-desc">
             <div class="title-list book-intro">
-                <h2>Thông tin bài đăng</h2>
+                <h2>Thông tin truyện</h2>
             </div>
             <h3 class="title" itemprop="name">
                 @article.Title
@@ -34,21 +34,18 @@
                         <h3><span class="glyphicon glyphicon-user"></span>&nbsp;Tác giả:</h3>
                         @for (int i = 0; i < authors.Count; i++)
                         {
+                            <a itemprop="author" asp-controller="Author" asp-action="Index" asp-route-id="@authors[i].AuthorId" title="@authors[i].Name">@authors[i].Name</a>
                             if (i != authors.Count - 1)
                             {
-                                <a itemprop="author" href="/tac-gia/@authors[i].AuthorId" title="@authors[i].Name">@authors[i].Name,</a>
-                            }
-                            else
-                            {
-                                <a itemprop="author" href="/tac-gia/@authors[i].AuthorId" title="@authors[i].Name">@authors[i].Name</a>
+                                @(", ")
                             }
                         }
                     </div>
                     <div>
-                        <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Danh mục:</h3>
-                        @if (category != null)
+                        <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Người đăng:</h3>
+                        @if (user != null)
                         {
-                            <a itemprop="genre" href="/danh-muc/@category.CategoryId" title="@category.Name">@category.Name</a>
+                            <a itemprop="genre" asp-controller="User" asp-action="Index" asp-route-id="@user.UserId" title="@user.UserName">@user.UserName</a>
                         }
 
                     </div>
@@ -56,15 +53,11 @@
                         <h3><span class="glyphicon glyphicon-tag"></span>&nbsp;Thể loại:</h3>
                         @for (int i = 0; i < genres.Count; i++)
                         {
-                            if (i != authors.Count - 1)
+                            <a itemprop="genre" asp-controller="Genre" asp-action="Index" asp-route-genreId="@genres[i].GenreId" title="@genres[i].Name">@genres[i].Name</a>
+                            if (i != genres.Count - 1)
                             {
-                                <a itemprop="genre" href="/the-loai/@genres[i].GenreId" title="@genres[i].Name">@genres[i].Name,</a>
+                                @(", ");
                             }
-                            else
-                            {
-                                <a itemprop="genre" href="/the-loai/@genres[i].GenreId" title="@genres[i].Name">@genres[i].Name</a>
-                            }
-
                         }
                     </div>
 
@@ -95,11 +88,11 @@
                 </div>
 
                 <div class="group-buttons">
-                    <a href="/p/@article.ArticleId/1" class="btn btn-danger btn-block btn-style btn-border">
+                    <a asp-controller="Chapter" asp-action="Index" asp-route-articleId="@article.ArticleId" asp-route-index="1" class="btn btn-danger btn-block btn-style btn-border">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;ĐỌC TỪ ĐẦU
                     </a>
                     <a id="add-bookmark-btn" class="btn btn-info btn-border">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;BOOKMARK
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;THÊM VÀO BOOKMARK
                     </a>
                 </div>
 
@@ -114,7 +107,7 @@
                         {
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/p/@article.ArticleId/@chapters[i].ChapterId" title="@chapters[i].Title">
+                                <a asp-controller="Chapter" asp-action="Index" asp-route-articleId="@article.ArticleId" asp-route-index="@chapters[i].Index" title="@chapters[i].Title">
                                     <span class="chapter-text">
                                         @chapters[i].Title
                                     </span>
@@ -136,7 +129,7 @@
                         {
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/p/@article.ArticleId/@chapters[i].ChapterId" title="@chapters[i].Title">
+                                <a asp-controller="Chapter" asp-action="Index" asp-route-articleId="@article.ArticleId" asp-route-index="@chapters[i].Index" title="@chapters[i].Title">
                                     <span class="chapter-text">
                                         @chapters[i].Title
                                     </span>
@@ -152,7 +145,7 @@
                         {
                             <li>
                                 <span class="glyphicon glyphicon-certificate"></span>
-                                <a href="/p/@article.ArticleId/@chapters[i].Index" title="@chapters[i].Title">
+                                <a asp-controller="Chapter" asp-action="Index" asp-route-articleId="@article.ArticleId" asp-route-index="@chapters[i].Index" title="@chapters[i].Title">
                                     <span class="chapter-text">
                                         @chapters[i].Title
                                     </span>

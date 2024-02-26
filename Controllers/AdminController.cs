@@ -43,12 +43,14 @@ namespace BookWormProject.Controllers
             return View();
         }
 
+        [Role("Admin")]
         public IActionResult Article()
         {
-            var articles = _context.Articles.Where(x => x.IsDeleted == null).Include(a => a.Authors).Include(a => a.Category).Include(a => a.Genres).ToList();
+            var articles = _context.Articles.Include(a => a.Authors).Include(a => a.Genres).OrderByDescending(a => a.ArticleId).ToList();
             return View(articles);
         }
 
+        [Role("Admin")]
         public IActionResult Chapter(int articleId)
         {
             var chapters = _chapterService.GetChapterByArticleId(articleId).ToList();
@@ -57,27 +59,31 @@ namespace BookWormProject.Controllers
             return View(chapters);
         }
 
+        [Role("Admin")]
         public IActionResult Author()
         {
-            var author = _authorService.GetAllAuthors().ToList();
+            var author = _authorService.GetAllAuthors().OrderByDescending(a => a.AuthorId).ToList();
             return View(author);
         }
 
+        [Role("Admin")]
         public IActionResult User()
         {
-            var user = _userService.GetAllUsers().ToList();
+            var user = _userService.GetAllUsers().OrderByDescending(u => u.UserId).ToList();
             return View(user);
         }
 
+        [Role("Admin")]
         public IActionResult Category()
         {
             var category = _categoryService.GetAllCategories().ToList();
             return View(category);
         }
 
+        [Role("Admin")]
         public IActionResult Genre()
         {
-            var genre = _genreService.GetAllGenres().ToList();
+            var genre = _genreService.GetAllGenres().OrderByDescending(g => g.GenreId).ToList();
             return View(genre);
         }
     }

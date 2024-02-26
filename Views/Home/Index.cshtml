@@ -1,6 +1,7 @@
-﻿@{
+﻿@using BookWormProject.Utils.Settings
+@{
     Layout = "_LayoutBookWorm";
-    ViewData["Title"] = "BookWorm - Web đọc sách và truyện";
+    ViewData["Title"] = GeneralSetting.Title;
 }
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model BookWormProject.ViewModels.Home.IndexViewModel
@@ -27,7 +28,7 @@
                         <span class="full-label"></span>
                     }
                     <img src="@hotArticles[i].CoverImage" width="129" height="192" alt="#" class="img-responsive item-img"
-                     itemprop="image" />
+                         itemprop="image" />
                     <div class="title">
                         <h3 itemprop="name">
                             @hotArticles[i].Title
@@ -72,9 +73,19 @@
                     }
                 </div>
                 <div class="hidden-xs col-sm-3 col-md-3 col-cat text-888">
+                    @{
+                        int cnt = 0;
+                        int genresCount = newArticles[i].Genres.Count();
+                    }
                     @foreach (var genre in newArticles[i].Genres)
                     {
+                        cnt++;
                         <a itemprop="genre" href="/the-loai/@genre.GenreId" title="@genre.Name">@genre.Name</a>
+                        if (cnt != genresCount)
+                        {
+                            @(", ")
+                            ;
+                        }
                     }
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-2 col-chap text-info">
@@ -87,7 +98,7 @@
                     else
                     {
                         var newestChapter = newArticles[i].Chapters.MaxBy(x => x.Index);
-                        <a title="@newestChapter.Title" href="/p/@newArticles[i].ArticleId/@newestChapter.ChapterId">
+                        <a title="@newestChapter.Title" href="/p/@newArticles[i].ArticleId/@newestChapter.Index">
                             <span class="chapter-text">
                                 @newestChapter.Title
                             </span>

@@ -1,40 +1,34 @@
 ﻿@{
     Layout = "_LayoutAdmin";
-    ViewData["Title"] = "List Article";
+    ViewData["Title"] = "Danh sách truyện";
 }
 @model List<Article>
+@using BookWormProject.Data.Services
+@inject IArticleService articleService
 
-<div class="row">
-    <div class="col-md-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/admin/article">Article</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </div>
-</div>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Articles</h3>
+                <h3 class="card-title text-uppercase">@ViewData["Title"]</h3>
                 <div class="card-tools">
-                    <a class="btn btn-outline-success" onclick="createArticle()"><i class="fas fa-plus"></i> Add Article</a>
+                    <a class="btn btn-outline-success" onclick="createArticle()"><i class="fas fa-plus"></i> Tạo mới</a>
                 </div>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 5%">ID</th>
-                            <th style="width: 10%">Title</th>
-                            <th style="width: 20%">Description</th>
-                            <th style="width: 10%">Authors</th>
-                            <th style="width: 10%">Category</th>
-                            <th style="width: 10%">Genres</th>
-                            <th style="width: 10%">Created At</th>
-                            <th style="width: 10%">Updated At</th>
-                            <th style="width: 10%">Action</th>
+                            <th style="width: 5%">#ID</th>
+                            <th style="width: 10%">Tên truyện</th>
+                            <th style="width: 10%">Tác giả</th>
+                            <th style="width: 10%">Thể loại</th>
+                            <th style="width: 10%">Số chương</th>
+                            <th style="width: 10%">Mô tả</th>
+                            <th style="width: 10%">Người tạo</th>
+                            <th style="width: 10%">Thời gian tạo</th>
+                            <th style="width: 10%">Thời gian cập nhật</th>
+                            <th style="width: 10%">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,8 +36,8 @@
                         {
                             <tr>
                                 <td>@article.ArticleId</td>
-                                <td>@article.Title</td>
-                                <td>@article.Description</td>
+                                <td><a href="/p/@article.ArticleId" target="_blank">@article.Title</a></td>
+
                                 <td>
                                     @foreach (var author in article.Authors)
                                     {
@@ -51,20 +45,22 @@
                                     }
                                 </td>
                                 <td>
-                                    @article.Category.Name
-                                </td>
-                                <td>
                                     @foreach (var genre in article.Genres)
                                     {
                                         <span class="badge badge-success">@genre.Name</span>
                                     }
                                 </td>
+                                <td>@articleService.GetChaptersForArticle(article.ArticleId).Count()</td>
+                                <td>@article.Description</td>
+                                <td>
+                                    @article.User?.Name
+                                </td>
                                 <td>@article.CreatedAt</td>
                                 <td>@article.UpdatedAt</td>
                                 <td>
-                                    <a href="/admin/chapter?articleId=@article.ArticleId" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit chapter</a>
-                                    <a class="btn btn-outline-primary btn-sm" onclick="editArticle(@article.ArticleId)"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                    <a class="btn btn-outline-danger btn-sm" onclick="deleteArticle(@article.ArticleId)"><i class="fas fa-trash"></i> Delete</a>
+                                    <a class="btn btn-outline-primary btn-sm" onclick="editArticle(@article.ArticleId)"><i class="fas fa-pencil-alt"></i> Sửa</a>
+                                    <a class="btn btn-outline-danger btn-sm" onclick="deleteArticle(@article.ArticleId)"><i class="fas fa-trash"></i> Xoá</a>
+                                    <a href="/admin/chapter?articleId=@article.ArticleId" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil-alt"></i> Sửa chương</a>
                                 </td>
                             </tr>
                         }

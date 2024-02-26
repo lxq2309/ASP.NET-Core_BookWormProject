@@ -28,7 +28,7 @@ namespace BookWormProject.APIControllers
         public IActionResult GetNewArticles(int? page, int pageSize = 10)
         {
             var articles = _articleService.GetAllArticles()
-                                                                 .OrderByDescending(x => x.ArticleId);
+                                                                 .OrderByDescending(x => x.UpdatedAt);
             return ArticleListHelper.CreateArticleListResponse(this, _articleService, articles, page, pageSize, "GetNewArticles");
         }
 
@@ -47,13 +47,6 @@ namespace BookWormProject.APIControllers
                                                                  .Where(x=>x.IsCompleted)
                                                                  .OrderByDescending(x => x.ArticleId);
             return ArticleListHelper.CreateArticleListResponse(this, _articleService, articles, page, pageSize, "GetCompletedArticles");
-        }
-
-        [HttpGet("get_articles_for_category")]
-        public IActionResult GetArticlesForCategory(int categoryId, int? page, int pageSize = 10)
-        {
-            var articles = _categoryService.GetArticlesForCategory(categoryId).OrderByDescending(x => x.ArticleId);
-            return ArticleListHelper.CreateArticleListResponse(this, _articleService, articles, page, pageSize, "GetArticlesForCategory");
         }
 
         [HttpGet("get_articles_for_genre")]

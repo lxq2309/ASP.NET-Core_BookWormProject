@@ -15,6 +15,12 @@
                 </h2>
                 <div class="info-detail">
                     <div class="group">
+                        <div class="label">Username</div>
+                        <div class="detail">
+                            @currentUser.UserName
+                        </div>
+                    </div>
+                    <div class="group">
                         <div class="label">Họ và tên</div>
                         <div class="detail">
                             @currentUser.Name
@@ -75,11 +81,11 @@
                         <div class="detail">
                             @if (currentUser.Role == 1)
                             {
-                                <span style="color:red">Administrator</span>
+                                <span style="color:red">Quản trị viên</span>
                             }
                             else if (currentUser.Role == 0)
                             {
-                                <span style="color:blue">User</span>
+                                <span style="color:blue">Người dùng</span>
 
                             }
                         </div>

@@ -13,8 +13,5 @@ namespace BookWormProject.Data.Repository
         void Update(Category category);
 
         void Delete(Category category);
-
-        public IEnumerable<Genre>? GetGenresForCategory(int categorizationId);
-        public IEnumerable<Article>? GetArticlesForCategory(int categorizationId);
     }
 }

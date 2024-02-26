@@ -23,7 +23,7 @@ namespace BookWormProject.Utils.Helper
                     .Select(x => new GenreDTO { GenreId = x.GenreId, Name = x.Name }),
                 IsCompleted = x.IsCompleted,
                 Chapters = articleService.GetChaptersForArticle(x.ArticleId)
-                    .Select(x => new ChapterDTO { ChapterId = x.ChapterId, Title = x.Title }),
+                    .Select(x => new ChapterDTO { ChapterId = x.ChapterId, Title = x.Title, Index = x.Index }),
                 Authors = articleService.GetAuthorsForArticle(x.ArticleId)
                     .Select(x => new AuthorDTO { AuthorId = x.AuthorId, Name = x.Name })
             });

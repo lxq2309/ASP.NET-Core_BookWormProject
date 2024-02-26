@@ -23,13 +23,9 @@ public partial class Article
 
     public int ViewCount { get; set; }
 
-    public int CategoryId { get; set; }
-
     public bool? IsDeleted { get; set; }
 
     public virtual ICollection<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
-
-    public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 

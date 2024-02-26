@@ -1,76 +1,34 @@
 ﻿@model BookWormProject.ViewModels.Category.CategoryCreateEditViewModel
 @{
-    ViewData["Title"] = "Edit Category";
+    ViewData["Title"] = "Sửa danh mục " + Model.Name;
     Layout = "_LayoutAdmin";
 }
 
 <div class="row">
     <div class="col-md-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/admin/category">Category</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Edit Category</h3>
+                <h3 class="card-title">@ViewData["Title"]</h3>
             </div>
             <div class="card-body">
                 <form asp-controller="Category" asp-action="Edit" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="Name" value="@Model.Name" required>
+                        <label for="name">Tên danh mục</label>
+                        <input type="text" class="form-control" name="Name" value="@Model.Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="Description">@Model.Description</textarea>
+                        <label for="link">Đường dẫn</label>
+                        <input type="text" class="form-control" name="Link" value="@Model.Link" required>
                     </div>
-
                     <div class="form-group">
-                        <label>Genres</label>
-                        <div class="row">
-                            @foreach (var genre in ViewBag.AllGenres)
-                            {
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="genre_@genre.GenreId" name="Genres" onchange="validateForm()" value="@genre.GenreId" @(Model.SelectedGenres.Contains((Genre)genre)?"checked":"")>
-                                        <label class="custom-control-label" for="genre_@genre.GenreId">@genre.Name</label>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Genres)
+                        <label for="description">Mô tả</label>
+                        <textarea class="form-control" name="Description">@Model.Description</textarea>
                     </div>
 
                     <input type="hidden" asp-for="CategoryId" value="@Model.CategoryId" />
-                    <button type="submit" id="submit-btn" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary">Sửa</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function validateForm() {
-        var genres = document.getElementsByName("Genres");
-        var isGenresChecked = false;
-
-        for (var i = 0; i < genres.length; i++) {
-            if (genres[i].checked) {
-                isGenresChecked = true;
-                break;
-            }
-        }
-
-        if (!isGenresChecked) {
-            document.getElementById("submit-btn").disabled = true;
-        } else {
-            document.getElementById("submit-btn").disabled = false;
-        }
-    }
-</script>

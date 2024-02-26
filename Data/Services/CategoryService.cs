@@ -27,19 +27,10 @@ namespace BookWormProject.Data.Services
             return _categoryRepository.GetAll();
         }
 
-        public IEnumerable<Article>? GetArticlesForCategory(int categorizationId)
-        {
-            return _categoryRepository.GetArticlesForCategory(categorizationId);
-        }
 
         public Category GetCategoryById(int id)
         {
             return _categoryRepository.GetCategoryById(id);
-        }
-
-        public IEnumerable<Genre>? GetGenresForCategory(int categorizationId)
-        {
-            return _categoryRepository.GetGenresForCategory(categorizationId);
         }
 
         public void UpdateCategory(Category category)

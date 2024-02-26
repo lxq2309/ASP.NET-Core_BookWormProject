@@ -51,11 +51,16 @@ namespace BookWormProject.Controllers
             var currentId = _userService.GetCurrentUserId();
             var currentUser = _userService.GetById(currentId);
             var targetUser = (id == null) ? currentUser : _userService.GetById((int)id);
+            // Nếu cố vào xem thông tin của một tài khoản không tồn tại thì chuyển hướng về trang chủ
+            if (targetUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var viewModels = new UserIndexViewModel()
             {
                 CurrentUser = currentUser,
                 TargetUser = targetUser,
-                IsMyAccount = currentUser.UserId == targetUser.UserId
+                IsMyAccount = currentUser != null && currentUser.UserId == targetUser.UserId
             };
             return View(viewModels);
         }

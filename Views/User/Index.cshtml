@@ -4,8 +4,17 @@
 
 @model BookWormProject.ViewModels.User.UserIndexViewModel
 @{
-    var currentUser = (Model.CurrentUser.UserId == Model.TargetUser.UserId) ? Model.CurrentUser : Model.TargetUser;
+    var user = Model.TargetUser;
     bool isMyAccount = Model.IsMyAccount;
+    if (isMyAccount)
+    {
+        ViewData["Title"] = "Tài khoản của bạn";
+        user = Model.CurrentUser;
+    }
+    else
+    {
+        ViewData["Title"] = "Tài khoản của " + user.Name;
+    }
 }
 <div id="account-information">
     <div class="container">
@@ -16,11 +25,11 @@
                         <section class="user-sidebar clearfix">
                             <div class="userinfo clearfix">
                                 <figure>
-                                    <img alt="" src="@currentUser.Avatar" class="avatar user-img">
+                                    <img alt="" src="@user.Avatar" class="avatar user-img">
                                     <figcaption>
                                         <div class="title">Tài khoản của</div>
                                         <div class="user-name">
-                                            @currentUser.UserName
+                                            @user.UserName
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -61,40 +70,47 @@
     <script>
         $(document).ready(function () {
             var urlParams = new URLSearchParams(window.location.search);
+            // Lấy giá trị của query
             var query = urlParams.get('query');
+            // Nếu query là bookmark thì tải trang bookmark
             if (query === 'bookmark') {
                 $('#user-sidebar li.active').removeClass('active');
                 $('#user-sidebar li').eq(2).addClass('active');
                 loadBookmarks(1);
             }
+            // Nếu query là posted_article thì tải trang các bài viết đã đăng
             else if (query === 'posted_article') {
                 $('#user-sidebar li.active').removeClass('active');
                 $('#user-sidebar li').eq(3).addClass('active');
                 loadPostedArticle(1);
+            // Nếu không nằm trong các trường hợp trên thì load trang thông tin chung
             } else {
                 loadGeneralInfo();
             }
 
+            // Set hiệu ứng active khi bấm vào các phần tử trên thanh sidebar bên trái
             $('#user-sidebar li').click(function () {
                 $('#user-sidebar li.active').removeClass('active');
                 $(this).addClass('active');
             });
         });
 
+        // Hiển thị thông tin chung của tài khoản
         function loadGeneralInfo() {
             $.ajax({
-                url: '/User/GetPartialGeneralResult/?id=' + @currentUser.UserId,
+                url: '/User/GetPartialGeneralResult/?id=' + @user.UserId,
                 type: 'GET',
                 data: {},
                 success: function (result) {
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
 
+        // Hiển thị trang sửa thông tin tài khoản
         function loadChangeInfo() {
             $.ajax({
                 url: '/User/GetPartialChangeInfoResult',
@@ -104,53 +120,57 @@
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
 
+        // Hiển thị trang Bookmark
         function loadBookmarks(page) {
             $.ajax({
-                url: '/User/GetPartialBookmarksResult?page=' + page + '&id=' + @currentUser.UserId,
+                url: '/User/GetPartialBookmarksResult?page=' + page + '&id=' + @user.UserId,
                 type: 'GET',
                 dataType: 'html',
                 success: function (result) {
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
 
+        // Hiển thị các comment đã gửi
         function loadComments(page) {
             $.ajax({
-                url: '/User/GetPartialCommentsResult?page=' + page + '&id=' + @currentUser.UserId,
+                url: '/User/GetPartialCommentsResult?page=' + page + '&id=' + @user.UserId,
                 type: 'GET',
                 dataType: 'html',
                 success: function (result) {
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
 
+        // Hiển thị các bài viết đã đăng
         function loadPostedArticle(page) {
             $.ajax({
-                url: '/User/GetPartialPostedArticle?page=' + page + '&id=' + @currentUser.UserId,
+                url: '/User/GetPartialPostedArticle?page=' + page + '&id=' + @user.UserId,
                 type: 'GET',
                 dataType: 'html',
                 success: function (result) {
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
-
+           
+        // Hiển thị trang đổi mật khẩu
         function loadChangePassword() {
             $.ajax({
                 url: '/User/GetPartialChangePassword',
@@ -160,7 +180,7 @@
                     $('#load-user-content').html(result);
                 },
                 error: function () {
-                    alert('Failed to load');
+                    alert('Tải trang thất bại, vui lòng bấm F5 để thử lại.');
                 }
             });
         }
