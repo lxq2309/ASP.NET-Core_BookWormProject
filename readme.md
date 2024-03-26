@@ -4,8 +4,6 @@
 
 # MỤC LỤC
 
-[LỜI NÓI ĐẦU](#_Toc159704724)
-
 [MỤC LỤC](#_Toc159704725)
 
 [DANH MỤC BẢNG BIỂU](#_Toc159704726)
